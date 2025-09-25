@@ -1,9 +1,10 @@
 # Pulse Trading Final Marketing Plan
 ## Strategic Roadmap for Retail Investor Growth
+**15-20 Minute Presentation | September 2025**
 
 ---
 
-## Slide 1: Title
+## Slide 1: Title (1 min)
 **Pulse Trading Final Marketing Plan**
 - Strategic Roadmap for Retail Investor Growth
 - Team: Kennedy, Derek, Shang, Maryam, Scott, Sour
@@ -11,7 +12,7 @@
 
 ---
 
-## Slide 2: The Challenge & Solution
+## Slide 2: The Challenge & Solution (2 min)
 
 ### 🎯 **The Problem**
 Retail investors lack accessible, data-driven platforms with community support
@@ -24,45 +25,50 @@ Empowers smarter trading through data and peer insights
 
 ---
 
-## Slide 3: Market Analysis
-
-```mermaid
-flowchart LR
-    subgraph PESTELE
-      P[Political] & E[Economic] & S[Social] & T[Technological] & En[Environmental] & L[Legal] & Et[Ethical]
-    end
-    subgraph SWOT
-      St[Strengths] & W[Weaknesses] & O[Opportunities] & Th[Threats]
-    end
-    P & E & S & T & En & L & Et --> St & W & O & Th
-```
-
-**Key Insights:**
-- Digital adoption ↑, regulatory shifts, social trading trend
-- Strength in tech & community; opportunity in underserved segments
-
----
-
-## Slide 4: Strategic Objectives
+## Slide 3: Market Opportunity (2 min)
 
 ```mermaid
 graph TD
-  A[Start] --> B[5,000 Sign-ups]
-  A --> C[1,000 Active Users]
-  A --> D[40% Brand Recall]
-  A --> E[$250K Fees]
-  style B fill:#4CAF50; style C fill:#4CAF50; style D fill:#4CAF50; style E fill:#4CAF50
+  A[Market Opportunity] --> B[Digital Adoption Rising]
+  A --> C[Social Trading Trend]
+  A --> D[Regulatory Support]
+  B --> E[Pulse Trading Advantage]
+  C --> E
+  D --> E
+  E --> F[Strong Market Entry Position]
 ```
 
-**Year 1 Targets:**
-1. **5,000** new sign-ups
-2. **1,000** monthly active traders
-3. **40%** aided brand recall
-4. **$250,000** transaction fees
+**Market Drivers:**
+- **Digital Adoption:** 85% prefer mobile-first trading
+- **Social Trading:** 65% value community features
+- **Regulatory Support:** Fintech-friendly policies
+- **Result:** Perfect timing for Pulse Trading entry
 
 ---
 
-## Slide 5: Value Proposition
+## Slide 4: Strategic Objectives (2 min)
+
+```mermaid
+graph LR
+  A[Year 1 Goals] --> B[5K Users]
+  A --> C[1K Active]
+  A --> D[40% Awareness]
+  A --> E[$250K Revenue]
+  B --> F[Growth Foundation]
+  C --> F
+  D --> F
+  E --> F
+```
+
+**Measurable Targets:**
+1. **5,000** new sign-ups (user acquisition)
+2. **1,000** monthly active traders (engagement)
+3. **40%** aided brand recall (awareness)
+4. **$250,000** transaction fees (revenue)
+
+---
+
+## Slide 5: Value Proposition (1.5 min)
 
 ```mermaid
 graph LR
@@ -76,7 +82,7 @@ graph LR
 
 ---
 
-## Slide 6: Target Customer Journey
+## Slide 6: Target Customer Journey (1.5 min)
 
 ```mermaid
 sequenceDiagram
@@ -94,7 +100,7 @@ sequenceDiagram
 
 ---
 
-## Slide 7: Marketing Mix - Product & Price
+## Slide 7: Marketing Mix - Product & Price (2 min)
 
 ### 📱 **Product**
 - Mobile-first app with real-time analytics
@@ -143,7 +149,7 @@ graph TB
 
 ---
 
-## Slide 10: Financial Projections
+## Slide 10: Financial Projections (2 min)
 
 ```mermaid
 flowchart TD
@@ -161,7 +167,7 @@ flowchart TD
 
 ---
 
-## Slide 11: Performance Tracking
+## Slide 11: Performance Tracking (1.5 min)
 
 ```mermaid
 flowchart LR
@@ -177,7 +183,7 @@ flowchart LR
 
 ---
 
-## Slide 12: Survey Validation
+## Slide 12: Survey Validation (1 min)
 
 ### 📊 **Key Findings (50 Respondents)**
 - **80%** want real-time analytics
@@ -189,7 +195,7 @@ flowchart LR
 
 ---
 
-## Slide 13: Team Contributions
+## Slide 13: Team Contributions (1 min)
 
 | Member | Role | Key Contribution |
 |--------|------|------------------|
@@ -202,7 +208,7 @@ flowchart LR
 
 ---
 
-## Slide 14: Implementation Timeline
+## Slide 14: Implementation Timeline (1 min)
 
 ### 📅 **Key Milestones**
 - **Sep 26:** Complete survey (8 responses)
@@ -217,7 +223,7 @@ flowchart LR
 
 ---
 
-## Slide 15: Next Steps
+## Slide 15: Next Steps (1 min)
 
 ### 🚀 **Immediate Actions**
 1. Complete final survey responses
@@ -236,3 +242,25 @@ flowchart LR
 **Questions & Discussion**
 
 *Pulse Trading: Empowering retail investors with insights and social support*
+
+---
+
+## 📊 **Presentation Timing Summary**
+**Total: 18 minutes (within 15-20 min target)**
+
+- Slide 1: Title (1 min)
+- Slide 2: Challenge & Solution (2 min)
+- Slide 3: Market Opportunity (2 min)
+- Slide 4: Strategic Objectives (2 min)
+- Slide 5: Value Proposition (1.5 min)
+- Slide 6: Customer Journey (1.5 min)
+- Slide 7: Product & Price (2 min)
+- Slide 8: Customer Decision Journey (1.5 min)
+- Slide 9: Service Excellence (1 min)
+- Slide 10: Financial Projections (2 min)
+- Slide 11: Performance Tracking (1.5 min)
+- Slide 12: Survey Validation (1 min)
+- Slide 13: Team Contributions (1 min)
+- Slide 14: Implementation Timeline (1 min)
+- Slide 15: Next Steps (1 min)
+- **Q&A Buffer:** 2 minutes
