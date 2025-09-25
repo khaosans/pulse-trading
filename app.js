@@ -605,7 +605,7 @@ class NarrativeSystem {
       },
       3: { 
         duration: 70, 
-        text: "Our comprehensive PESTELE and SWOT analyses reveal a compelling market landscape. While regulatory changes and competitive pressure present challenges, the trends strongly favor our approach. Digital adoption is accelerating rapidly, with 85% of our target demographic preferring mobile-first solutions. The social trading trend is gaining momentum, with 65% of investors valuing community features. Our analysis shows that Pulse Trading's community-focused approach is perfectly positioned to capitalize on these trends. These insights directly inform our strategic objectives for 2026.",
+        text: "Our comprehensive PESTLE and SWOT analyses reveal a compelling market landscape. While regulatory changes and competitive pressure present challenges, the trends strongly favor our approach. Digital adoption is accelerating rapidly, with 85% of our target demographic preferring mobile-first solutions. The social trading trend is gaining momentum, with 65% of investors valuing community features. Our analysis shows that Pulse Trading's community-focused approach is perfectly positioned to capitalize on these trends. These insights directly inform our strategic objectives for 2026.",
         readingTime: 10
       },
       4: { 
