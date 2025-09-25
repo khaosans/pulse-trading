@@ -1,209 +1,164 @@
-# Pulse Trading Final Marketing Plan Presentation
+# Pulse Trading Final Marketing Plan
 
-A comprehensive, interactive presentation demo showcasing the Pulse Trading marketing strategy with professional business diagrams, audio narration, and smooth user experience.
+A comprehensive, interactive presentation showcasing the strategic marketing plan for Pulse Trading - a retail trading platform that combines real-time analytics with community-driven learning.
 
 ## 🎯 Overview
 
-This presentation demonstrates a complete marketing plan for Pulse Trading, a retail trading platform that combines real-time analytics with community-driven learning. The presentation features 16 slides covering market analysis, strategic objectives, value proposition, and implementation roadmap.
+This presentation demonstrates a data-driven marketing strategy targeting the $2.7 billion retail trading market. Built with modern web technologies, it features interactive visualizations, comprehensive narratives, and professional business frameworks.
 
-## ✨ Key Features
+## 🚀 Features
 
-### 🎤 **Interactive Audio Narration**
-- **Professional Script**: Complete narrative for each slide with presenter attribution
-- **Text-to-Speech**: Built-in Web Speech API integration
-- **Visual Feedback**: Real-time text highlighting during narration
-- **Progress Tracking**: Visual progress bar and time display
-- **Playback Controls**: Play, pause, resume, and stop functionality
+- **Interactive Presentation**: 16 comprehensive slides with smooth navigation
+- **Audio Narration**: Complete speaker notes with play/pause controls
+- **Dynamic Visualizations**: 
+  - 10 Mermaid business diagrams (PESTLE, SWOT, Value Proposition, etc.)
+  - 3 Chart.js data visualizations (Budget, ROI, Survey Results)
+- **Professional Design**: Business-focused layouts with consistent styling
+- **Responsive Layout**: Works on desktop, tablet, and mobile devices
+- **Keyboard Shortcuts**: Full keyboard navigation support
 
-### 🎬 **Presentation Modes**
-- **Individual Slide Narration**: Play narration for current slide
-- **Full Presentation Mode**: Auto-advancing slides with synchronized narration
-- **Manual Navigation**: Standard slide-by-slide navigation
-- **Keyboard Shortcuts**: Quick access to all features
+## 📊 Content Highlights
 
-### 📊 **Professional Business Diagrams**
-- **Mermaid Integration**: Interactive, professional business diagrams
-- **Consistent Styling**: Corporate-grade visual design
-- **Business Frameworks**: PESTELE, SWOT, Value Proposition, Customer Journey
-- **Real-time Rendering**: Dynamic diagram generation
+### Strategic Framework
+- **Environmental Analysis**: PESTLE & SWOT frameworks
+- **Target Market**: Validated user personas and journey mapping
+- **Value Proposition**: Customer problem-solution-benefit mapping
+- **Marketing Mix**: Product, Price, Promotion, Place strategies
 
-### 🎨 **Modern UX Design**
-- **Smooth Animations**: Flicker-free transitions and interactions
-- **Glass-morphism Effects**: Modern backdrop blur and transparency
-- **Responsive Design**: Works across different screen sizes
-- **Professional Styling**: Corporate presentation aesthetics
+### Data-Driven Insights
+- **Primary Research**: 50-respondent Qualtrics survey results
+- **Financial Projections**: $100K budget allocation with 2.5x ROI target
+- **KPI Framework**: Monthly tracking with remediation plans
+- **Implementation Timeline**: Detailed execution roadmap
 
-## 🚀 Quick Start
+## 🛠️ Technology Stack
 
-1. **Open the Presentation**
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Visualizations**: Mermaid.js, Chart.js, D3.js, Plotly.js
+- **Styling**: Custom CSS with CSS Grid and Flexbox
+- **Audio**: Web Speech API for narration
+- **Development**: Python HTTP server for local development
+
+## 🏃‍♂️ Quick Start
+
+### Prerequisites
+- Python 3.x (for local development server)
+- Modern web browser (Chrome, Firefox, Safari, Edge)
+
+### Installation & Running
+
+1. **Clone the repository**
    ```bash
-   # Simply open index.html in any modern web browser
-   open index.html
+   git clone https://github.com/khaosans/pulse-trading.git
+   cd pulse-trading
    ```
 
-2. **Navigate the Presentation**
-   - Use arrow keys or click navigation buttons
-   - Press `Space` to advance slides
-   - Use `Home`/`End` for first/last slide
+2. **Start the development server**
+   ```bash
+   # Option 1: Python server (recommended)
+   python3 -m http.server 8080
+   
+   # Option 2: Using npm scripts
+   npm run start
+   ```
 
-3. **Audio Narration**
-   - Press `N` to toggle narration for current slide
-   - Press `P` to start full presentation mode
-   - Use the control buttons at the bottom of the screen
+3. **Open in browser**
+   ```
+   http://localhost:8080
+   ```
 
-## ⌨️ Keyboard Shortcuts
+### Alternative Development Servers
 
-| Key | Action |
-|-----|--------|
-| `←` `→` | Navigate slides |
-| `Space` | Next slide |
-| `N` | Toggle narrative |
-| `P` | Play full presentation |
-| `T` | Toggle timer |
-| `R` | Reset timer |
-| `Ctrl/Cmd + F` | Fullscreen mode |
-| `Home` | First slide |
-| `End` | Last slide |
-| `ESC` | Exit fullscreen |
+```bash
+# Using live-server (auto-reload)
+npm run dev
 
-## 📋 Presentation Structure
+# Using serve
+npm run serve
+```
 
-### **Slide Overview**
-1. **Title Slide** - Introduction and team overview
-2. **Abstract/The Hook** - Market gap and solution overview
-3. **Environmental Analysis** - PESTELE & SWOT framework
-4. **Strategic Objectives** - 2026 roadmap and metrics
-5. **Value Proposition** - Feature-to-emotion brand ladder
-6. **Target Customer** - User journey and persona analysis
-7. **Product** - Core features and functionality
-8. **Price** - Pricing strategy and model
-9. **Promotion** - Marketing mix and customer journey
-10. **Place** - Distribution and accessibility
-11. **3Ps Service Design** - People, Process, Physical Evidence
-12. **Financial Projections** - Budget allocation and ROI
-13. **KPIs** - Key performance indicators
-14. **Survey Results** - Market research findings
-15. **Team Contributions** - Individual responsibilities
-16. **Next Steps** - Implementation roadmap
+## 🎮 Usage
 
-### **Business Frameworks Used**
-- **PESTELE Analysis**: Political, Economic, Social, Technological, Environmental, Legal, Ethical factors
-- **SWOT Analysis**: Strengths, Weaknesses, Opportunities, Threats
-- **Value Proposition Canvas**: Feature-to-emotion brand ladder
-- **Customer Decision Journey**: Problem recognition to post-purchase loyalty
-- **Service Excellence Triangle**: People, Process, Physical Evidence
-- **Marketing Mix (4Ps + 3Ps)**: Product, Price, Promotion, Place + People, Process, Physical Evidence
+### Navigation
+- **Arrow Keys** / **Space**: Navigate between slides
+- **Home/End**: Jump to first/last slide
+- **N**: Toggle audio narration
+- **T**: Toggle presentation timer
+- **R**: Reset timer
+- **Ctrl/Cmd + F**: Fullscreen mode
+- **ESC**: Exit fullscreen
 
-## 🛠️ Technical Implementation
+### Features
+- **Audio Narration**: Click play button or press 'N' to hear speaker notes
+- **Interactive Charts**: Hover over Chart.js visualizations for details
+- **Responsive Design**: Automatically adapts to screen size
 
-### **Technologies Used**
-- **HTML5**: Semantic structure and accessibility
-- **CSS3**: Modern styling with CSS Grid, Flexbox, and animations
-- **JavaScript ES6+**: Interactive functionality and state management
-- **Web Speech API**: Text-to-speech narration
-- **Mermaid.js**: Professional business diagram rendering
-
-### **Architecture**
-- **Modular Design**: Separated concerns for maintainability
-- **Event-Driven**: Responsive user interactions
-- **State Management**: Centralized presentation state
-- **Performance Optimized**: Efficient rendering and memory management
-
-### **Browser Compatibility**
-- ✅ Chrome 80+
-- ✅ Firefox 75+
-- ✅ Safari 13+
-- ✅ Edge 80+
-
-## 📁 File Structure
+## 📁 Project Structure
 
 ```
 pulse-trading/
-├── index.html          # Main presentation file
-├── app.js             # Core JavaScript functionality
-├── style.css          # Styling and animations
-├── package.json       # Project dependencies
-├── README.md          # This file
-└── assets/            # Supporting documents
-    ├── BADM_520_FA25_023_FinalSlides.pptx
-    ├── FA25_023_Survey Questions.pdf
-    ├── Final Marketing Plan Presentation Fall 2025 (1).docx
-    ├── Pulse_Trading_Concise_Presentation.md
-    ├── Pulse_Trading_Final_Marketing_Plan.pptx
-    └── Pulse_Trading_Professional_Presentation.md
+├── src/                    # Main application files
+│   ├── index.html         # Main presentation
+│   ├── app.js            # JavaScript logic
+│   └── style.css         # Styling
+├── docs/                  # Documentation and assets
+│   ├── *.pptx           # PowerPoint presentations
+│   ├── *.pdf            # Survey questions
+│   └── *.md             # Markdown documentation
+├── .gitignore           # Git ignore rules
+├── package.json         # Project configuration
+└── README.md           # This file
 ```
 
-## 🎯 Target Audience
+## 👥 Team
 
-- **Business Students**: Marketing strategy and presentation skills
-- **Investors**: Comprehensive business plan overview
-- **Stakeholders**: Strategic roadmap and financial projections
-- **Team Members**: Role clarity and contribution overview
+**Pulse Trading Marketing Team:**
+- **Kennedy**: Strategy & Pricing Lead
+- **Derek**: Target Analysis Lead  
+- **Shang**: Product & Distribution Lead
+- **Maryam**: Promotion & Service Design Lead
+- **Scott**: Financial Analysis Lead
+- **Sour**: KPI Development Lead
 
-## 📈 Key Metrics & Goals
+## 📈 Key Metrics
 
-### **Strategic Objectives (2026)**
-- **User Acquisition**: 5,000 new sign-ups by Q2
-- **User Retention**: 25% monthly active user retention
-- **Revenue Generation**: $250K annual revenue
-- **Market Position**: Top-3 community platform recognition
+- **Target Market**: $2.7B retail trading market
+- **Revenue Goal**: $250K in Year 1
+- **Marketing ROI**: 2.5x return on investment
+- **User Target**: 5,000 sign-ups by Q2 2026
+- **Retention Goal**: 25% monthly active users
 
-### **Financial Projections**
-- **Marketing Budget**: $100,000
-- **Revenue Forecast**: $250,000
-- **Marketing ROI**: 2.5× MROI
-- **Break-even**: Month 18
+## 🔧 Development
 
-## 🔧 Development & Customization
-
-### **Adding New Slides**
-1. Add slide HTML structure in `index.html`
-2. Update navigation in the sidebar
-3. Add narrative data in `app.js`
-4. Include any required diagrams
-
-### **Modifying Narratives**
-1. Update `narrativeData` object in `app.js`
-2. Adjust timing and reading time
-3. Update speaker notes in HTML
-4. Test audio playback
-
-### **Customizing Styling**
-1. Modify CSS variables in `style.css`
-2. Update color schemes and typography
-3. Adjust animations and transitions
-4. Test responsive behavior
-
-## 🚀 Deployment
-
-### **Local Development**
+### Local Development
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd pulse-trading
+# Start development server
+python3 -m http.server 8080
 
-# Open in browser
-open index.html
+# Or use npm scripts
+npm run dev
 ```
 
-### **Web Deployment**
-- Upload files to any web server
-- Ensure HTTPS for Web Speech API
-- Test across different browsers
-- Optimize for mobile devices
-
-## 📞 Support & Contact
-
-For questions or issues with the presentation:
-- **Team**: Kennedy, Derek, Shang, Maryam, Scott, Sour
-- **Course**: BADM 520 - Marketing Strategy
-- **Institution**: University of Michigan
-- **Date**: September 2025
+### Browser Compatibility
+- Chrome 80+
+- Firefox 75+
+- Safari 13+
+- Edge 80+
 
 ## 📄 License
 
-This project is created for educational purposes as part of the BADM 520 Marketing Strategy course at the University of Michigan.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+This is a final project submission. For questions or feedback, please contact the team.
+
+## 📞 Contact
+
+- **Repository**: [https://github.com/khaosans/pulse-trading](https://github.com/khaosans/pulse-trading)
+- **Team**: Pulse Trading Marketing Team
+- **Course**: BADM 520 - Fall 2025
 
 ---
 
-**Built with ❤️ by the Pulse Trading Marketing Team**
+*Built with ❤️ by the Pulse Trading Team*

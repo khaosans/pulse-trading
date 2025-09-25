@@ -1,7 +1,7 @@
 {
   "name": "pulse-trading-presentation",
   "version": "1.0.0",
-  "description": "Interactive SPA presentation for Pulse Trading marketing plan with Ollama AI integration",
+  "description": "Interactive presentation for Pulse Trading Final Marketing Plan - A comprehensive, data-driven strategy for retail trading platform growth",
   "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8000",
@@ -19,7 +19,7 @@
     "marketing",
     "pulse-trading"
   ],
-  "author": "Pulse Trading Team",
+  "author": "Pulse Trading Team (Kennedy, Derek, Shang, Maryam, Scott, Sour)",
   "license": "MIT",
   "devDependencies": {
     "live-server": "^1.2.2",
