@@ -11,6 +11,9 @@ class PulseTradingPresentation {
         this.selectedVoice = null;
         this.playbackSpeed = 1.0;
         this.autoAdvance = true;
+        this.isTransitioning = false;
+        this.progressInterval = null;
+        this.slideStartTime = null;
         this.slideTimings = {
             1: 45,   // Title slide - 45 seconds
             2: 60,   // Problem & Solution - 60 seconds
@@ -129,16 +132,60 @@ class PulseTradingPresentation {
     }
 
     nextSlide() {
-        if (this.currentSlide < this.totalSlides) {
-            this.currentSlide++;
-            this.updateSlide();
+        if (this.currentSlide < this.totalSlides && !this.isTransitioning) {
+            this.isTransitioning = true;
+            
+            // Add transition classes for smooth animation
+            const currentSlideElement = document.querySelector(`[data-slide="${this.currentSlide}"]`);
+            const nextSlideElement = document.querySelector(`[data-slide="${this.currentSlide + 1}"]`);
+            
+            if (currentSlideElement && nextSlideElement) {
+                currentSlideElement.classList.add('prev');
+                nextSlideElement.classList.add('next');
+                
+                setTimeout(() => {
+                    currentSlideElement.classList.remove('active', 'prev');
+                    nextSlideElement.classList.remove('next');
+                    nextSlideElement.classList.add('active');
+                    
+                    this.currentSlide++;
+                    this.updateSlide();
+                    this.isTransitioning = false;
+                }, 300);
+            } else {
+                this.currentSlide++;
+                this.updateSlide();
+                this.isTransitioning = false;
+            }
         }
     }
 
     previousSlide() {
-        if (this.currentSlide > 1) {
-            this.currentSlide--;
-            this.updateSlide();
+        if (this.currentSlide > 1 && !this.isTransitioning) {
+            this.isTransitioning = true;
+            
+            // Add transition classes for smooth animation
+            const currentSlideElement = document.querySelector(`[data-slide="${this.currentSlide}"]`);
+            const prevSlideElement = document.querySelector(`[data-slide="${this.currentSlide - 1}"]`);
+            
+            if (currentSlideElement && prevSlideElement) {
+                currentSlideElement.classList.add('next');
+                prevSlideElement.classList.add('prev');
+                
+                setTimeout(() => {
+                    currentSlideElement.classList.remove('active', 'next');
+                    prevSlideElement.classList.remove('prev');
+                    prevSlideElement.classList.add('active');
+                    
+                    this.currentSlide--;
+                    this.updateSlide();
+                    this.isTransitioning = false;
+                }, 300);
+            } else {
+                this.currentSlide--;
+                this.updateSlide();
+                this.isTransitioning = false;
+            }
         }
     }
 
@@ -375,6 +422,79 @@ Provide an improved narrative that maintains the key information while making it
         return '';
     }
 
+    // Enhanced progress tracking for seamless UX
+    startProgressTracking() {
+        this.clearProgressInterval();
+        this.progressInterval = setInterval(() => {
+            this.updateProgress();
+        }, 100); // Update every 100ms for smooth progress
+    }
+
+    clearProgressInterval() {
+        if (this.progressInterval) {
+            clearInterval(this.progressInterval);
+            this.progressInterval = null;
+        }
+    }
+
+    updateProgress() {
+        if (!this.isPlaying || !this.slideStartTime) return;
+
+        const currentTime = Date.now();
+        const elapsed = (currentTime - this.slideStartTime) / 1000; // Convert to seconds
+        const totalTime = this.slideTimings[this.currentSlide];
+        
+        const progressPercent = Math.min((elapsed / totalTime) * 100, 100);
+        
+        // Update progress bar
+        const progressFill = document.getElementById('progressFill');
+        if (progressFill) {
+            progressFill.style.width = `${progressPercent}%`;
+        }
+        
+        // Update time display
+        const timeDisplay = document.getElementById('timeDisplay');
+        if (timeDisplay) {
+            const currentMinutes = Math.floor(elapsed / 60);
+            const currentSeconds = Math.floor(elapsed % 60);
+            const totalMinutes = Math.floor(totalTime / 60);
+            const totalSeconds = Math.floor(totalTime % 60);
+            
+            timeDisplay.textContent = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')} / ${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Auto-advance when time is up
+        if (elapsed >= totalTime && this.autoAdvance) {
+            this.autoAdvanceToNextSlide();
+        }
+    }
+
+    autoAdvanceToNextSlide() {
+        if (this.isTransitioning) return;
+        
+        this.isTransitioning = true;
+        this.clearProgressInterval();
+        
+        // Smooth transition to next slide
+        setTimeout(() => {
+            if (this.currentSlide < this.totalSlides) {
+                this.nextSlide();
+                this.isTransitioning = false;
+                
+                // Continue narration if playing
+                if (this.isPlaying) {
+                    setTimeout(() => {
+                        this.startNarration();
+                    }, 500); // Brief pause between slides for better flow
+                }
+            } else {
+                // End of presentation
+                this.stopNarration();
+                this.isTransitioning = false;
+            }
+        }, 300); // Transition delay
+    }
+
     // Audio Narration Methods
     initializeAudio() {
         // Load available voices
@@ -477,9 +597,15 @@ Provide an improved narrative that maintains the key information while making it
             return;
         }
 
+        if (this.isTransitioning) return;
+
         this.isPlaying = true;
         this.isPaused = false;
+        this.slideStartTime = Date.now();
         this.updateAudioUI();
+
+        // Start progress tracking
+        this.startProgressTracking();
 
         const utterance = new SpeechSynthesisUtterance(this.speakerNotes[this.currentSlide]);
         
@@ -524,8 +650,23 @@ Provide an improved narrative that maintains the key information while making it
         this.isPlaying = false;
         this.isPaused = false;
         this.currentUtterance = null;
+        this.clearProgressInterval();
         this.updateAudioUI();
-        this.updateProgress(0, 0);
+        
+        // Reset progress bar
+        const progressFill = document.getElementById('progressFill');
+        if (progressFill) {
+            progressFill.style.width = '0%';
+        }
+        
+        // Reset time display
+        const timeDisplay = document.getElementById('timeDisplay');
+        if (timeDisplay) {
+            const totalTime = this.slideTimings[this.currentSlide];
+            const totalMinutes = Math.floor(totalTime / 60);
+            const totalSeconds = Math.floor(totalTime % 60);
+            timeDisplay.textContent = `0:00 / ${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}`;
+        }
     }
 
     onSpeechStart() {

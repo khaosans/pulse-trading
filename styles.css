@@ -69,6 +69,14 @@ body {
     border-radius: 25px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.audio-controls:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .audio-btn {
@@ -98,29 +106,79 @@ body {
     transform: none;
 }
 
-.audio-progress {
+.audio-progress-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 0.5rem;
     min-width: 200px;
 }
 
 .progress-bar {
-    flex: 1;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
     overflow: hidden;
-    cursor: pointer;
     position: relative;
 }
 
 .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, #667eea, #764ba2);
-    border-radius: 3px;
+    border-radius: 2px;
     width: 0%;
-    transition: width 0.1s ease;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.audio-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    font-size: 0.9rem;
+    justify-content: center;
+}
+
+/* Slide Transitions */
+.slide {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide.prev {
+    transform: translateX(-100px);
+}
+
+.slide.next {
+    transform: translateX(100px);
 }
 
 #timeDisplay {
