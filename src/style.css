@@ -2168,3 +2168,107 @@ select.form-control {
     padding: var(--space-16);
   }
 }
+
+/* Table Styles */
+.table-container {
+  margin: var(--space-24) 0;
+  overflow-x: auto;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+
+table th {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-white);
+  padding: var(--space-16) var(--space-12);
+  text-align: left;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--color-primary-dark);
+}
+
+table td {
+  padding: var(--space-16) var(--space-12);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table tr:nth-child(even) {
+  background-color: rgba(var(--color-primary-rgb), 0.02);
+}
+
+table tr:hover {
+  background-color: rgba(var(--color-primary-rgb), 0.05);
+  transition: background-color 0.2s ease;
+}
+
+/* Specific Table Styles */
+.strategic-objectives-table th:first-child,
+.strategic-objectives-table td:first-child {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.strategic-objectives-table th:first-child {
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+}
+
+.value-proposition-table .pain-desc,
+.value-proposition-table .solution-desc,
+.value-proposition-table .benefit-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin-top: var(--space-4);
+  display: block;
+}
+
+.customer-journey-table td {
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+}
+
+.product-features-table td {
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+}
+
+.pricing-strategy-table td:nth-child(2) {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
+}
+
+/* Responsive Table Styles */
+@media (max-width: 768px) {
+  .table-container {
+    margin: var(--space-16) 0;
+  }
+  
+  table th,
+  table td {
+    padding: var(--space-12) var(--space-8);
+    font-size: var(--font-size-xs);
+  }
+  
+  table th {
+    font-size: var(--font-size-xs);
+  }
+}
