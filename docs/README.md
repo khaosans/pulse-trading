@@ -197,12 +197,12 @@ open index.html
 For questions or issues with the presentation:
 - **Team**: Kennedy, Derek, Shang, Maryam, Scott, Sour
 - **Course**: BADM 520 - Marketing Strategy
-- **Institution**: University of Michigan
+- **Institution**: iMBA UIUC (University of Illinois Urbana-Champaign)
 - **Date**: September 2025
 
 ## 📄 License
 
-This project is created for educational purposes as part of the BADM 520 Marketing Strategy course at the University of Michigan.
+This project is created for educational purposes as part of the BADM 520 Marketing Strategy course at iMBA UIUC (University of Illinois Urbana-Champaign).
 
 ---
 

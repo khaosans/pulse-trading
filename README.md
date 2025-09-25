@@ -216,7 +216,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ### Academic Use
 - **Course**: BADM 520 - Marketing Strategy
-- **Institution**: University of Michigan
+- **Institution**: iMBA UIUC (University of Illinois Urbana-Champaign)
 - **Semester**: Fall 2025
 - **Purpose**: Final marketing plan presentation
 
@@ -232,7 +232,7 @@ This is a final academic project. For questions or feedback:
 - **Repository**: [https://github.com/khaosans/pulse-trading](https://github.com/khaosans/pulse-trading)
 - **Presentation**: [http://localhost:8080](http://localhost:8080) (when running locally)
 - **Team**: Pulse Trading Marketing Team
-- **Academic**: BADM 520 - University of Michigan
+- **Academic**: BADM 520 - iMBA UIUC
 
 ---
 
