@@ -1,0 +1,34 @@
+{
+  "name": "pulse-trading-presentation",
+  "version": "1.0.0",
+  "description": "Interactive SPA presentation for Pulse Trading marketing plan with Ollama AI integration",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx serve .",
+    "dev": "npx live-server --port=8000 --open=/index.html",
+    "build": "echo 'No build process needed for static files'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "presentation",
+    "spa",
+    "ollama",
+    "ai",
+    "fintech",
+    "marketing",
+    "pulse-trading"
+  ],
+  "author": "Pulse Trading Team",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.1"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khaosans/pulse-trading.git"
+  },
+  "homepage": "https://github.com/khaosans/pulse-trading#readme"
+}

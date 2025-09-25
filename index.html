@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulse Trading - Marketing Plan Presentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Pulse Trading</span>
+                </div>
+                <div class="nav-controls">
+                    <button id="prevBtn" class="nav-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span id="slideCounter">1 / 15</span>
+                    <button id="nextBtn" class="nav-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button id="fullscreenBtn" class="nav-btn">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Presentation Container -->
+        <main class="presentation-container">
+            <div class="slide-container">
+                <!-- Slide 1: Title -->
+                <div class="slide active" data-slide="1">
+                    <div class="slide-content title-slide">
+                        <div class="title-header">
+                            <h1>Pulse Trading</h1>
+                            <h2>Final Marketing Plan</h2>
+                            <p class="subtitle">Strategic Roadmap for Retail Investor Growth</p>
+                        </div>
+                        <div class="title-details">
+                            <div class="team-info">
+                                <h3>Team Members</h3>
+                                <div class="team-grid">
+                                    <span>Kennedy</span>
+                                    <span>Derek</span>
+                                    <span>Shang</span>
+                                    <span>Maryam</span>
+                                    <span>Scott</span>
+                                    <span>Sour</span>
+                                </div>
+                            </div>
+                            <div class="presentation-info">
+                                <p><i class="fas fa-calendar"></i> September 2025</p>
+                                <p><i class="fas fa-clock"></i> 15-20 Minutes</p>
+                                <p><i class="fas fa-users"></i> Professional Business Presentation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Problem & Solution -->
+                <div class="slide" data-slide="2">
+                    <div class="slide-content">
+                        <h2>The Challenge & Solution</h2>
+                        <div class="content-grid">
+                            <div class="problem-section">
+                                <h3><i class="fas fa-exclamation-triangle"></i> The Market Problem</h3>
+                                <ul>
+                                    <li>Retail investors lack accessible, data-driven platforms</li>
+                                    <li>Current options: Over-complex OR basic without insights</li>
+                                    <li>78% feel under-informed, 65% lack peer learning</li>
+                                </ul>
+                            </div>
+                            <div class="solution-section">
+                                <h3><i class="fas fa-lightbulb"></i> Our Solution</h3>
+                                <ul>
+                                    <li>Real-time analytics + vibrant user community</li>
+                                    <li>Data-driven insights + social learning</li>
+                                    <li>Mobile-first, professional-grade experience</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="value-prop">
+                            <h3><i class="fas fa-gem"></i> Value Proposition</h3>
+                            <p>Empowers smarter trading decisions through real-time data and peer insights</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Market Analysis -->
+                <div class="slide" data-slide="3">
+                    <div class="slide-content">
+                        <h2>Comprehensive Market Analysis</h2>
+                        <div class="analysis-container">
+                            <div class="pest-analysis">
+                                <h3>PEST Analysis</h3>
+                                <div class="pest-grid">
+                                    <div class="pest-item">
+                                        <h4>Political</h4>
+                                        <p>Fintech-friendly regulations</p>
+                                    </div>
+                                    <div class="pest-item">
+                                        <h4>Economic</h4>
+                                        <p>$2.3T market growing 15% annually</p>
+                                    </div>
+                                    <div class="pest-item">
+                                        <h4>Social</h4>
+                                        <p>85% prefer mobile-first experiences</p>
+                                    </div>
+                                    <div class="pest-item">
+                                        <h4>Technological</h4>
+                                        <p>AI and real-time data accessible</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swot-analysis">
+                                <h3>SWOT Analysis</h3>
+                                <div class="swot-grid">
+                                    <div class="swot-item strength">
+                                        <h4>Strengths</h4>
+                                        <p>Advanced tech + community focus</p>
+                                    </div>
+                                    <div class="swot-item weakness">
+                                        <h4>Weaknesses</h4>
+                                        <p>New market entry</p>
+                                    </div>
+                                    <div class="swot-item opportunity">
+                                        <h4>Opportunities</h4>
+                                        <p>Underserved millennial/Gen Z segments</p>
+                                    </div>
+                                    <div class="swot-item threat">
+                                        <h4>Threats</h4>
+                                        <p>Established competitors</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4: Strategic Objectives -->
+                <div class="slide" data-slide="4">
+                    <div class="slide-content">
+                        <h2>SMART Strategic Objectives</h2>
+                        <div class="objectives-container">
+                            <div class="objectives-grid">
+                                <div class="objective-item">
+                                    <div class="objective-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <h3>5,000 Sign-ups</h3>
+                                    <p>User Acquisition</p>
+                                    <span class="timeline">Q1-Q4 2026</span>
+                                </div>
+                                <div class="objective-item">
+                                    <div class="objective-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h3>1,000 Active Users</h3>
+                                    <p>User Engagement</p>
+                                    <span class="timeline">Q2-Q4 2026</span>
+                                </div>
+                                <div class="objective-item">
+                                    <div class="objective-icon">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <h3>40% Brand Recall</h3>
+                                    <p>Brand Awareness</p>
+                                    <span class="timeline">Q4 2026</span>
+                                </div>
+                                <div class="objective-item">
+                                    <div class="objective-icon">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                    <h3>$250K Revenue</h3>
+                                    <p>Revenue Generation</p>
+                                    <span class="timeline">Q2-Q4 2026</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 5: Value Proposition -->
+                <div class="slide" data-slide="5">
+                    <div class="slide-content">
+                        <h2>Value Proposition Canvas</h2>
+                        <div class="value-canvas">
+                            <div class="customer-jobs">
+                                <h3>Customer Jobs</h3>
+                                <ul>
+                                    <li>Make informed trading decisions</li>
+                                    <li>Learn from experienced traders</li>
+                                    <li>Access professional-grade analytics</li>
+                                </ul>
+                            </div>
+                            <div class="pain-points">
+                                <h3>Pain Points We Solve</h3>
+                                <ul>
+                                    <li>Lack of real-time data (80%)</li>
+                                    <li>No peer learning (65%)</li>
+                                    <li>Over-complex tools (78%)</li>
+                                </ul>
+                            </div>
+                            <div class="gain-creators">
+                                <h3>Our Gain Creators</h3>
+                                <ul>
+                                    <li>Real-time analytics dashboard</li>
+                                    <li>Social trading feeds</li>
+                                    <li>Mobile-first design</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 6: Customer Journey -->
+                <div class="slide" data-slide="6">
+                    <div class="slide-content">
+                        <h2>Customer Journey & Target Profile</h2>
+                        <div class="journey-container">
+                            <div class="target-profile">
+                                <h3>Target Customer Profile</h3>
+                                <div class="profile-grid">
+                                    <div class="profile-item">
+                                        <h4>Demographics</h4>
+                                        <ul>
+                                            <li>Age: 22-40 years</li>
+                                            <li>Location: US urban/suburban</li>
+                                            <li>Education: College educated</li>
+                                            <li>Income: $50K-$150K</li>
+                                        </ul>
+                                    </div>
+                                    <div class="profile-item">
+                                        <h4>Psychographics</h4>
+                                        <ul>
+                                            <li>Tech-savvy & mobile-first</li>
+                                            <li>Learning-oriented</li>
+                                            <li>Community-minded</li>
+                                            <li>Data-driven decisions</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="journey-stages">
+                                <h3>Customer Journey Stages</h3>
+                                <div class="journey-flow">
+                                    <div class="journey-step">
+                                        <span class="step-number">1</span>
+                                        <h4>Awareness</h4>
+                                        <p>Social Media Ads</p>
+                                    </div>
+                                    <div class="journey-arrow">→</div>
+                                    <div class="journey-step">
+                                        <span class="step-number">2</span>
+                                        <h4>Consideration</h4>
+                                        <p>Webinars & Content</p>
+                                    </div>
+                                    <div class="journey-arrow">→</div>
+                                    <div class="journey-step">
+                                        <span class="step-number">3</span>
+                                        <h4>Purchase</h4>
+                                        <p>Referral Incentives</p>
+                                    </div>
+                                    <div class="journey-arrow">→</div>
+                                    <div class="journey-step">
+                                        <span class="step-number">4</span>
+                                        <h4>Advocacy</h4>
+                                        <p>Loyalty Programs</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 7: Marketing Mix -->
+                <div class="slide" data-slide="7">
+                    <div class="slide-content">
+                        <h2>Marketing Mix Strategy</h2>
+                        <div class="marketing-mix">
+                            <div class="mix-item">
+                                <div class="mix-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <h3>Product</h3>
+                                <ul>
+                                    <li>Mobile-first app</li>
+                                    <li>Real-time analytics</li>
+                                    <li>Social trading feeds</li>
+                                    <li>Freemium model</li>
+                                </ul>
+                            </div>
+                            <div class="mix-item">
+                                <div class="mix-icon">
+                                    <i class="fas fa-tag"></i>
+                                </div>
+                                <h3>Price</h3>
+                                <ul>
+                                    <li>Free core features</li>
+                                    <li>Premium: $9.99/month</li>
+                                    <li>70% willing to pay</li>
+                                    <li>Competitive advantage</li>
+                                </ul>
+                            </div>
+                            <div class="mix-item">
+                                <div class="mix-icon">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                                <h3>Place</h3>
+                                <ul>
+                                    <li>iOS/Android stores</li>
+                                    <li>Company website</li>
+                                    <li>Finance blogs</li>
+                                    <li>Urban/suburban focus</li>
+                                </ul>
+                            </div>
+                            <div class="mix-item">
+                                <div class="mix-icon">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                <h3>Promotion</h3>
+                                <ul>
+                                    <li>Digital ads (40%)</li>
+                                    <li>Content marketing (25%)</li>
+                                    <li>Influencers (20%)</li>
+                                    <li>Webinars (15%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 8: Customer Decision Journey -->
+                <div class="slide" data-slide="8">
+                    <div class="slide-content">
+                        <h2>Customer Decision Journey</h2>
+                        <div class="decision-journey">
+                            <div class="journey-stage">
+                                <h3>1. Problem Recognition</h3>
+                                <p>Market volatility, investment goals</p>
+                                <div class="tactics">
+                                    <span class="tactic">Social media ads</span>
+                                    <span class="tactic">Influencer teasers</span>
+                                </div>
+                            </div>
+                            <div class="journey-stage">
+                                <h3>2. Information Search</h3>
+                                <p>Research platforms, compare features</p>
+                                <div class="tactics">
+                                    <span class="tactic">Educational webinars</span>
+                                    <span class="tactic">Blog content</span>
+                                </div>
+                            </div>
+                            <div class="journey-stage">
+                                <h3>3. Evaluation</h3>
+                                <p>Features, pricing, user experience</p>
+                                <div class="tactics">
+                                    <span class="tactic">Free trial</span>
+                                    <span class="tactic">Testimonials</span>
+                                </div>
+                            </div>
+                            <div class="journey-stage">
+                                <h3>4. Purchase Decision</h3>
+                                <p>Value proposition, social proof</p>
+                                <div class="tactics">
+                                    <span class="tactic">Referral bonuses</span>
+                                    <span class="tactic">Onboarding support</span>
+                                </div>
+                            </div>
+                            <div class="journey-stage">
+                                <h3>5. Advocacy</h3>
+                                <p>Successful trading, community</p>
+                                <div class="tactics">
+                                    <span class="tactic">Loyalty programs</span>
+                                    <span class="tactic">Community recognition</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 9: Service Excellence -->
+                <div class="slide" data-slide="9">
+                    <div class="slide-content">
+                        <h2>Service Excellence Framework</h2>
+                        <div class="service-excellence">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3>People</h3>
+                                <ul>
+                                    <li>Expert support team</li>
+                                    <li>Community moderators</li>
+                                    <li>Customer success specialists</li>
+                                </ul>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h3>Process</h3>
+                                <ul>
+                                    <li>Seamless onboarding (5 min)</li>
+                                    <li>Intuitive user interface</li>
+                                    <li>Streamlined trading process</li>
+                                </ul>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <h3>Physical Evidence</h3>
+                                <ul>
+                                    <li>Polished mobile app</li>
+                                    <li>Active community</li>
+                                    <li>Professional brand materials</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 10: Financial Projections -->
+                <div class="slide" data-slide="10">
+                    <div class="slide-content">
+                        <h2>Financial Projections & ROI</h2>
+                        <div class="financial-container">
+                            <div class="budget-allocation">
+                                <h3>Budget Allocation ($100K)</h3>
+                                <div class="budget-items">
+                                    <div class="budget-item">
+                                        <div class="budget-bar" style="width: 40%"></div>
+                                        <span>Digital Advertising - $40K (40%)</span>
+                                    </div>
+                                    <div class="budget-item">
+                                        <div class="budget-bar" style="width: 25%"></div>
+                                        <span>Content Marketing - $25K (25%)</span>
+                                    </div>
+                                    <div class="budget-item">
+                                        <div class="budget-bar" style="width: 20%"></div>
+                                        <span>Influencer Partnerships - $20K (20%)</span>
+                                    </div>
+                                    <div class="budget-item">
+                                        <div class="budget-bar" style="width: 15%"></div>
+                                        <span>Webinars & Events - $15K (15%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="revenue-projections">
+                                <h3>Revenue Projections</h3>
+                                <div class="revenue-metrics">
+                                    <div class="metric">
+                                        <h4>$250K</h4>
+                                        <p>Transaction Fees (Year 1)</p>
+                                    </div>
+                                    <div class="metric">
+                                        <h4>2.5x</h4>
+                                        <p>Marketing ROI</p>
+                                    </div>
+                                    <div class="metric">
+                                        <h4>Month 8</h4>
+                                        <p>Break-even Timeline</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 11: Performance Tracking -->
+                <div class="slide" data-slide="11">
+                    <div class="slide-content">
+                        <h2>Performance Tracking & KPIs</h2>
+                        <div class="kpi-container">
+                            <table class="kpi-table">
+                                <thead>
+                                    <tr>
+                                        <th>Objective</th>
+                                        <th>KPI Target</th>
+                                        <th>Measurement Method</th>
+                                        <th>Plan B Remedy</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>User Acquisition</strong></td>
+                                        <td>5,000 sign-ups by Q4 2026</td>
+                                        <td>Monthly sign-up tracking</td>
+                                        <td>Increase ad spend, enhance referrals</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>User Engagement</strong></td>
+                                        <td>1,000 monthly active users</td>
+                                        <td>DAU/MAU metrics</td>
+                                        <td>Trading competitions, improve onboarding</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Brand Awareness</strong></td>
+                                        <td>40% aided brand recall</td>
+                                        <td>Quarterly brand surveys</td>
+                                        <td>Expand influencer campaigns</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Revenue Generation</strong></td>
+                                        <td>$250K transaction fees</td>
+                                        <td>Monthly revenue tracking</td>
+                                        <td>Fee discounts, expand segments</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 12: Survey Validation -->
+                <div class="slide" data-slide="12">
+                    <div class="slide-content">
+                        <h2>Market Validation & Survey Results</h2>
+                        <div class="survey-container">
+                            <div class="survey-header">
+                                <h3>Primary Research Validation (50 Respondents)</h3>
+                            </div>
+                            <div class="survey-metrics">
+                                <div class="metric-card">
+                                    <div class="metric-value">80%</div>
+                                    <div class="metric-label">Want real-time analytics</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-value">65%</div>
+                                    <div class="metric-label">Value community features</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-value">70%</div>
+                                    <div class="metric-label">Willing to pay premium</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-value">85%</div>
+                                    <div class="metric-label">Prefer mobile-first</div>
+                                </div>
+                            </div>
+                            <div class="validation-insights">
+                                <h3>Key Insights</h3>
+                                <ul>
+                                    <li>Strong product-market fit indicators</li>
+                                    <li>Premium pricing model validated</li>
+                                    <li>Mobile-first strategy confirmed</li>
+                                    <li>Community features highly valued</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 13: Team Contributions -->
+                <div class="slide" data-slide="13">
+                    <div class="slide-content">
+                        <h2>Team Expertise & Contributions</h2>
+                        <div class="team-container">
+                            <div class="team-grid">
+                                <div class="team-member">
+                                    <div class="member-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <h3>Derek</h3>
+                                    <p class="role">Market Research Lead</p>
+                                    <p class="contribution">Survey design, customer segmentation, competitive analysis</p>
+                                </div>
+                                <div class="team-member">
+                                    <div class="member-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <h3>Kennedy</h3>
+                                    <p class="role">Strategy & Pricing Lead</p>
+                                    <p class="contribution">Strategic planning, pricing models, market positioning</p>
+                                </div>
+                                <div class="team-member">
+                                    <div class="member-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <h3>Shang</h3>
+                                    <p class="role">Product & Distribution Lead</p>
+                                    <p class="contribution">Feature development, channel strategy, user experience</p>
+                                </div>
+                                <div class="team-member">
+                                    <div class="member-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <h3>Maryam</h3>
+                                    <p class="role">Marketing & Service Lead</p>
+                                    <p class="contribution">Campaign development, service design, brand strategy</p>
+                                </div>
+                                <div class="team-member">
+                                    <div class="member-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <h3>Scott</h3>
+                                    <p class="role">Financial Analysis Lead</p>
+                                    <p class="contribution">Financial projections, ROI modeling, budget optimization</p>
+                                </div>
+                                <div class="team-member">
+                                    <div class="member-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <h3>Sour</h3>
+                                    <p class="role">Performance & Analytics Lead</p>
+                                    <p class="contribution">KPI development, tracking systems, performance optimization</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 14: Implementation Timeline -->
+                <div class="slide" data-slide="14">
+                    <div class="slide-content">
+                        <h2>Implementation Timeline & Milestones</h2>
+                        <div class="timeline-container">
+                            <div class="timeline-phases">
+                                <div class="phase">
+                                    <h3>Phase 1: Foundation (Months 1-3)</h3>
+                                    <ul>
+                                        <li>Complete market research</li>
+                                        <li>Develop MVP features</li>
+                                        <li>Launch initial campaigns</li>
+                                        <li><strong>Target:</strong> 1,000 sign-ups</li>
+                                    </ul>
+                                </div>
+                                <div class="phase">
+                                    <h3>Phase 2: Growth (Months 4-8)</h3>
+                                    <ul>
+                                        <li>Scale marketing campaigns</li>
+                                        <li>Launch premium features</li>
+                                        <li>Expand community features</li>
+                                        <li><strong>Target:</strong> 3,000 sign-ups, 500 active users</li>
+                                    </ul>
+                                </div>
+                                <div class="phase">
+                                    <h3>Phase 3: Optimization (Months 9-12)</h3>
+                                    <ul>
+                                        <li>Optimize conversion rates</li>
+                                        <li>Expand to new segments</li>
+                                        <li>Prepare for Series A funding</li>
+                                        <li><strong>Target:</strong> 5,000 sign-ups, 1,000 active users, $250K revenue</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 15: Next Steps -->
+                <div class="slide" data-slide="15">
+                    <div class="slide-content">
+                        <h2>Next Steps & Call to Action</h2>
+                        <div class="next-steps-container">
+                            <div class="immediate-steps">
+                                <h3>Immediate Next Steps</h3>
+                                <div class="steps-grid">
+                                    <div class="step-item">
+                                        <h4>Week 1-2: Final Preparation</h4>
+                                        <ul>
+                                            <li>Complete final survey responses</li>
+                                            <li>Conduct financial review session</li>
+                                            <li>Finalize presentation materials</li>
+                                        </ul>
+                                    </div>
+                                    <div class="step-item">
+                                        <h4>Week 3-4: Execution</h4>
+                                        <ul>
+                                            <li>Record and edit presentation video</li>
+                                            <li>Submit final deliverables</li>
+                                            <li>Begin market research</li>
+                                        </ul>
+                                    </div>
+                                    <div class="step-item">
+                                        <h4>Month 2-3: Implementation</h4>
+                                        <ul>
+                                            <li>Launch MVP development</li>
+                                            <li>Initiate marketing planning</li>
+                                            <li>Begin partnership discussions</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="investment-opportunity">
+                                <h3>Investment Opportunity</h3>
+                                <div class="investment-details">
+                                    <div class="investment-metric">
+                                        <h4>$500K</h4>
+                                        <p>Total Funding Needed</p>
+                                    </div>
+                                    <div class="investment-metric">
+                                        <h4>18 Months</h4>
+                                        <p>Runway</p>
+                                    </div>
+                                    <div class="investment-metric">
+                                        <h4>10x</h4>
+                                        <p>Expected Returns (3 years)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Speaker Notes Panel -->
+        <div id="speakerNotes" class="speaker-notes">
+            <div class="notes-header">
+                <h3>Speaker Notes</h3>
+                <button id="toggleNotes" class="toggle-btn">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+            <div class="notes-content">
+                <div id="notesText">Welcome to our Pulse Trading Final Marketing Plan. This presentation outlines our data-driven, community-focused strategy to scale our platform and deliver strong ROI for investors.</div>
+            </div>
+        </div>
+
+        <!-- AI Enhancement Panel -->
+        <div id="aiPanel" class="ai-panel">
+            <div class="ai-header">
+                <h3><i class="fas fa-robot"></i> AI Enhancement</h3>
+                <button id="toggleAI" class="toggle-btn">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+            </div>
+            <div class="ai-content">
+                <div class="ai-controls">
+                    <button id="enhanceContent" class="ai-btn">
+                        <i class="fas fa-magic"></i> Enhance Content
+                    </button>
+                    <button id="generateInsights" class="ai-btn">
+                        <i class="fas fa-lightbulb"></i> Generate Insights
+                    </button>
+                    <button id="improveNarrative" class="ai-btn">
+                        <i class="fas fa-comments"></i> Improve Narrative
+                    </button>
+                </div>
+                <div id="aiOutput" class="ai-output">
+                    <p>Click a button above to enhance your presentation with AI insights.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
