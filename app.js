@@ -48,6 +48,7 @@ class PresentationApp {
     // Initialize Chart.js visualizations
     this.createBudgetChart();
     this.createROIChart();
+    this.createSurveyChart();
   }
   
   createBudgetChart() {
@@ -138,6 +139,73 @@ class PresentationApp {
             title: {
               display: true,
               text: 'Amount ($K)'
+            }
+          }
+        }
+      }
+    });
+  }
+  
+  createSurveyChart() {
+    const ctx = document.getElementById('surveyChart');
+    if (!ctx) return;
+    
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Real-time Analytics', 'Community Features', 'Premium Pricing', 'Mobile-First Design'],
+        datasets: [{
+          label: 'Survey Response (%)',
+          data: [80, 65, 70, 85],
+          backgroundColor: [
+            '#1f4e79',
+            '#2e7d32',
+            '#d84315',
+            '#7b1fa2'
+          ],
+          borderColor: [
+            '#1f4e79',
+            '#2e7d32',
+            '#d84315',
+            '#7b1fa2'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Key Survey Findings (n=50)',
+            font: {
+              size: 16,
+              weight: 'bold'
+            }
+          },
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            title: {
+              display: true,
+              text: 'Percentage (%)'
+            },
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Survey Categories'
             }
           }
         }

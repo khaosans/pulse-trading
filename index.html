@@ -253,35 +253,40 @@ graph TB
                         <div class="diagram-container">
                             <div class="mermaid">
 graph TB
-    subgraph "Value Proposition Framework"
-        A["💎 Pulse Trading<br/>Value Proposition"]
+    subgraph "Value Proposition Canvas"
+        A["Pulse Trading Value Proposition"]
+        A --> B["Target Customer"]
+        A --> C["Value Proposition"]
     end
     
-    subgraph "Strategic Positioning"
-        A --> B["🎯 Market Position<br/>Empowering retail investors<br/>with insights & community"]
+    subgraph "Customer Jobs & Pains"
+        B --> D["Jobs to be Done<br/>• Make informed trades<br/>• Learn from others<br/>• Build confidence"]
+        B --> E["Pain Points<br/>• Complex platforms<br/>• Lack of community<br/>• Information overload"]
     end
     
-    subgraph "Emotional Benefits"
-        A --> C["❤️ Emotional Value<br/>Confidence in decisions<br/>Sense of belonging<br/>Learning & growth"]
+    subgraph "Value Proposition Elements"
+        C --> F["Products & Services<br/>• Real-time analytics<br/>• Community features<br/>• Educational content"]
+        C --> G["Pain Relievers<br/>• Simplified interface<br/>• Peer support<br/>• Curated insights"]
+        C --> H["Gain Creators<br/>• Better decisions<br/>• Faster learning<br/>• Higher confidence"]
     end
     
-    subgraph "Functional Benefits"
-        A --> D["⚙️ Functional Value<br/>Real-time market analytics<br/>Social community feeds<br/>Educational modules<br/>Portfolio tracking"]
+    subgraph "Value Hierarchy"
+        F --> I["Functional Value<br/>Real-time data & tools"]
+        G --> J["Emotional Value<br/>Confidence & belonging"]
+        H --> K["Social Value<br/>Community & learning"]
     end
     
-    subgraph "Business Impact"
-        D --> E["📈 Features Drive<br/>User Engagement"]
-        C --> F["💝 Emotions Drive<br/>Customer Loyalty"]
-        B --> G["🏆 Position Drives<br/>Market Differentiation"]
-    end
-    
-    style A fill:#2E86AB,color:#fff
-    style B fill:#A23B72,color:#fff
-    style C fill:#F18F01,color:#fff
-    style D fill:#C73E1D,color:#fff
-    style E fill:#D2BA4C,color:#000
-    style F fill:#D2BA4C,color:#000
-    style G fill:#D2BA4C,color:#000
+    style A fill:#1f4e79,color:#fff,stroke:#1f4e79,stroke-width:3px
+    style B fill:#2e7d32,color:#fff,stroke:#2e7d32,stroke-width:2px
+    style C fill:#d84315,color:#fff,stroke:#d84315,stroke-width:2px
+    style D fill:#e8f5e8,color:#000,stroke:#388e3c,stroke-width:1px
+    style E fill:#ffebee,color:#000,stroke:#d32f2f,stroke-width:1px
+    style F fill:#e3f2fd,color:#000,stroke:#1976d2,stroke-width:1px
+    style G fill:#fff3e0,color:#000,stroke:#f57c00,stroke-width:1px
+    style H fill:#f3e5f5,color:#000,stroke:#7b1fa2,stroke-width:1px
+    style I fill:#e8f5e8,color:#000,stroke:#388e3c,stroke-width:1px
+    style J fill:#ffebee,color:#000,stroke:#d32f2f,stroke-width:1px
+    style K fill:#e3f2fd,color:#000,stroke:#1976d2,stroke-width:1px
             </div>
                         </div>
                         <div class="value-summary">
@@ -472,31 +477,49 @@ sequenceDiagram
                             <div class="mermaid">
 flowchart LR
     subgraph "Customer Decision Journey"
-        A["🔍 Problem<br/>Recognition"] --> B["📚 Information<br/>Search"]
-        B --> C["⚖️ Alternative<br/>Evaluation"]
-        C --> D["💳 Purchase<br/>Decision"]
-        D --> E["💝 Post-Purchase<br/>Loyalty"]
+        A["Awareness<br/>Problem Recognition"] --> B["Consideration<br/>Information Search"]
+        B --> C["Evaluation<br/>Alternative Analysis"]
+        C --> D["Purchase<br/>Decision Making"]
+        D --> E["Retention<br/>Post-Purchase Experience"]
+        E --> F["Advocacy<br/>Loyalty & Referrals"]
     end
     
     subgraph "Marketing Touchpoints"
-        A --> F["📱 Social Media Ads<br/>🤝 Influencer Partnerships<br/>🎯 Targeted Campaigns"]
-        B --> G["📚 Educational Webinars<br/>📝 Blog Content & Guides<br/>🎓 Learning Resources"]
-        C --> H["⭐ User Testimonials<br/>🆓 Free Trial Access<br/>📊 Feature Comparisons"]
-        D --> I["💸 Referral Bonuses<br/>⏰ Limited-Time Offers<br/>🎁 Welcome Incentives"]
-        E --> J["👥 Community Programs<br/>🎯 Advanced Feature Access<br/>🔄 Retention Campaigns"]
+        A --> G["Digital Advertising<br/>Social Media Campaigns<br/>Influencer Partnerships"]
+        B --> H["Educational Content<br/>Webinars & Guides<br/>SEO & Content Marketing"]
+        C --> I["Free Trials<br/>Feature Demos<br/>User Testimonials"]
+        D --> J["Conversion Optimization<br/>Limited Offers<br/>Welcome Incentives"]
+        E --> K["Community Engagement<br/>Advanced Features<br/>Retention Programs"]
+        F --> L["Referral Programs<br/>User-Generated Content<br/>Brand Advocacy"]
     end
     
-    style A fill:#2E86AB,color:#fff
-    style B fill:#A23B72,color:#fff
-    style C fill:#F18F01,color:#fff
-    style D fill:#C73E1D,color:#fff
-    style E fill:#D2BA4C,color:#000
+    subgraph "Key Metrics"
+        G --> M["Impressions<br/>Click-through Rate"]
+        H --> N["Engagement Rate<br/>Time on Site"]
+        I --> O["Trial Conversion<br/>Demo Completion"]
+        J --> P["Purchase Rate<br/>Revenue per User"]
+        K --> Q["Retention Rate<br/>Monthly Active Users"]
+        L --> R["Referral Rate<br/>Net Promoter Score"]
+    end
     
-    style A fill:#B4413C,color:#fff
-    style B fill:#FFC185,color:#000
-    style C fill:#5D878F,color:#fff
-    style D fill:#D2BA4C,color:#000
-    style E fill:#21808D,color:#fff
+    style A fill:#1f4e79,color:#fff,stroke:#1f4e79,stroke-width:2px
+    style B fill:#2e7d32,color:#fff,stroke:#2e7d32,stroke-width:2px
+    style C fill:#d84315,color:#fff,stroke:#d84315,stroke-width:2px
+    style D fill:#7b1fa2,color:#fff,stroke:#7b1fa2,stroke-width:2px
+    style E fill:#f57c00,color:#fff,stroke:#f57c00,stroke-width:2px
+    style F fill:#00695c,color:#fff,stroke:#00695c,stroke-width:2px
+    style G fill:#e3f2fd,color:#000,stroke:#1976d2,stroke-width:1px
+    style H fill:#e8f5e8,color:#000,stroke:#388e3c,stroke-width:1px
+    style I fill:#ffebee,color:#000,stroke:#d32f2f,stroke-width:1px
+    style J fill:#f3e5f5,color:#000,stroke:#7b1fa2,stroke-width:1px
+    style K fill:#fff3e0,color:#000,stroke:#f57c00,stroke-width:1px
+    style L fill:#e0f2f1,color:#000,stroke:#00695c,stroke-width:1px
+    style M fill:#e3f2fd,color:#000,stroke:#1976d2,stroke-width:1px
+    style N fill:#e8f5e8,color:#000,stroke:#388e3c,stroke-width:1px
+    style O fill:#ffebee,color:#000,stroke:#d32f2f,stroke-width:1px
+    style P fill:#f3e5f5,color:#000,stroke:#7b1fa2,stroke-width:1px
+    style Q fill:#fff3e0,color:#000,stroke:#f57c00,stroke-width:1px
+    style R fill:#e0f2f1,color:#000,stroke:#00695c,stroke-width:1px
             </div>
                         </div>
                         <div class="speaker-info">
@@ -754,25 +777,30 @@ flowchart LR
                             <p><strong>Target Demographic:</strong> US adults 22-40, college-educated, moderate+ income</p>
                         </div>
                         <div class="survey-insights">
-                            <div class="insight-item">
-                                <div class="insight-stat">80%</div>
-                                <div class="insight-text">Want real-time market analytics</div>
-                                <div class="insight-detail">Validates core product feature</div>
+                            <div class="chart-container">
+                                <canvas id="surveyChart" width="400" height="300"></canvas>
                             </div>
-                            <div class="insight-item">
-                                <div class="insight-stat">65%</div>
-                                <div class="insight-text">Value community features</div>
-                                <div class="insight-detail">Supports social trading approach</div>
-                            </div>
-                            <div class="insight-item">
-                                <div class="insight-stat">70%</div>
-                                <div class="insight-text">Willing to pay premium</div>
-                                <div class="insight-detail">Validates $9.99 pricing strategy</div>
-                            </div>
-                            <div class="insight-item">
-                                <div class="insight-stat">85%</div>
-                                <div class="insight-text">Prefer mobile-first design</div>
-                                <div class="insight-detail">Confirms platform strategy</div>
+                            <div class="insight-summary">
+                                <div class="insight-item">
+                                    <div class="insight-stat">80%</div>
+                                    <div class="insight-text">Want real-time market analytics</div>
+                                    <div class="insight-detail">Validates core product feature</div>
+                                </div>
+                                <div class="insight-item">
+                                    <div class="insight-stat">65%</div>
+                                    <div class="insight-text">Value community features</div>
+                                    <div class="insight-detail">Supports social trading approach</div>
+                                </div>
+                                <div class="insight-item">
+                                    <div class="insight-stat">70%</div>
+                                    <div class="insight-text">Willing to pay premium</div>
+                                    <div class="insight-detail">Validates $9.99 pricing strategy</div>
+                                </div>
+                                <div class="insight-item">
+                                    <div class="insight-stat">85%</div>
+                                    <div class="insight-text">Prefer mobile-first design</div>
+                                    <div class="insight-detail">Confirms platform strategy</div>
+                                </div>
                             </div>
                         </div>
                         <div class="additional-insights">
