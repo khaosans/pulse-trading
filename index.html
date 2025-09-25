@@ -6,6 +6,9 @@
     <title>Pulse Trading Final Marketing Plan</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.26.0/plotly.min.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -64,12 +67,6 @@
                                 <span class="narrative-text">Press 'N' to play narration or use the controls below</span>
                             </div>
                         </div>
-                        <div class="narrative-display">
-                            <h4>Current Narration:</h4>
-                            <div class="narrative-text-display">
-                                <p id="narrative-text-1">Welcome to our Pulse Trading Final Marketing Plan. I'm excited to present our comprehensive, data-driven strategy that positions Pulse Trading to capture significant market share in the $2.7 billion retail trading space. Over the next 15 minutes, we'll walk through our research findings, strategic framework, and implementation roadmap that will deliver strong ROI for investors. Let's begin with the market challenge that sparked our innovative solution.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -104,12 +101,6 @@
                                 <span class="narrative-text">Press 'N' to play narration or use the controls below</span>
                             </div>
                         </div>
-                        <div class="narrative-display">
-                            <h4>Current Narration:</h4>
-                            <div class="narrative-text-display">
-                                <p id="narrative-text-2">The retail trading market presents a clear opportunity, but everyday investors face a fundamental problem: they're caught between two extremes. On one side, professional trading platforms are too complex and intimidating. On the other, basic apps lack the community support and data insights that drive successful trading decisions. This gap represents a $2.7 billion market opportunity. Our solution, Pulse Trading, bridges this divide by delivering real-time analytics combined with social learning in one seamless, mobile-first experience. This foundation leads us to our comprehensive environmental analysis.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -121,44 +112,46 @@
                     </div>
                     <div class="slide-body">
                         <div class="diagram-container">
-                            <div class="mermaid">
-graph TB
-    subgraph "Market Environment Analysis"
-        A[Environmental Analysis]
-        A --> B[PESTELE Framework]
-        A --> C[SWOT Analysis]
-    end
-    
-    subgraph "External Factors"
-        B --> D["🏛️ Political<br/>Regulatory Stability"]
-        B --> E["📈 Economic<br/>$2.7B Market Growth"]
-        B --> F["👥 Social<br/>Digital Adoption 85%"]
-        B --> G["📱 Technology<br/>Mobile-First Trend"]
-    end
-    
-    subgraph "Internal Assessment"
-        C --> H["💪 Strengths<br/>Innovation & Community"]
-        C --> I["🎯 Opportunities<br/>Social Trading Boom"]
-        C --> J["⚠️ Weaknesses<br/>New Brand Recognition"]
-        C --> K["🚨 Threats<br/>Established Competitors"]
-    end
-    
-    style A fill:#2E86AB,color:#fff
-    style B fill:#A23B72,color:#fff
-    style C fill:#F18F01,color:#fff
-    style D fill:#E8F4F8,color:#000
-    style E fill:#E8F4F8,color:#000
-    style F fill:#E8F4F8,color:#000
-    style G fill:#E8F4F8,color:#000
-    style H fill:#E8F4F8,color:#000
-    style I fill:#E8F4F8,color:#000
-    style J fill:#E8F4F8,color:#000
-    style K fill:#E8F4F8,color:#000
-    
-    style A fill:#21808D,color:#fff
-    style B fill:#FFC185,color:#000
-    style C fill:#FFC185,color:#000
-            </div>
+                <div class="mermaid">
+                graph TB
+                    subgraph "Environmental Analysis Framework"
+                        A["Environmental Analysis"]
+                        A --> B["PESTELE Analysis"]
+                        A --> C["SWOT Analysis"]
+                    end
+                    
+                    subgraph "External Environment"
+                        B --> D["Political<br/>Regulatory Stability"]
+                        B --> E["Economic<br/>$2.7B Market Size"]
+                        B --> F["Social<br/>85% Mobile Preference"]
+                        B --> G["Technological<br/>AI Integration Trend"]
+                        B --> H["Environmental<br/>Digital-First Approach"]
+                        B --> I["Legal<br/>Financial Regulations"]
+                        B --> J["Ethical<br/>Transparent Trading"]
+                    end
+                    
+                    subgraph "Internal Assessment"
+                        C --> K["Strengths<br/>Community Focus"]
+                        C --> L["Weaknesses<br/>Brand Recognition"]
+                        C --> M["Opportunities<br/>Social Trading Growth"]
+                        C --> N["Threats<br/>Established Competitors"]
+                    end
+                    
+                    style A fill:#1f4e79,color:#fff,stroke:#1f4e79,stroke-width:3px
+                    style B fill:#2e7d32,color:#fff,stroke:#2e7d32,stroke-width:2px
+                    style C fill:#d84315,color:#fff,stroke:#d84315,stroke-width:2px
+                    style D fill:#e3f2fd,color:#000,stroke:#1976d2,stroke-width:1px
+                    style E fill:#e8f5e8,color:#000,stroke:#388e3c,stroke-width:1px
+                    style F fill:#fff3e0,color:#000,stroke:#f57c00,stroke-width:1px
+                    style G fill:#f3e5f5,color:#000,stroke:#7b1fa2,stroke-width:1px
+                    style H fill:#e0f2f1,color:#000,stroke:#00695c,stroke-width:1px
+                    style I fill:#fce4ec,color:#000,stroke:#c2185b,stroke-width:1px
+                    style J fill:#f1f8e9,color:#000,stroke:#689f38,stroke-width:1px
+                    style K fill:#e8f5e8,color:#000,stroke:#388e3c,stroke-width:1px
+                    style L fill:#ffebee,color:#000,stroke:#d32f2f,stroke-width:1px
+                    style M fill:#e3f2fd,color:#000,stroke:#1976d2,stroke-width:1px
+                    style N fill:#fff3e0,color:#000,stroke:#f57c00,stroke-width:1px
+                </div>
                         </div>
                         <div class="highlights">
                             <p><strong>Key Insights:</strong> Digital adoption rising 📱, social trading trending 👥, regulatory environment stabilizing 📊</p>
@@ -176,12 +169,6 @@ graph TB
                             <div class="narrative-indicator">
                                 <span class="narrative-icon">🎤</span>
                                 <span class="narrative-text">Press 'N' to play narration or use the controls below</span>
-                            </div>
-                        </div>
-                        <div class="narrative-display">
-                            <h4>Current Narration:</h4>
-                            <div class="narrative-text-display">
-                                <p id="narrative-text-3">Our comprehensive PESTELE and SWOT analyses reveal a compelling market landscape. While regulatory changes and competitive pressure present challenges, the trends strongly favor our approach. Digital adoption is accelerating rapidly, with 85% of our target demographic preferring mobile-first solutions. The social trading trend is gaining momentum, with 65% of investors valuing community features. Our analysis shows that Pulse Trading's community-focused approach is perfectly positioned to capitalize on these trends. These insights directly inform our strategic objectives for 2026.</p>
                             </div>
                         </div>
                     </div>
@@ -202,40 +189,44 @@ graph TB
                             <div class="diagram-container">
                                 <div class="mermaid">
 graph TB
-    subgraph "Strategic Objectives 2026"
-        A["🎯 Strategic Objectives<br/>2026 Roadmap"]
+    subgraph "Strategic Objectives Framework"
+        A["Strategic Objectives 2026"]
+        A --> B["Growth Targets"]
+        A --> C["Performance Metrics"]
+        A --> D["Market Position"]
     end
     
-    subgraph "Growth Metrics"
-        A --> B["👥 User Acquisition<br/>5,000 New Sign-ups by Q2<br/>150% Growth Trajectory"]
-        A --> C["📊 User Retention<br/>25% Monthly Active Users<br/>Product-Market Fit"]
-        A --> D["💰 Revenue Generation<br/>$250K Annual Revenue<br/>2.5x Marketing ROI"]
-        A --> E["🏆 Market Position<br/>Top-3 Community Platform<br/>Industry Recognition"]
+    subgraph "Growth Targets"
+        B --> E["User Acquisition<br/>5,000 sign-ups by Q2"]
+        B --> F["Revenue Growth<br/>$250K by year-end"]
+        B --> G["Market Share<br/>Top-3 community platform"]
     end
     
-    subgraph "Key Tactics"
-        B --> B1["📱 Digital Marketing<br/>Campaign"]
-        B --> B2["🤝 Influencer<br/>Partnerships"]
-        B --> B3["🔄 Referral<br/>Program"]
-        
-        C --> C1["💬 Community<br/>Engagement"]
-        C --> C2["🎯 Personalized<br/>Content"]
-        C --> C3["🎮 Gamification<br/>Elements"]
-        
-        D --> D1["💎 Premium<br/>Subscriptions"]
-        D --> D2["🆓 Freemium<br/>Conversion"]
-        D --> D3["📈 Performance<br/>Optimization"]
-        
-        E --> E1["📚 Thought<br/>Leadership"]
-        E --> E2["🤝 Strategic<br/>Partnerships"]
-        E --> E3["👥 User-Generated<br/>Content"]
+    subgraph "Performance Metrics"
+        C --> H["User Retention<br/>25% monthly active"]
+        C --> I["Engagement<br/>Community participation"]
+        C --> J["ROI<br/>2.5x marketing return"]
     end
     
-    style A fill:#2E86AB,color:#fff
-    style B fill:#A23B72,color:#fff
-    style C fill:#F18F01,color:#fff
-    style D fill:#C73E1D,color:#fff
-    style E fill:#D2BA4C,color:#000
+    subgraph "Success Drivers"
+        D --> K["Brand Recognition<br/>Industry leadership"]
+        D --> L["Product Quality<br/>User satisfaction"]
+        D --> M["Market Position<br/>Competitive advantage"]
+    end
+    
+    style A fill:#1f4e79,color:#fff,stroke:#1f4e79,stroke-width:3px
+    style B fill:#2e7d32,color:#fff,stroke:#2e7d32,stroke-width:2px
+    style C fill:#d84315,color:#fff,stroke:#d84315,stroke-width:2px
+    style D fill:#7b1fa2,color:#fff,stroke:#7b1fa2,stroke-width:2px
+    style E fill:#e8f5e8,color:#000,stroke:#388e3c,stroke-width:1px
+    style F fill:#e8f5e8,color:#000,stroke:#388e3c,stroke-width:1px
+    style G fill:#e8f5e8,color:#000,stroke:#388e3c,stroke-width:1px
+    style H fill:#ffebee,color:#000,stroke:#d32f2f,stroke-width:1px
+    style I fill:#ffebee,color:#000,stroke:#d32f2f,stroke-width:1px
+    style J fill:#ffebee,color:#000,stroke:#d32f2f,stroke-width:1px
+    style K fill:#f3e5f5,color:#000,stroke:#7b1fa2,stroke-width:1px
+    style L fill:#f3e5f5,color:#000,stroke:#7b1fa2,stroke-width:1px
+    style M fill:#f3e5f5,color:#000,stroke:#7b1fa2,stroke-width:1px
                 </div>
                             </div>
                         </div>
@@ -649,13 +640,12 @@ graph TB
                             </div>
                         </div>
                         <div class="diagram-container">
-                            <div class="mermaid">
-pie title Marketing Budget Allocation ($100K)
-    "Digital Advertising" : 40
-    "Content Creation" : 25
-    "Influencer Partnerships" : 20
-    "Events & Webinars" : 15
-            </div>
+                            <div class="chart-container">
+                                <canvas id="budgetChart" width="400" height="300"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="roiChart" width="400" height="300"></canvas>
+                            </div>
                         </div>
                         <div class="revenue-streams">
                             <h4>🔄 Revenue Streams</h4>

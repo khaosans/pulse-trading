@@ -40,109 +40,7 @@ class PresentationApp {
     // Force render all diagrams after a delay
     setTimeout(() => {
       this.renderAllMermaidDiagrams();
-      this.initializeCharts();
     }, 1000);
-  }
-  
-  initializeCharts() {
-    // Initialize Chart.js visualizations
-    this.createBudgetChart();
-    this.createROIChart();
-  }
-  
-  createBudgetChart() {
-    const ctx = document.getElementById('budgetChart');
-    if (!ctx) return;
-    
-    new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Digital Advertising', 'Content Creation', 'Influencer Partnerships', 'Events & Webinars'],
-        datasets: [{
-          data: [40, 25, 20, 15],
-          backgroundColor: [
-            '#1f4e79',
-            '#2e7d32', 
-            '#d84315',
-            '#7b1fa2'
-          ],
-          borderWidth: 2,
-          borderColor: '#ffffff'
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Marketing Budget Allocation ($100K)',
-            font: {
-              size: 16,
-              weight: 'bold'
-            }
-          },
-          legend: {
-            position: 'bottom',
-            labels: {
-              padding: 20,
-              usePointStyle: true
-            }
-          }
-        }
-      }
-    });
-  }
-  
-  createROIChart() {
-    const ctx = document.getElementById('roiChart');
-    if (!ctx) return;
-    
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
-        datasets: [{
-          label: 'Revenue ($K)',
-          data: [45, 75, 95, 135],
-          backgroundColor: '#1f4e79',
-          borderColor: '#1f4e79',
-          borderWidth: 2
-        }, {
-          label: 'Marketing Spend ($K)',
-          data: [25, 25, 25, 25],
-          backgroundColor: '#d84315',
-          borderColor: '#d84315',
-          borderWidth: 2
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Quarterly Revenue vs Marketing Spend',
-            font: {
-              size: 16,
-              weight: 'bold'
-            }
-          },
-          legend: {
-            position: 'top'
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Amount ($K)'
-            }
-          }
-        }
-      }
-    });
   }
   
   initializeMermaid() {
@@ -508,6 +406,8 @@ class NarrativeSystem {
     this.currentSlide = 1;
     this.isPlaying = false;
     this.isPaused = false;
+    this.isFullPresentation = false;
+    this.advanceTimer = null;
     this.currentAudio = null;
     this.speechSynthesis = window.speechSynthesis;
     this.utterance = null;
@@ -692,11 +592,30 @@ class NarrativeSystem {
     `;
     timeDisplay.textContent = '0:00 / 0:00';
     
+    // Full presentation button
+    const fullBtn = document.createElement('button');
+    fullBtn.className = 'narrative-full-btn';
+    fullBtn.innerHTML = '<span class="btn-icon">🎬</span><span class="btn-text">Full</span>';
+    fullBtn.style.cssText = `
+      padding: 12px 20px;
+      border: 2px solid #667eea;
+      border-radius: 12px;
+      background: transparent;
+      color: #667eea;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    `;
     
     // Assemble controls
     controlsContainer.appendChild(playBtn);
     controlsContainer.appendChild(progressContainer);
     controlsContainer.appendChild(timeDisplay);
+    controlsContainer.appendChild(fullBtn);
     
     document.body.appendChild(controlsContainer);
     
@@ -704,6 +623,7 @@ class NarrativeSystem {
     this.progressElement = progressBar;
     this.playBtn = playBtn;
     this.timeDisplay = timeDisplay;
+    this.fullBtn = fullBtn;
     
     // Add smooth entrance animation
     requestAnimationFrame(() => {
@@ -712,10 +632,10 @@ class NarrativeSystem {
     });
     
     // Add hover effects
-    this.addHoverEffects(playBtn);
+    this.addHoverEffects(playBtn, fullBtn);
   }
   
-  addHoverEffects(playBtn) {
+  addHoverEffects(playBtn, fullBtn) {
     // Play button hover effects
     playBtn.addEventListener('mouseenter', () => {
       playBtn.style.transform = 'translateY(-2px)';
@@ -735,6 +655,26 @@ class NarrativeSystem {
       playBtn.style.transform = 'translateY(-2px) scale(1)';
     });
     
+    // Full button hover effects
+    fullBtn.addEventListener('mouseenter', () => {
+      fullBtn.style.background = '#667eea';
+      fullBtn.style.color = 'white';
+      fullBtn.style.transform = 'translateY(-2px)';
+    });
+    
+    fullBtn.addEventListener('mouseleave', () => {
+      fullBtn.style.background = 'transparent';
+      fullBtn.style.color = '#667eea';
+      fullBtn.style.transform = 'translateY(0)';
+    });
+    
+    fullBtn.addEventListener('mousedown', () => {
+      fullBtn.style.transform = 'translateY(0) scale(0.98)';
+    });
+    
+    fullBtn.addEventListener('mouseup', () => {
+      fullBtn.style.transform = 'translateY(-2px) scale(1)';
+    });
   }
   
   setupEventListeners() {
@@ -742,6 +682,9 @@ class NarrativeSystem {
       this.playBtn.addEventListener('click', () => this.toggleNarrative());
     }
     
+    if (this.fullBtn) {
+      this.fullBtn.addEventListener('click', () => this.playFullPresentation());
+    }
     
     // Handle speech synthesis events
     if (this.speechSynthesis) {
