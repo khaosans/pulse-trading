@@ -1,8 +1,33 @@
-// Pulse Trading Presentation SPA with Ollama AI Integration
+// Pulse Trading Presentation SPA with Ollama AI Integration and Audio Narration
 class PulseTradingPresentation {
     constructor() {
         this.currentSlide = 1;
         this.totalSlides = 15;
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.currentUtterance = null;
+        this.speechSynthesis = window.speechSynthesis;
+        this.voices = [];
+        this.selectedVoice = null;
+        this.playbackSpeed = 1.0;
+        this.autoAdvance = true;
+        this.slideTimings = {
+            1: 45,   // Title slide - 45 seconds
+            2: 60,   // Problem & Solution - 60 seconds
+            3: 75,   // Market Analysis - 75 seconds
+            4: 50,   // Strategic Objectives - 50 seconds
+            5: 55,   // Value Proposition - 55 seconds
+            6: 70,   // Customer Journey - 70 seconds
+            7: 65,   // Marketing Mix - 65 seconds
+            8: 60,   // Decision Journey - 60 seconds
+            9: 50,   // Service Excellence - 50 seconds
+            10: 70,  // Financial Projections - 70 seconds
+            11: 65,  // Performance Tracking - 65 seconds
+            12: 55,  // Survey Validation - 55 seconds
+            13: 60,  // Team Contributions - 60 seconds
+            14: 70,  // Implementation Timeline - 70 seconds
+            15: 80   // Next Steps - 80 seconds
+        };
         this.speakerNotes = {
             1: "Welcome to our Pulse Trading Final Marketing Plan. This presentation outlines our data-driven, community-focused strategy to scale our platform and deliver strong ROI for investors.",
             2: "Everyday investors face a critical gap: they're either overwhelmed by institutional-grade complexity or underserved by basic platforms. Pulse Trading solves this by delivering professional-grade analytics in a community-driven, mobile-first experience.",
@@ -30,6 +55,7 @@ class PulseTradingPresentation {
         this.updateSpeakerNotes();
         this.setupKeyboardNavigation();
         this.initializeAI();
+        this.initializeAudio();
     }
 
     setupEventListeners() {
@@ -48,6 +74,15 @@ class PulseTradingPresentation {
         document.getElementById('enhanceContent').addEventListener('click', () => this.enhanceContent());
         document.getElementById('generateInsights').addEventListener('click', () => this.generateInsights());
         document.getElementById('improveNarrative').addEventListener('click', () => this.improveNarrative());
+        
+        // Audio controls
+        document.getElementById('playPauseBtn').addEventListener('click', () => this.togglePlayPause());
+        document.getElementById('stopBtn').addEventListener('click', () => this.stopNarration());
+        document.getElementById('voiceSelect').addEventListener('change', (e) => this.selectVoice(e.target.value));
+        document.getElementById('speedSlider').addEventListener('input', (e) => this.setPlaybackSpeed(e.target.value));
+        
+        // Progress bar click
+        document.querySelector('.progress-bar').addEventListener('click', (e) => this.seekToPosition(e));
     }
 
     setupKeyboardNavigation() {
@@ -60,9 +95,16 @@ class PulseTradingPresentation {
                     break;
                 case 'ArrowRight':
                 case 'ArrowDown':
-                case ' ':
                     e.preventDefault();
                     this.nextSlide();
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    if (this.isPlaying || this.isPaused) {
+                        this.togglePlayPause();
+                    } else {
+                        this.nextSlide();
+                    }
                     break;
                 case 'f':
                 case 'F':
@@ -332,6 +374,274 @@ Provide an improved narrative that maintains the key information while making it
         }
         return '';
     }
+
+    // Audio Narration Methods
+    initializeAudio() {
+        // Load available voices
+        this.loadVoices();
+        
+        // Handle voice loading (some browsers load voices asynchronously)
+        if (this.speechSynthesis.onvoiceschanged !== undefined) {
+            this.speechSynthesis.onvoiceschanged = () => this.loadVoices();
+        }
+        
+        // Set up speech synthesis event listeners
+        this.speechSynthesis.addEventListener('start', () => this.onSpeechStart());
+        this.speechSynthesis.addEventListener('end', () => this.onSpeechEnd());
+        this.speechSynthesis.addEventListener('error', () => this.onSpeechError());
+        
+        // Initialize UI
+        this.updateAudioUI();
+    }
+
+    loadVoices() {
+        this.voices = this.speechSynthesis.getVoices();
+        const voiceSelect = document.getElementById('voiceSelect');
+        
+        // Clear existing options except the first one
+        voiceSelect.innerHTML = '<option value="auto">Auto Voice</option>';
+        
+        // Add available voices
+        this.voices.forEach((voice, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = `${voice.name} (${voice.lang})`;
+            voiceSelect.appendChild(option);
+        });
+        
+        // Select a professional voice by default
+        this.selectBestVoice();
+    }
+
+    selectBestVoice() {
+        // Prefer English voices with professional-sounding names
+        const preferredVoices = [
+            'Microsoft David Desktop',
+            'Microsoft Zira Desktop',
+            'Google US English',
+            'Alex',
+            'Samantha',
+            'Victoria'
+        ];
+        
+        for (const preferred of preferredVoices) {
+            const voiceIndex = this.voices.findIndex(voice => 
+                voice.name.includes(preferred) && voice.lang.startsWith('en')
+            );
+            if (voiceIndex !== -1) {
+                this.selectVoice(voiceIndex);
+                return;
+            }
+        }
+        
+        // Fallback to first English voice
+        const englishVoice = this.voices.find(voice => voice.lang.startsWith('en'));
+        if (englishVoice) {
+            const index = this.voices.indexOf(englishVoice);
+            this.selectVoice(index);
+        }
+    }
+
+    selectVoice(voiceIndex) {
+        if (voiceIndex === 'auto') {
+            this.selectedVoice = null;
+        } else {
+            this.selectedVoice = this.voices[parseInt(voiceIndex)];
+        }
+        document.getElementById('voiceSelect').value = voiceIndex;
+    }
+
+    setPlaybackSpeed(speed) {
+        this.playbackSpeed = parseFloat(speed);
+        document.getElementById('speedValue').textContent = `${speed}x`;
+        
+        // Update current utterance if playing
+        if (this.currentUtterance) {
+            this.currentUtterance.rate = this.playbackSpeed;
+        }
+    }
+
+    togglePlayPause() {
+        if (this.isPlaying) {
+            this.pauseNarration();
+        } else if (this.isPaused) {
+            this.resumeNarration();
+        } else {
+            this.startNarration();
+        }
+    }
+
+    startNarration() {
+        if (!this.speakerNotes[this.currentSlide]) {
+            console.log('No narration available for this slide');
+            return;
+        }
+
+        this.isPlaying = true;
+        this.isPaused = false;
+        this.updateAudioUI();
+
+        const utterance = new SpeechSynthesisUtterance(this.speakerNotes[this.currentSlide]);
+        
+        // Configure speech settings
+        utterance.rate = this.playbackSpeed;
+        utterance.pitch = 1.0;
+        utterance.volume = 0.8;
+        
+        if (this.selectedVoice) {
+            utterance.voice = this.selectedVoice;
+        }
+
+        // Set up event listeners for this utterance
+        utterance.onstart = () => this.onUtteranceStart();
+        utterance.onend = () => this.onUtteranceEnd();
+        utterance.onerror = () => this.onUtteranceError();
+
+        this.currentUtterance = utterance;
+        this.speechSynthesis.speak(utterance);
+    }
+
+    pauseNarration() {
+        if (this.isPlaying) {
+            this.speechSynthesis.pause();
+            this.isPlaying = false;
+            this.isPaused = true;
+            this.updateAudioUI();
+        }
+    }
+
+    resumeNarration() {
+        if (this.isPaused) {
+            this.speechSynthesis.resume();
+            this.isPlaying = true;
+            this.isPaused = false;
+            this.updateAudioUI();
+        }
+    }
+
+    stopNarration() {
+        this.speechSynthesis.cancel();
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.currentUtterance = null;
+        this.updateAudioUI();
+        this.updateProgress(0, 0);
+    }
+
+    onSpeechStart() {
+        console.log('Speech started');
+    }
+
+    onSpeechEnd() {
+        console.log('Speech ended');
+        if (this.autoAdvance && this.currentSlide < this.totalSlides) {
+            setTimeout(() => {
+                this.nextSlide();
+                if (this.isPlaying) {
+                    this.startNarration();
+                }
+            }, 1000); // 1 second pause between slides
+        } else {
+            this.isPlaying = false;
+            this.isPaused = false;
+            this.updateAudioUI();
+        }
+    }
+
+    onSpeechError(event) {
+        console.error('Speech error:', event.error);
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.updateAudioUI();
+    }
+
+    onUtteranceStart() {
+        this.startProgressTimer();
+    }
+
+    onUtteranceEnd() {
+        this.stopProgressTimer();
+    }
+
+    onUtteranceError(event) {
+        console.error('Utterance error:', event.error);
+        this.stopProgressTimer();
+    }
+
+    startProgressTimer() {
+        const slideDuration = this.slideTimings[this.currentSlide] || 60;
+        this.progressStartTime = Date.now();
+        this.progressDuration = slideDuration * 1000;
+        
+        this.progressInterval = setInterval(() => {
+            const elapsed = Date.now() - this.progressStartTime;
+            const progress = Math.min(elapsed / this.progressDuration, 1);
+            this.updateProgress(progress, slideDuration);
+        }, 100);
+    }
+
+    stopProgressTimer() {
+        if (this.progressInterval) {
+            clearInterval(this.progressInterval);
+            this.progressInterval = null;
+        }
+    }
+
+    updateProgress(progress, totalDuration) {
+        const progressFill = document.getElementById('progressFill');
+        const timeDisplay = document.getElementById('timeDisplay');
+        
+        progressFill.style.width = `${progress * 100}%`;
+        
+        const currentTime = Math.floor(progress * totalDuration);
+        const minutes = Math.floor(currentTime / 60);
+        const seconds = currentTime % 60;
+        const totalMinutes = Math.floor(totalDuration / 60);
+        const totalSeconds = totalDuration % 60;
+        
+        timeDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')} / ${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}`;
+    }
+
+    seekToPosition(event) {
+        if (!this.isPlaying && !this.isPaused) return;
+        
+        const progressBar = event.currentTarget;
+        const rect = progressBar.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const progress = clickX / rect.width;
+        
+        // Calculate new position
+        const slideDuration = this.slideTimings[this.currentSlide] || 60;
+        const newTime = progress * slideDuration;
+        
+        // Restart narration from new position
+        this.stopNarration();
+        setTimeout(() => {
+            this.startNarration();
+            // Note: Browser TTS doesn't support seeking, so we restart from beginning
+            // In a production app, you'd use pre-recorded audio files for seeking
+        }, 100);
+    }
+
+    updateAudioUI() {
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const icon = playPauseBtn.querySelector('i');
+        
+        if (this.isPlaying) {
+            icon.className = 'fas fa-pause';
+            playPauseBtn.title = 'Pause Narration';
+            stopBtn.disabled = false;
+        } else if (this.isPaused) {
+            icon.className = 'fas fa-play';
+            playPauseBtn.title = 'Resume Narration';
+            stopBtn.disabled = false;
+        } else {
+            icon.className = 'fas fa-play';
+            playPauseBtn.title = 'Play Narration';
+            stopBtn.disabled = true;
+        }
+    }
 }
 
 // Initialize the presentation when the DOM is loaded
@@ -437,11 +747,18 @@ document.addEventListener('keydown', (e) => {
     if (e.key === '?' || e.key === '/') {
         e.preventDefault();
         alert(`Keyboard Shortcuts:
-• Arrow Keys / Space: Navigate slides
+• Arrow Keys: Navigate slides
+• Space: Play/Pause narration (or next slide if not playing)
 • F: Toggle fullscreen
 • N: Toggle speaker notes
 • A: Toggle AI panel
 • Escape: Exit fullscreen
-• ?: Show this help`);
+• ?: Show this help
+
+Audio Controls:
+• Click Play to start automatic narration
+• Adjust speed and voice in audio settings
+• Progress bar shows current slide timing
+• Auto-advances to next slide when narration ends`);
     }
 });

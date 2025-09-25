@@ -29,6 +29,32 @@
                         <i class="fas fa-expand"></i>
                     </button>
                 </div>
+                
+                <!-- Audio Narration Controls -->
+                <div class="audio-controls">
+                    <button id="playPauseBtn" class="audio-btn" title="Play/Pause Narration">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="stopBtn" class="audio-btn" title="Stop Narration">
+                        <i class="fas fa-stop"></i>
+                    </button>
+                    <div class="audio-progress">
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                        <span id="timeDisplay">0:00 / 0:00</span>
+                    </div>
+                    <div class="audio-settings">
+                        <select id="voiceSelect" class="voice-select" title="Select Voice">
+                            <option value="auto">Auto Voice</option>
+                        </select>
+                        <div class="speed-control">
+                            <label for="speedSlider">Speed:</label>
+                            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" class="speed-slider">
+                            <span id="speedValue">1.0x</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
 
