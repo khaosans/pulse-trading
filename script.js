@@ -14,6 +14,7 @@ class PulseTradingPresentation {
         this.isTransitioning = false;
         this.progressInterval = null;
         this.slideStartTime = null;
+        this.hasUserInteracted = false;
         this.slideTimings = {
             1: 45,   // Title slide - 45 seconds
             2: 60,   // Problem & Solution - 60 seconds
@@ -59,13 +60,35 @@ class PulseTradingPresentation {
         this.setupKeyboardNavigation();
         this.initializeAI();
         this.initializeAudio();
+        
+        // Auto-start narration after a brief delay to ensure everything is loaded
+        setTimeout(() => {
+            this.autoStartNarration();
+        }, 1000);
+    }
+
+    autoStartNarration() {
+        // Only auto-start if no user interaction has occurred
+        if (!this.hasUserInteracted) {
+            console.log('Auto-starting presentation narration');
+            this.startNarration();
+        }
     }
 
     setupEventListeners() {
         // Navigation buttons
-        document.getElementById('prevBtn').addEventListener('click', () => this.previousSlide());
-        document.getElementById('nextBtn').addEventListener('click', () => this.nextSlide());
-        document.getElementById('fullscreenBtn').addEventListener('click', () => this.toggleFullscreen());
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            this.hasUserInteracted = true;
+            this.previousSlide();
+        });
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            this.hasUserInteracted = true;
+            this.nextSlide();
+        });
+        document.getElementById('fullscreenBtn').addEventListener('click', () => {
+            this.hasUserInteracted = true;
+            this.toggleFullscreen();
+        });
         
         // Speaker notes toggle
         document.getElementById('toggleNotes').addEventListener('click', () => this.toggleSpeakerNotes());
@@ -79,10 +102,22 @@ class PulseTradingPresentation {
         document.getElementById('improveNarrative').addEventListener('click', () => this.improveNarrative());
         
         // Audio controls
-        document.getElementById('playPauseBtn').addEventListener('click', () => this.togglePlayPause());
-        document.getElementById('stopBtn').addEventListener('click', () => this.stopNarration());
-        document.getElementById('voiceSelect').addEventListener('change', (e) => this.selectVoice(e.target.value));
-        document.getElementById('speedSlider').addEventListener('input', (e) => this.setPlaybackSpeed(e.target.value));
+        document.getElementById('playPauseBtn').addEventListener('click', () => {
+            this.hasUserInteracted = true;
+            this.togglePlayPause();
+        });
+        document.getElementById('stopBtn').addEventListener('click', () => {
+            this.hasUserInteracted = true;
+            this.stopNarration();
+        });
+        document.getElementById('voiceSelect').addEventListener('change', (e) => {
+            this.hasUserInteracted = true;
+            this.selectVoice(e.target.value);
+        });
+        document.getElementById('speedSlider').addEventListener('input', (e) => {
+            this.hasUserInteracted = true;
+            this.setPlaybackSpeed(e.target.value);
+        });
         
         // Progress bar click
         document.querySelector('.progress-bar').addEventListener('click', (e) => this.seekToPosition(e));
@@ -90,6 +125,8 @@ class PulseTradingPresentation {
 
     setupKeyboardNavigation() {
         document.addEventListener('keydown', (e) => {
+            this.hasUserInteracted = true; // Track keyboard interaction
+            
             switch(e.key) {
                 case 'ArrowLeft':
                 case 'ArrowUp':
@@ -135,6 +172,9 @@ class PulseTradingPresentation {
         if (this.currentSlide < this.totalSlides && !this.isTransitioning) {
             this.isTransitioning = true;
             
+            // Store current playing state for seamless continuation
+            const wasPlaying = this.isPlaying;
+            
             // Add transition classes for smooth animation
             const currentSlideElement = document.querySelector(`[data-slide="${this.currentSlide}"]`);
             const nextSlideElement = document.querySelector(`[data-slide="${this.currentSlide + 1}"]`);
@@ -151,11 +191,25 @@ class PulseTradingPresentation {
                     this.currentSlide++;
                     this.updateSlide();
                     this.isTransitioning = false;
+                    
+                    // Auto-continue narration if it was playing
+                    if (wasPlaying) {
+                        setTimeout(() => {
+                            this.startNarration();
+                        }, 100); // Minimal delay for seamless flow
+                    }
                 }, 300);
             } else {
                 this.currentSlide++;
                 this.updateSlide();
                 this.isTransitioning = false;
+                
+                // Auto-continue narration if it was playing
+                if (wasPlaying) {
+                    setTimeout(() => {
+                        this.startNarration();
+                    }, 100);
+                }
             }
         }
     }
@@ -444,6 +498,12 @@ Provide an improved narrative that maintains the key information while making it
         const elapsed = (currentTime - this.slideStartTime) / 1000; // Convert to seconds
         const totalTime = this.slideTimings[this.currentSlide];
         
+        // Validate totalTime to prevent NaN
+        if (!totalTime || isNaN(totalTime)) {
+            console.warn(`Invalid timing for slide ${this.currentSlide}:`, totalTime);
+            return;
+        }
+        
         const progressPercent = Math.min((elapsed / totalTime) * 100, 100);
         
         // Update progress bar
@@ -452,7 +512,7 @@ Provide an improved narrative that maintains the key information while making it
             progressFill.style.width = `${progressPercent}%`;
         }
         
-        // Update time display
+        // Update time display with proper validation
         const timeDisplay = document.getElementById('timeDisplay');
         if (timeDisplay) {
             const currentMinutes = Math.floor(elapsed / 60);
@@ -460,7 +520,14 @@ Provide an improved narrative that maintains the key information while making it
             const totalMinutes = Math.floor(totalTime / 60);
             const totalSeconds = Math.floor(totalTime % 60);
             
-            timeDisplay.textContent = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')} / ${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}`;
+            // Ensure we have valid numbers
+            const formatTime = (minutes, seconds) => {
+                const mins = isNaN(minutes) ? 0 : minutes;
+                const secs = isNaN(seconds) ? 0 : seconds;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            };
+            
+            timeDisplay.textContent = `${formatTime(currentMinutes, currentSeconds)} / ${formatTime(totalMinutes, totalSeconds)}`;
         }
         
         // Auto-advance when time is up
@@ -481,18 +548,72 @@ Provide an improved narrative that maintains the key information while making it
                 this.nextSlide();
                 this.isTransitioning = false;
                 
-                // Continue narration if playing
+                // Auto-continue narration if playing (seamless flow)
                 if (this.isPlaying) {
                     setTimeout(() => {
                         this.startNarration();
-                    }, 500); // Brief pause between slides for better flow
+                    }, 300); // Reduced pause for seamless flow
                 }
             } else {
-                // End of presentation
+                // End of presentation - stop narration gracefully
                 this.stopNarration();
                 this.isTransitioning = false;
+                this.showPresentationComplete();
             }
-        }, 300); // Transition delay
+        }, 200); // Reduced transition delay for smoother flow
+    }
+
+    showPresentationComplete() {
+        // Show completion message
+        const timeDisplay = document.getElementById('timeDisplay');
+        if (timeDisplay) {
+            timeDisplay.textContent = 'Presentation Complete';
+        }
+        
+        // Reset play button to show completion with replay option
+        const playBtn = document.getElementById('playPauseBtn');
+        if (playBtn) {
+            playBtn.innerHTML = '<i class="fas fa-redo"></i>';
+            playBtn.title = 'Replay Presentation';
+            
+            // Add click handler for replay
+            playBtn.onclick = () => {
+                this.replayPresentation();
+            };
+        }
+    }
+
+    replayPresentation() {
+        // Reset to first slide
+        this.currentSlide = 1;
+        this.updateSlide();
+        
+        // Reset audio state
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.hasUserInteracted = false;
+        
+        // Reset progress
+        const progressFill = document.getElementById('progressFill');
+        if (progressFill) {
+            progressFill.style.width = '0%';
+        }
+        
+        // Reset play button
+        const playBtn = document.getElementById('playPauseBtn');
+        if (playBtn) {
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            playBtn.title = 'Play/Pause Narration';
+            playBtn.onclick = () => {
+                this.hasUserInteracted = true;
+                this.togglePlayPause();
+            };
+        }
+        
+        // Auto-start narration
+        setTimeout(() => {
+            this.startNarration();
+        }, 500);
     }
 
     // Audio Narration Methods
@@ -592,39 +713,58 @@ Provide an improved narrative that maintains the key information while making it
     }
 
     startNarration() {
-        if (!this.speakerNotes[this.currentSlide]) {
-            console.log('No narration available for this slide');
-            return;
+        try {
+            // Validate slide content
+            if (!this.speakerNotes[this.currentSlide]) {
+                console.warn(`No narration available for slide ${this.currentSlide}`);
+                return;
+            }
+
+            // Prevent conflicts during transitions
+            if (this.isTransitioning) {
+                console.log('Skipping narration start - transition in progress');
+                return;
+            }
+
+            // Cancel any existing speech
+            this.speechSynthesis.cancel();
+
+            // Set up narration state
+            this.isPlaying = true;
+            this.isPaused = false;
+            this.slideStartTime = Date.now();
+            this.updateAudioUI();
+
+            // Start progress tracking
+            this.startProgressTracking();
+
+            // Create speech utterance
+            const utterance = new SpeechSynthesisUtterance(this.speakerNotes[this.currentSlide]);
+            
+            // Configure speech settings with validation
+            utterance.rate = Math.max(0.1, Math.min(10, this.playbackSpeed)); // Clamp between 0.1 and 10
+            utterance.pitch = 1.0;
+            utterance.volume = 0.8;
+            
+            // Set voice if available
+            if (this.selectedVoice) {
+                utterance.voice = this.selectedVoice;
+            }
+
+            // Set up event listeners for this utterance
+            utterance.onstart = () => this.onUtteranceStart();
+            utterance.onend = () => this.onUtteranceEnd();
+            utterance.onerror = () => this.onUtteranceError();
+
+            this.currentUtterance = utterance;
+            this.speechSynthesis.speak(utterance);
+            
+        } catch (error) {
+            console.error('Error starting narration:', error);
+            this.isPlaying = false;
+            this.isPaused = false;
+            this.updateAudioUI();
         }
-
-        if (this.isTransitioning) return;
-
-        this.isPlaying = true;
-        this.isPaused = false;
-        this.slideStartTime = Date.now();
-        this.updateAudioUI();
-
-        // Start progress tracking
-        this.startProgressTracking();
-
-        const utterance = new SpeechSynthesisUtterance(this.speakerNotes[this.currentSlide]);
-        
-        // Configure speech settings
-        utterance.rate = this.playbackSpeed;
-        utterance.pitch = 1.0;
-        utterance.volume = 0.8;
-        
-        if (this.selectedVoice) {
-            utterance.voice = this.selectedVoice;
-        }
-
-        // Set up event listeners for this utterance
-        utterance.onstart = () => this.onUtteranceStart();
-        utterance.onend = () => this.onUtteranceEnd();
-        utterance.onerror = () => this.onUtteranceError();
-
-        this.currentUtterance = utterance;
-        this.speechSynthesis.speak(utterance);
     }
 
     pauseNarration() {
