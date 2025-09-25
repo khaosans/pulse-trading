@@ -3,784 +3,975 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulse Trading - Marketing Plan Presentation</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Pulse Trading Final Marketing Plan</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 </head>
 <body>
-    <div id="app">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-brand">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Pulse Trading</span>
-                </div>
-                <div class="nav-controls">
-                    <button id="prevBtn" class="nav-btn" disabled>
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <span id="slideCounter">1 / 15</span>
-                    <button id="nextBtn" class="nav-btn">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <button id="fullscreenBtn" class="nav-btn">
-                        <i class="fas fa-expand"></i>
-                    </button>
-                </div>
-                
-                <!-- Audio Narration Controls -->
-                <div class="audio-controls">
-                    <button id="playPauseBtn" class="audio-btn" title="Play/Pause Narration">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button id="stopBtn" class="audio-btn" title="Stop Narration">
-                        <i class="fas fa-stop"></i>
-                    </button>
-                    <div class="audio-progress-container">
-                        <div class="progress-bar">
-                            <div id="progressFill" class="progress-fill"></div>
-                        </div>
-                        <div class="audio-progress">
-                            <span id="timeDisplay">0:00 / 0:00</span>
-                        </div>
-                    </div>
-                    <div class="audio-settings">
-                        <select id="voiceSelect" class="voice-select" title="Select Voice">
-                            <option value="auto">Auto Voice</option>
-                        </select>
-                        <div class="speed-control">
-                            <label for="speedSlider">Speed:</label>
-                            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" class="speed-slider">
-                            <span id="speedValue">1.0x</span>
-                        </div>
-                    </div>
-                </div>
+    <div class="app-container">
+        <!-- Side Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3>Pulse Trading</h3>
+                <p>Marketing Plan</p>
             </div>
+            <ul class="nav-list" id="nav-list">
+                <li><a href="#" data-slide="1" class="nav-item active">Title Slide</a></li>
+                <li><a href="#" data-slide="2" class="nav-item">Abstract / The Hook</a></li>
+                <li><a href="#" data-slide="3" class="nav-item">Environmental Analysis</a></li>
+                <li><a href="#" data-slide="4" class="nav-item">Strategic Objectives</a></li>
+                <li><a href="#" data-slide="5" class="nav-item">Value Proposition</a></li>
+                <li><a href="#" data-slide="6" class="nav-item">Target Customer</a></li>
+                <li><a href="#" data-slide="7" class="nav-item">Product</a></li>
+                <li><a href="#" data-slide="8" class="nav-item">Price</a></li>
+                <li><a href="#" data-slide="9" class="nav-item">Promotion</a></li>
+                <li><a href="#" data-slide="10" class="nav-item">Place</a></li>
+                <li><a href="#" data-slide="11" class="nav-item">3Ps</a></li>
+                <li><a href="#" data-slide="12" class="nav-item">Financial Projections</a></li>
+                <li><a href="#" data-slide="13" class="nav-item">KPIs</a></li>
+                <li><a href="#" data-slide="14" class="nav-item">Survey Results</a></li>
+                <li><a href="#" data-slide="15" class="nav-item">Team Contributions</a></li>
+                <li><a href="#" data-slide="16" class="nav-item">Next Steps</a></li>
+            </ul>
         </nav>
 
-        <!-- Main Presentation Container -->
-        <main class="presentation-container">
+        <!-- Main Content -->
+        <main class="main-content">
             <div class="slide-container">
                 <!-- Slide 1: Title -->
-                <div class="slide active" data-slide="1">
-                    <div class="slide-content title-slide">
-                        <div class="title-header">
-                            <h1>Pulse Trading</h1>
-                            <h2>Final Marketing Plan</h2>
-                            <p class="subtitle">Strategic Roadmap for Retail Investor Growth</p>
-                        </div>
-                        <div class="title-details">
-                            <div class="team-info">
-                                <h3>Team Members</h3>
-                                <div class="team-grid">
-                                    <span>Kennedy</span>
-                                    <span>Derek</span>
-                                    <span>Shang</span>
-                                    <span>Maryam</span>
-                                    <span>Scott</span>
-                                    <span>Sour</span>
-                                </div>
+                <div class="slide active" id="slide-1">
+                    <div class="slide-header">
+                        <h1>Pulse Trading Final Marketing Plan</h1>
+                        <h2>Strategic Roadmap for Retail Investor Growth</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="title-info">
+                            <p class="team-info">Team: Kennedy, Derek, Shang, Maryam, Scott, Sour</p>
+                            <p class="date-info">September 2025</p>
+                            <p class="client-info">Client: Pulse Trading Platform</p>
+                            <div class="market-highlight">
+                                <h3>Market Opportunity: $2.7B Retail Trading Market</h3>
+                                <p>Empowering retail investors with data-driven insights and community support</p>
                             </div>
-                            <div class="presentation-info">
-                                <p><i class="fas fa-calendar"></i> September 2025</p>
-                                <p><i class="fas fa-clock"></i> 15-20 Minutes</p>
-                                <p><i class="fas fa-users"></i> Professional Business Presentation</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p><strong>Kennedy:</strong> Welcome to our Pulse Trading Final Marketing Plan. I'm excited to present our comprehensive, data-driven strategy that positions Pulse Trading to capture significant market share in the $2.7 billion retail trading space. Over the next 15 minutes, we'll walk through our research findings, strategic framework, and implementation roadmap that will deliver strong ROI for investors. Let's begin with the market challenge that sparked our innovative solution.</p>
+                            <div class="narrative-indicator">
+                                <span class="narrative-icon">🎤</span>
+                                <span class="narrative-text">Press 'N' to play narration or use the controls below</span>
+                            </div>
+                        </div>
+                        <div class="narrative-display">
+                            <h4>Current Narration:</h4>
+                            <div class="narrative-text-display">
+                                <p id="narrative-text-1">Welcome to our Pulse Trading Final Marketing Plan. I'm excited to present our comprehensive, data-driven strategy that positions Pulse Trading to capture significant market share in the $2.7 billion retail trading space. Over the next 15 minutes, we'll walk through our research findings, strategic framework, and implementation roadmap that will deliver strong ROI for investors. Let's begin with the market challenge that sparked our innovative solution.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 2: Problem & Solution -->
-                <div class="slide" data-slide="2">
-                    <div class="slide-content">
-                        <h2>The Challenge & Solution</h2>
-                        <div class="content-grid">
-                            <div class="problem-section">
-                                <h3><i class="fas fa-exclamation-triangle"></i> The Market Problem</h3>
-                                <ul>
-                                    <li>Retail investors lack accessible, data-driven platforms</li>
-                                    <li>Current options: Over-complex OR basic without insights</li>
-                                    <li>78% feel under-informed, 65% lack peer learning</li>
-                                </ul>
+                <!-- Slide 2: Abstract -->
+                <div class="slide" id="slide-2">
+                    <div class="slide-header">
+                        <h1>Abstract / The Hook</h1>
+                        <h2>Market Gap & Our Solution</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="hook-content">
+                            <div class="hook-item challenge">
+                                <h3>🚫 Challenge</h3>
+                                <p>Retail investors lack accessible, data-driven platforms with community support. Existing solutions are either too complex or lack social learning features.</p>
                             </div>
-                            <div class="solution-section">
-                                <h3><i class="fas fa-lightbulb"></i> Our Solution</h3>
-                                <ul>
-                                    <li>Real-time analytics + vibrant user community</li>
-                                    <li>Data-driven insights + social learning</li>
-                                    <li>Mobile-first, professional-grade experience</li>
-                                </ul>
+                            <div class="hook-item solution">
+                                <h3>💡 Solution</h3>
+                                <p>Pulse Trading combines real-time analytics with a vibrant user community, bridging the gap between professional tools and social learning.</p>
+                            </div>
+                            <div class="hook-item value">
+                                <h3>📈 Value</h3>
+                                <p>Empowers smarter trading through data insights and peer collaboration, targeting $250K revenue in Year 1 with 2.5x MROI.</p>
                             </div>
                         </div>
-                        <div class="value-prop">
-                            <h3><i class="fas fa-gem"></i> Value Proposition</h3>
-                            <p>Empowers smarter trading decisions through real-time data and peer insights</p>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p><strong>Kennedy:</strong> The retail trading market presents a clear opportunity, but everyday investors face a fundamental problem: they're caught between two extremes. On one side, professional trading platforms are too complex and intimidating. On the other, basic apps lack the community support and data insights that drive successful trading decisions. This gap represents a $2.7 billion market opportunity. Our solution, Pulse Trading, bridges this divide by delivering real-time analytics combined with social learning in one seamless, mobile-first experience. This foundation leads us to our comprehensive environmental analysis.</p>
+                            <div class="narrative-indicator">
+                                <span class="narrative-icon">🎤</span>
+                                <span class="narrative-text">Press 'N' to play narration or use the controls below</span>
+                            </div>
+                        </div>
+                        <div class="narrative-display">
+                            <h4>Current Narration:</h4>
+                            <div class="narrative-text-display">
+                                <p id="narrative-text-2">The retail trading market presents a clear opportunity, but everyday investors face a fundamental problem: they're caught between two extremes. On one side, professional trading platforms are too complex and intimidating. On the other, basic apps lack the community support and data insights that drive successful trading decisions. This gap represents a $2.7 billion market opportunity. Our solution, Pulse Trading, bridges this divide by delivering real-time analytics combined with social learning in one seamless, mobile-first experience. This foundation leads us to our comprehensive environmental analysis.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 3: Market Analysis -->
-                <div class="slide" data-slide="3">
-                    <div class="slide-content">
-                        <h2>Comprehensive Market Analysis</h2>
-                        <div class="analysis-container">
-                            <div class="pest-analysis">
-                                <h3>PEST Analysis</h3>
-                                <div class="pest-grid">
-                                    <div class="pest-item">
-                                        <h4>Political</h4>
-                                        <p>Fintech-friendly regulations</p>
-                                    </div>
-                                    <div class="pest-item">
-                                        <h4>Economic</h4>
-                                        <p>$2.3T market growing 15% annually</p>
-                                    </div>
-                                    <div class="pest-item">
-                                        <h4>Social</h4>
-                                        <p>85% prefer mobile-first experiences</p>
-                                    </div>
-                                    <div class="pest-item">
-                                        <h4>Technological</h4>
-                                        <p>AI and real-time data accessible</p>
-                                    </div>
-                                </div>
+                <!-- Slide 3: Environmental Analysis -->
+                <div class="slide" id="slide-3">
+                    <div class="slide-header">
+                        <h1>Environmental Analysis</h1>
+                        <h2>PESTELE & SWOT Framework</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="diagram-container">
+                            <div class="mermaid">
+graph TB
+    subgraph "Market Environment Analysis"
+        A[Environmental Analysis]
+        A --> B[PESTELE Framework]
+        A --> C[SWOT Analysis]
+    end
+    
+    subgraph "External Factors"
+        B --> D["🏛️ Political<br/>Regulatory Stability"]
+        B --> E["📈 Economic<br/>$2.7B Market Growth"]
+        B --> F["👥 Social<br/>Digital Adoption 85%"]
+        B --> G["📱 Technology<br/>Mobile-First Trend"]
+    end
+    
+    subgraph "Internal Assessment"
+        C --> H["💪 Strengths<br/>Innovation & Community"]
+        C --> I["🎯 Opportunities<br/>Social Trading Boom"]
+        C --> J["⚠️ Weaknesses<br/>New Brand Recognition"]
+        C --> K["🚨 Threats<br/>Established Competitors"]
+    end
+    
+    style A fill:#2E86AB,color:#fff
+    style B fill:#A23B72,color:#fff
+    style C fill:#F18F01,color:#fff
+    style D fill:#E8F4F8,color:#000
+    style E fill:#E8F4F8,color:#000
+    style F fill:#E8F4F8,color:#000
+    style G fill:#E8F4F8,color:#000
+    style H fill:#E8F4F8,color:#000
+    style I fill:#E8F4F8,color:#000
+    style J fill:#E8F4F8,color:#000
+    style K fill:#E8F4F8,color:#000
+    
+    style A fill:#21808D,color:#fff
+    style B fill:#FFC185,color:#000
+    style C fill:#FFC185,color:#000
+            </div>
+                        </div>
+                        <div class="highlights">
+                            <p><strong>Key Insights:</strong> Digital adoption rising 📱, social trading trending 👥, regulatory environment stabilizing 📊</p>
+                            <ul>
+                                <li>Growing demand for mobile-first solutions</li>
+                                <li>Increased retail investor participation post-2020</li>
+                                <li>Community-driven investment approaches gaining traction</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p><strong>Kennedy:</strong> Our comprehensive PESTELE and SWOT analyses reveal a compelling market landscape. While regulatory changes and competitive pressure present challenges, the trends strongly favor our approach. Digital adoption is accelerating rapidly, with 85% of our target demographic preferring mobile-first solutions. The social trading trend is gaining momentum, with 65% of investors valuing community features. Our analysis shows that Pulse Trading's community-focused approach is perfectly positioned to capitalize on these trends. These insights directly inform our strategic objectives for 2026.</p>
+                            <div class="narrative-indicator">
+                                <span class="narrative-icon">🎤</span>
+                                <span class="narrative-text">Press 'N' to play narration or use the controls below</span>
                             </div>
-                            <div class="swot-analysis">
-                                <h3>SWOT Analysis</h3>
-                                <div class="swot-grid">
-                                    <div class="swot-item strength">
-                                        <h4>Strengths</h4>
-                                        <p>Advanced tech + community focus</p>
-                                    </div>
-                                    <div class="swot-item weakness">
-                                        <h4>Weaknesses</h4>
-                                        <p>New market entry</p>
-                                    </div>
-                                    <div class="swot-item opportunity">
-                                        <h4>Opportunities</h4>
-                                        <p>Underserved millennial/Gen Z segments</p>
-                                    </div>
-                                    <div class="swot-item threat">
-                                        <h4>Threats</h4>
-                                        <p>Established competitors</p>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="narrative-display">
+                            <h4>Current Narration:</h4>
+                            <div class="narrative-text-display">
+                                <p id="narrative-text-3">Our comprehensive PESTELE and SWOT analyses reveal a compelling market landscape. While regulatory changes and competitive pressure present challenges, the trends strongly favor our approach. Digital adoption is accelerating rapidly, with 85% of our target demographic preferring mobile-first solutions. The social trading trend is gaining momentum, with 65% of investors valuing community features. Our analysis shows that Pulse Trading's community-focused approach is perfectly positioned to capitalize on these trends. These insights directly inform our strategic objectives for 2026.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Slide 4: Strategic Objectives -->
-                <div class="slide" data-slide="4">
-                    <div class="slide-content">
-                        <h2>SMART Strategic Objectives</h2>
-                        <div class="objectives-container">
-                            <div class="objectives-grid">
-                                <div class="objective-item">
-                                    <div class="objective-icon">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                    <h3>5,000 Sign-ups</h3>
-                                    <p>User Acquisition</p>
-                                    <span class="timeline">Q1-Q4 2026</span>
-                                </div>
-                                <div class="objective-item">
-                                    <div class="objective-icon">
-                                        <i class="fas fa-chart-line"></i>
-                                    </div>
-                                    <h3>1,000 Active Users</h3>
-                                    <p>User Engagement</p>
-                                    <span class="timeline">Q2-Q4 2026</span>
-                                </div>
-                                <div class="objective-item">
-                                    <div class="objective-icon">
-                                        <i class="fas fa-bullhorn"></i>
-                                    </div>
-                                    <h3>40% Brand Recall</h3>
-                                    <p>Brand Awareness</p>
-                                    <span class="timeline">Q4 2026</span>
-                                </div>
-                                <div class="objective-item">
-                                    <div class="objective-icon">
-                                        <i class="fas fa-dollar-sign"></i>
-                                    </div>
-                                    <h3>$250K Revenue</h3>
-                                    <p>Revenue Generation</p>
-                                    <span class="timeline">Q2-Q4 2026</span>
-                                </div>
+                <div class="slide" id="slide-4">
+                    <div class="slide-header">
+                        <h1>Strategic Recommendation & Objectives</h1>
+                        <h2>Measurable Growth Targets</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="objectives-content">
+                            <div class="positioning">
+                                <h3>Strategic Positioning</h3>
+                                <p>"Data-driven, community-focused trading platform for empowered retail investors"</p>
+                            </div>
+                            <div class="diagram-container">
+                                <div class="mermaid">
+graph TB
+    subgraph "Strategic Objectives 2026"
+        A["🎯 Strategic Objectives<br/>2026 Roadmap"]
+    end
+    
+    subgraph "Growth Metrics"
+        A --> B["👥 User Acquisition<br/>5,000 New Sign-ups by Q2<br/>150% Growth Trajectory"]
+        A --> C["📊 User Retention<br/>25% Monthly Active Users<br/>Product-Market Fit"]
+        A --> D["💰 Revenue Generation<br/>$250K Annual Revenue<br/>2.5x Marketing ROI"]
+        A --> E["🏆 Market Position<br/>Top-3 Community Platform<br/>Industry Recognition"]
+    end
+    
+    subgraph "Key Tactics"
+        B --> B1["📱 Digital Marketing<br/>Campaign"]
+        B --> B2["🤝 Influencer<br/>Partnerships"]
+        B --> B3["🔄 Referral<br/>Program"]
+        
+        C --> C1["💬 Community<br/>Engagement"]
+        C --> C2["🎯 Personalized<br/>Content"]
+        C --> C3["🎮 Gamification<br/>Elements"]
+        
+        D --> D1["💎 Premium<br/>Subscriptions"]
+        D --> D2["🆓 Freemium<br/>Conversion"]
+        D --> D3["📈 Performance<br/>Optimization"]
+        
+        E --> E1["📚 Thought<br/>Leadership"]
+        E --> E2["🤝 Strategic<br/>Partnerships"]
+        E --> E3["👥 User-Generated<br/>Content"]
+    end
+    
+    style A fill:#2E86AB,color:#fff
+    style B fill:#A23B72,color:#fff
+    style C fill:#F18F01,color:#fff
+    style D fill:#C73E1D,color:#fff
+    style E fill:#D2BA4C,color:#000
+                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p><strong>Kennedy:</strong> These four strategic objectives translate our market insights into measurable, achievable targets. First, we aim to acquire 5,000 new sign-ups by Q2 2026, representing a 150% growth trajectory. Second, we'll achieve 25% monthly active user retention, demonstrating strong product-market fit. Third, we'll generate $250,000 in revenue by year-end, with a 2.5x marketing return on investment. Finally, we'll establish Pulse Trading as a top-3 community platform in the retail trading space. Each objective has defined tactics, timelines, and success metrics. Now let's see how these objectives connect to our value proposition framework.</p>
+                            <div class="narrative-indicator">
+                                <span class="narrative-icon">🎤</span>
+                                <span class="narrative-text">Press 'N' to play narration or use the controls below</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Slide 5: Value Proposition -->
-                <div class="slide" data-slide="5">
-                    <div class="slide-content">
-                        <h2>Value Proposition Canvas</h2>
-                        <div class="value-canvas">
-                            <div class="customer-jobs">
-                                <h3>Customer Jobs</h3>
-                                <ul>
-                                    <li>Make informed trading decisions</li>
-                                    <li>Learn from experienced traders</li>
-                                    <li>Access professional-grade analytics</li>
-                                </ul>
-                            </div>
-                            <div class="pain-points">
-                                <h3>Pain Points We Solve</h3>
-                                <ul>
-                                    <li>Lack of real-time data (80%)</li>
-                                    <li>No peer learning (65%)</li>
-                                    <li>Over-complex tools (78%)</li>
-                                </ul>
-                            </div>
-                            <div class="gain-creators">
-                                <h3>Our Gain Creators</h3>
-                                <ul>
-                                    <li>Real-time analytics dashboard</li>
-                                    <li>Social trading feeds</li>
-                                    <li>Mobile-first design</li>
-                                </ul>
+                <div class="slide" id="slide-5">
+                    <div class="slide-header">
+                        <h1>Value Proposition</h1>
+                        <h2>Feature-to-Emotion Brand Ladder</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="diagram-container">
+                            <div class="mermaid">
+graph TB
+    subgraph "Value Proposition Framework"
+        A["💎 Pulse Trading<br/>Value Proposition"]
+    end
+    
+    subgraph "Strategic Positioning"
+        A --> B["🎯 Market Position<br/>Empowering retail investors<br/>with insights & community"]
+    end
+    
+    subgraph "Emotional Benefits"
+        A --> C["❤️ Emotional Value<br/>Confidence in decisions<br/>Sense of belonging<br/>Learning & growth"]
+    end
+    
+    subgraph "Functional Benefits"
+        A --> D["⚙️ Functional Value<br/>Real-time market analytics<br/>Social community feeds<br/>Educational modules<br/>Portfolio tracking"]
+    end
+    
+    subgraph "Business Impact"
+        D --> E["📈 Features Drive<br/>User Engagement"]
+        C --> F["💝 Emotions Drive<br/>Customer Loyalty"]
+        B --> G["🏆 Position Drives<br/>Market Differentiation"]
+    end
+    
+    style A fill:#2E86AB,color:#fff
+    style B fill:#A23B72,color:#fff
+    style C fill:#F18F01,color:#fff
+    style D fill:#C73E1D,color:#fff
+    style E fill:#D2BA4C,color:#000
+    style F fill:#D2BA4C,color:#000
+    style G fill:#D2BA4C,color:#000
+            </div>
+                        </div>
+                        <div class="value-summary">
+                            <p><strong>Core Promise:</strong> "Smart trading through data + community"</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p><strong>Kennedy:</strong> Our value proposition ladder demonstrates how technical features translate into meaningful emotional benefits for users. At the functional level, real-time analytics and community features deliver immediate value. But the real power lies in the emotional benefits: confidence in trading decisions, belonging to a supportive community, and the satisfaction of continuous learning. This emotional connection drives long-term engagement and platform loyalty. Our research shows that users who engage with community features have 40% higher retention rates. This value proposition directly addresses the needs we identified in our target customer research.</p>
+                            <div class="narrative-indicator">
+                                <span class="narrative-icon">🎤</span>
+                                <span class="narrative-text">Press 'N' to play narration or use the controls below</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 6: Customer Journey -->
-                <div class="slide" data-slide="6">
-                    <div class="slide-content">
-                        <h2>Customer Journey & Target Profile</h2>
-                        <div class="journey-container">
-                            <div class="target-profile">
-                                <h3>Target Customer Profile</h3>
-                                <div class="profile-grid">
-                                    <div class="profile-item">
-                                        <h4>Demographics</h4>
-                                        <ul>
-                                            <li>Age: 22-40 years</li>
-                                            <li>Location: US urban/suburban</li>
-                                            <li>Education: College educated</li>
-                                            <li>Income: $50K-$150K</li>
-                                        </ul>
-                                    </div>
-                                    <div class="profile-item">
-                                        <h4>Psychographics</h4>
-                                        <ul>
-                                            <li>Tech-savvy & mobile-first</li>
-                                            <li>Learning-oriented</li>
-                                            <li>Community-minded</li>
-                                            <li>Data-driven decisions</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                <!-- Slide 6: Target Customer -->
+                <div class="slide" id="slide-6">
+                    <div class="slide-header">
+                        <h1>Target Customer Segment</h1>
+                        <h2>Validated User Personas & Journey</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="customer-info">
+                            <div class="customer-segment demographics">
+                                <h3>👤 Demographics</h3>
+                                <p><strong>Age:</strong> 22–40 years<br/>
+                                <strong>Location:</strong> US urban/suburban<br/>
+                                <strong>Education:</strong> College educated<br/>
+                                <strong>Income:</strong> Moderate to high</p>
                             </div>
-                            <div class="journey-stages">
-                                <h3>Customer Journey Stages</h3>
-                                <div class="journey-flow">
-                                    <div class="journey-step">
-                                        <span class="step-number">1</span>
-                                        <h4>Awareness</h4>
-                                        <p>Social Media Ads</p>
-                                    </div>
-                                    <div class="journey-arrow">→</div>
-                                    <div class="journey-step">
-                                        <span class="step-number">2</span>
-                                        <h4>Consideration</h4>
-                                        <p>Webinars & Content</p>
-                                    </div>
-                                    <div class="journey-arrow">→</div>
-                                    <div class="journey-step">
-                                        <span class="step-number">3</span>
-                                        <h4>Purchase</h4>
-                                        <p>Referral Incentives</p>
-                                    </div>
-                                    <div class="journey-arrow">→</div>
-                                    <div class="journey-step">
-                                        <span class="step-number">4</span>
-                                        <h4>Advocacy</h4>
-                                        <p>Loyalty Programs</p>
-                                    </div>
-                                </div>
+                            <div class="customer-segment psychographics">
+                                <h3>🧠 Psychographics</h3>
+                                <p>Tech-savvy early adopters<br/>
+                                Learning-oriented mindset<br/>
+                                Community-minded approach<br/>
+                                Data-driven decision makers</p>
+                            </div>
+                            <div class="customer-segment behavioral">
+                                <h3>📱 Behavioral</h3>
+                                <p>Monthly trading frequency<br/>
+                                Mobile-first preference (85%)<br/>
+                                Values real-time data<br/>
+                                Seeks peer insights</p>
+                            </div>
+                        </div>
+                        <div class="diagram-container">
+                            <div class="mermaid">
+sequenceDiagram
+    participant U as 👤 User
+    participant P as 📱 Platform
+    participant C as 👥 Community
+    
+    Note over U,C: Customer Journey & Value Creation
+    
+    U->>P: 🔍 Discovers trading need
+    P->>U: 📊 Provides real-time data
+    U->>C: 🤔 Seeks peer insights
+    C->>U: 💡 Shares trading tips
+    U->>P: 💰 Makes informed trades
+    P->>U: 📈 Tracks performance
+    U->>C: 🎉 Shares success story
+    
+    Note over U,C: Continuous Learning Loop
+            </div>
+                        </div>
+                        <div class="validation">
+                            <p><strong>Validation:</strong> 50-respondent Qualtrics survey + secondary research</p>
+                        </div>
+                        <div class="speaker-info">
+                            <p><strong>Speaker:</strong> Derek | <strong>Duration:</strong> 1-2 mins</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p><strong>Derek:</strong> Our 50-person Qualtrics survey validates this persona profile with compelling data. 85% of respondents prefer mobile-first solutions, confirming our platform strategy. 80% want real-time analytics, validating our core feature set. Most importantly, 65% value community features, proving our social learning approach. The survey also revealed that our target demographic is willing to pay premium prices for quality tools, with 70% indicating they would pay $9.99 monthly for our premium features. This validation gives us confidence in our product-market fit and pricing strategy.</p>
+                            <div class="narrative-indicator">
+                                <span class="narrative-icon">🎤</span>
+                                <span class="narrative-text">Press 'N' to play narration or use the controls below</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 7: Marketing Mix -->
-                <div class="slide" data-slide="7">
-                    <div class="slide-content">
-                        <h2>Marketing Mix Strategy</h2>
-                        <div class="marketing-mix">
+                <!-- Slide 7: Product -->
+                <div class="slide" id="slide-7">
+                    <div class="slide-header">
+                        <h1>Marketing Mix — Product</h1>
+                        <h2>Mobile-First Trading Platform</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="marketing-mix-content">
                             <div class="mix-item">
-                                <div class="mix-icon">
-                                    <i class="fas fa-mobile-alt"></i>
-                                </div>
-                                <h3>Product</h3>
+                                <h3>📱 Platform Type</h3>
+                                <p>Mobile-first trading application</p>
+                                <p><em>Responsive web + native apps</em></p>
+                            </div>
+                            <div class="mix-item">
+                                <h3>⚡ Core Features</h3>
                                 <ul>
-                                    <li>Mobile-first app</li>
-                                    <li>Real-time analytics</li>
-                                    <li>Social trading feeds</li>
-                                    <li>Freemium model</li>
+                                    <li>Real-time market analytics</li>
+                                    <li>Social community feeds</li>
+                                    <li>Interactive educational modules</li>
+                                    <li>Portfolio tracking & insights</li>
+                                    <li>Trading competitions</li>
                                 </ul>
                             </div>
                             <div class="mix-item">
-                                <div class="mix-icon">
-                                    <i class="fas fa-tag"></i>
-                                </div>
-                                <h3>Price</h3>
-                                <ul>
-                                    <li>Free core features</li>
-                                    <li>Premium: $9.99/month</li>
-                                    <li>70% willing to pay</li>
-                                    <li>Competitive advantage</li>
-                                </ul>
+                                <h3>💎 Service Tiers</h3>
+                                <p><strong>Free Tier:</strong> Core trading + basic community</p>
+                                <p><strong>Premium ($9.99/mo):</strong> Advanced analytics + priority support</p>
+                            </div>
+                        </div>
+                        <div class="speaker-info">
+                            <p><strong>Speaker:</strong> Shang | <strong>Duration:</strong> 45-60s</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p><strong>Shang:</strong> Our product architecture directly responds to these user preferences with a mobile-first design, real-time data integration, and seamless community features. The freemium model strategically lowers barriers to entry while premium features drive sustainable revenue growth. Our core features include advanced charting tools, social trading capabilities, and educational content. The premium tier adds AI-powered insights, priority customer support, and exclusive community access. This product strategy supports our pricing approach and creates multiple revenue streams.</p>
+                            <div class="narrative-indicator">
+                                <span class="narrative-icon">🎤</span>
+                                <span class="narrative-text">Press 'N' to play narration or use the controls below</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 8: Price -->
+                <div class="slide" id="slide-8">
+                    <div class="slide-header">
+                        <h1>Marketing Mix — Price</h1>
+                        <h2>Validated Freemium Strategy</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="marketing-mix-content">
+                            <div class="mix-item">
+                                <h3>💳 Pricing Model</h3>
+                                <p><strong>Freemium Strategy</strong></p>
+                                <p>Free access removes barriers, premium drives revenue</p>
                             </div>
                             <div class="mix-item">
-                                <div class="mix-icon">
-                                    <i class="fas fa-store"></i>
-                                </div>
-                                <h3>Place</h3>
+                                <h3>🆓 Free Tier</h3>
+                                <p>Core trading functionality<br/>
+                                Basic community access<br/>
+                                Standard market data<br/>
+                                Email support</p>
+                            </div>
+                            <div class="mix-item">
+                                <h3>⭐ Premium Tier</h3>
+                                <p><strong>$9.99/month</strong><br/>
+                                Advanced analytics dashboard<br/>
+                                Priority community features<br/>
+                                Real-time alerts<br/>
+                                Priority support</p>
+                            </div>
+                            <div class="mix-item">
+                                <h3>✅ Market Validation</h3>
+                                <p>70% survey willingness-to-pay<br/>
+                                Competitive benchmarking<br/>
+                                Price sensitivity analysis</p>
+                            </div>
+                        </div>
+                        <div class="speaker-info">
+                            <p><strong>Speaker:</strong> Kennedy | <strong>Duration:</strong> 45-60s</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p>Our $9.99 premium price point strikes the optimal balance—accessible for our target demographic while validated by 70% willingness-to-pay in our survey. This positions us competitively against $15-25 alternatives.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 9: Promotion -->
+                <div class="slide" id="slide-9">
+                    <div class="slide-header">
+                        <h1>Marketing Mix — Promotion</h1>
+                        <h2>Customer Decision Journey Strategy</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="diagram-container">
+                            <div class="mermaid">
+flowchart LR
+    subgraph "Customer Decision Journey"
+        A["🔍 Problem<br/>Recognition"] --> B["📚 Information<br/>Search"]
+        B --> C["⚖️ Alternative<br/>Evaluation"]
+        C --> D["💳 Purchase<br/>Decision"]
+        D --> E["💝 Post-Purchase<br/>Loyalty"]
+    end
+    
+    subgraph "Marketing Touchpoints"
+        A --> F["📱 Social Media Ads<br/>🤝 Influencer Partnerships<br/>🎯 Targeted Campaigns"]
+        B --> G["📚 Educational Webinars<br/>📝 Blog Content & Guides<br/>🎓 Learning Resources"]
+        C --> H["⭐ User Testimonials<br/>🆓 Free Trial Access<br/>📊 Feature Comparisons"]
+        D --> I["💸 Referral Bonuses<br/>⏰ Limited-Time Offers<br/>🎁 Welcome Incentives"]
+        E --> J["👥 Community Programs<br/>🎯 Advanced Feature Access<br/>🔄 Retention Campaigns"]
+    end
+    
+    style A fill:#2E86AB,color:#fff
+    style B fill:#A23B72,color:#fff
+    style C fill:#F18F01,color:#fff
+    style D fill:#C73E1D,color:#fff
+    style E fill:#D2BA4C,color:#000
+    
+    style A fill:#B4413C,color:#fff
+    style B fill:#FFC185,color:#000
+    style C fill:#5D878F,color:#fff
+    style D fill:#D2BA4C,color:#000
+    style E fill:#21808D,color:#fff
+            </div>
+                        </div>
+                        <div class="speaker-info">
+                            <p><strong>Speaker:</strong> Maryam | <strong>Duration:</strong> 45-60s</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p>Our integrated promotional strategy addresses each stage of the customer decision journey—from awareness through advocacy. Each touchpoint is designed to maximize conversion and build long-term community engagement.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 10: Place -->
+                <div class="slide" id="slide-10">
+                    <div class="slide-header">
+                        <h1>Marketing Mix — Place</h1>
+                        <h2>Digital Distribution Strategy</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="marketing-mix-content">
+                            <div class="mix-item">
+                                <h3>🏪 Primary Channels</h3>
                                 <ul>
-                                    <li>iOS/Android stores</li>
+                                    <li>Apple App Store</li>
+                                    <li>Google Play Store</li>
                                     <li>Company website</li>
-                                    <li>Finance blogs</li>
-                                    <li>Urban/suburban focus</li>
+                                    <li>Web application</li>
                                 </ul>
                             </div>
                             <div class="mix-item">
-                                <div class="mix-icon">
-                                    <i class="fas fa-bullhorn"></i>
-                                </div>
-                                <h3>Promotion</h3>
+                                <h3>🤝 Secondary Channels</h3>
                                 <ul>
-                                    <li>Digital ads (40%)</li>
-                                    <li>Content marketing (25%)</li>
-                                    <li>Influencers (20%)</li>
-                                    <li>Webinars (15%)</li>
+                                    <li>Finance blog partnerships</li>
+                                    <li>Social media platforms</li>
+                                    <li>Influencer collaborations</li>
+                                    <li>Partner referral programs</li>
+                                </ul>
+                            </div>
+                            <div class="mix-item">
+                                <h3>📍 Geographic Focus</h3>
+                                <p><strong>Primary:</strong> US urban markets<br/>
+                                <strong>Secondary:</strong> Suburban areas<br/>
+                                <strong>Strategy:</strong> High-density, tech-savvy demographics</p>
+                            </div>
+                            <div class="mix-item">
+                                <h3>🎯 Distribution Tactics</h3>
+                                <ul>
+                                    <li>SEO optimization</li>
+                                    <li>App store optimization (ASO)</li>
+                                    <li>Content marketing partnerships</li>
+                                    <li>Targeted digital advertising</li>
                                 </ul>
                             </div>
                         </div>
+                        <div class="speaker-info">
+                            <p><strong>Speaker:</strong> Shang | <strong>Duration:</strong> 45-60s</p>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Slide 8: Customer Decision Journey -->
-                <div class="slide" data-slide="8">
-                    <div class="slide-content">
-                        <h2>Customer Decision Journey</h2>
-                        <div class="decision-journey">
-                            <div class="journey-stage">
-                                <h3>1. Problem Recognition</h3>
-                                <p>Market volatility, investment goals</p>
-                                <div class="tactics">
-                                    <span class="tactic">Social media ads</span>
-                                    <span class="tactic">Influencer teasers</span>
-                                </div>
-                            </div>
-                            <div class="journey-stage">
-                                <h3>2. Information Search</h3>
-                                <p>Research platforms, compare features</p>
-                                <div class="tactics">
-                                    <span class="tactic">Educational webinars</span>
-                                    <span class="tactic">Blog content</span>
-                                </div>
-                            </div>
-                            <div class="journey-stage">
-                                <h3>3. Evaluation</h3>
-                                <p>Features, pricing, user experience</p>
-                                <div class="tactics">
-                                    <span class="tactic">Free trial</span>
-                                    <span class="tactic">Testimonials</span>
-                                </div>
-                            </div>
-                            <div class="journey-stage">
-                                <h3>4. Purchase Decision</h3>
-                                <p>Value proposition, social proof</p>
-                                <div class="tactics">
-                                    <span class="tactic">Referral bonuses</span>
-                                    <span class="tactic">Onboarding support</span>
-                                </div>
-                            </div>
-                            <div class="journey-stage">
-                                <h3>5. Advocacy</h3>
-                                <p>Successful trading, community</p>
-                                <div class="tactics">
-                                    <span class="tactic">Loyalty programs</span>
-                                    <span class="tactic">Community recognition</span>
-                                </div>
-                            </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p>Our digital-first distribution strategy ensures broad reach while maintaining cost efficiency. Focus on urban/suburban US markets allows concentrated marketing spend in high-value demographics.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 9: Service Excellence -->
-                <div class="slide" data-slide="9">
-                    <div class="slide-content">
-                        <h2>Service Excellence Framework</h2>
-                        <div class="service-excellence">
+                <!-- Slide 11: 3Ps -->
+                <div class="slide" id="slide-11">
+                    <div class="slide-header">
+                        <h1>Marketing Mix — 3Ps Service Design</h1>
+                        <h2>People • Process • Physical Evidence</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="diagram-container">
+                            <div class="mermaid">
+graph TB
+    subgraph "Service Excellence Framework"
+        A["🏆 Service Excellence<br/>Triangle"]
+    end
+    
+    subgraph "Core Elements"
+        A --> B["👥 People<br/>Expert Support Team<br/>Community Moderators<br/>Financial Advisors"]
+        A --> C["⚙️ Process<br/>Seamless Onboarding Flow<br/>Interactive Tutorials<br/>24/7 Support System"]
+        A --> D["📱 Physical Evidence<br/>Polished App Interface<br/>Active Community Forums<br/>Performance Dashboards"]
+    end
+    
+    subgraph "Business Outcomes"
+        B --> E["💝 Human Connection<br/>Trust & Relationships"]
+        C --> F["🎯 User Experience<br/>Smooth Operations"]
+        D --> G["💎 Tangible Value<br/>Visual Proof"]
+    end
+    
+    style A fill:#2E86AB,color:#fff
+    style B fill:#A23B72,color:#fff
+    style C fill:#F18F01,color:#fff
+    style D fill:#C73E1D,color:#fff
+    style E fill:#D2BA4C,color:#000
+    style F fill:#D2BA4C,color:#000
+    style G fill:#D2BA4C,color:#000
+            </div>
+                        </div>
+                        <div class="service-highlights">
                             <div class="service-item">
-                                <div class="service-icon">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                                <h3>People</h3>
-                                <ul>
-                                    <li>Expert support team</li>
-                                    <li>Community moderators</li>
-                                    <li>Customer success specialists</li>
-                                </ul>
+                                <h4>🎯 Service Promise</h4>
+                                <p>Professional expertise meets community support</p>
                             </div>
-                            <div class="service-item">
-                                <div class="service-icon">
-                                    <i class="fas fa-cogs"></i>
-                                </div>
-                                <h3>Process</h3>
-                                <ul>
-                                    <li>Seamless onboarding (5 min)</li>
-                                    <li>Intuitive user interface</li>
-                                    <li>Streamlined trading process</li>
-                                </ul>
-                            </div>
-                            <div class="service-item">
-                                <div class="service-icon">
-                                    <i class="fas fa-award"></i>
-                                </div>
-                                <h3>Physical Evidence</h3>
-                                <ul>
-                                    <li>Polished mobile app</li>
-                                    <li>Active community</li>
-                                    <li>Professional brand materials</li>
-                                </ul>
-                            </div>
+                        </div>
+                        <div class="speaker-info">
+                            <p><strong>Speaker:</strong> Maryam</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p>Our service design framework ensures every customer touchpoint reinforces our brand promise. Expert team support, intuitive processes, and visible community success create a cohesive service experience.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 10: Financial Projections -->
-                <div class="slide" data-slide="10">
-                    <div class="slide-content">
-                        <h2>Financial Projections & ROI</h2>
-                        <div class="financial-container">
-                            <div class="budget-allocation">
-                                <h3>Budget Allocation ($100K)</h3>
-                                <div class="budget-items">
-                                    <div class="budget-item">
-                                        <div class="budget-bar" style="width: 40%"></div>
-                                        <span>Digital Advertising - $40K (40%)</span>
-                                    </div>
-                                    <div class="budget-item">
-                                        <div class="budget-bar" style="width: 25%"></div>
-                                        <span>Content Marketing - $25K (25%)</span>
-                                    </div>
-                                    <div class="budget-item">
-                                        <div class="budget-bar" style="width: 20%"></div>
-                                        <span>Influencer Partnerships - $20K (20%)</span>
-                                    </div>
-                                    <div class="budget-item">
-                                        <div class="budget-bar" style="width: 15%"></div>
-                                        <span>Webinars & Events - $15K (15%)</span>
-                                    </div>
-                                </div>
+                <!-- Slide 12: Financial Projections -->
+                <div class="slide" id="slide-12">
+                    <div class="slide-header">
+                        <h1>Financial Projections</h1>
+                        <h2>Budget Allocation & ROI Targets</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="financial-overview">
+                            <div class="financial-item">
+                                <h3>💰 Marketing Budget</h3>
+                                <p>$100,000</p>
                             </div>
-                            <div class="revenue-projections">
-                                <h3>Revenue Projections</h3>
-                                <div class="revenue-metrics">
-                                    <div class="metric">
-                                        <h4>$250K</h4>
-                                        <p>Transaction Fees (Year 1)</p>
-                                    </div>
-                                    <div class="metric">
-                                        <h4>2.5x</h4>
-                                        <p>Marketing ROI</p>
-                                    </div>
-                                    <div class="metric">
-                                        <h4>Month 8</h4>
-                                        <p>Break-even Timeline</p>
-                                    </div>
-                                </div>
+                            <div class="financial-item">
+                                <h3>📈 Revenue Forecast</h3>
+                                <p>$250,000</p>
                             </div>
+                            <div class="financial-item">
+                                <h3>🎯 Marketing ROI</h3>
+                                <p>2.5× MROI</p>
+                            </div>
+                        </div>
+                        <div class="diagram-container">
+                            <div class="mermaid">
+pie title Marketing Budget Allocation ($100K)
+    "Digital Advertising" : 40
+    "Content Creation" : 25
+    "Influencer Partnerships" : 20
+    "Events & Webinars" : 15
+            </div>
+                        </div>
+                        <div class="revenue-streams">
+                            <h4>🔄 Revenue Streams</h4>
+                            <ul>
+                                <li><strong>Transaction Fees:</strong> Primary revenue driver</li>
+                                <li><strong>Premium Subscriptions:</strong> $9.99/month recurring</li>
+                                <li><strong>Data Services:</strong> Future monetization opportunity</li>
+                            </ul>
+                        </div>
+                        <div class="speaker-info">
+                            <p><strong>Speaker:</strong> Scott | <strong>Duration:</strong> 1-2 mins</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p>Our disciplined budget allocation prioritizes high-impact channels—40% digital advertising for reach, 25% content for engagement, 20% influencers for credibility. The 2.5x MROI target demonstrates strong financial discipline and growth potential.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 11: Performance Tracking -->
-                <div class="slide" data-slide="11">
-                    <div class="slide-content">
-                        <h2>Performance Tracking & KPIs</h2>
-                        <div class="kpi-container">
-                            <table class="kpi-table">
+                <!-- Slide 13: KPIs -->
+                <div class="slide" id="slide-13">
+                    <div class="slide-header">
+                        <h1>Key Performance Indicators</h1>
+                        <h2>Monitoring & Remediation Framework</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="kpi-table">
+                            <table>
                                 <thead>
                                     <tr>
-                                        <th>Objective</th>
+                                        <th>Strategic Objective</th>
                                         <th>KPI Target</th>
-                                        <th>Measurement Method</th>
-                                        <th>Plan B Remedy</th>
+                                        <th>Current Status</th>
+                                        <th>Remediation Plan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>User Acquisition</strong></td>
-                                        <td>5,000 sign-ups by Q4 2026</td>
-                                        <td>Monthly sign-up tracking</td>
-                                        <td>Increase ad spend, enhance referrals</td>
+                                        <td>Platform Growth</td>
+                                        <td>5,000 new sign-ups by Q4 2026</td>
+                                        <td>0 (Launch pending)</td>
+                                        <td>Boost social media ad budget, enhance referral incentives</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>User Engagement</strong></td>
-                                        <td>1,000 monthly active users</td>
-                                        <td>DAU/MAU metrics</td>
-                                        <td>Trading competitions, improve onboarding</td>
+                                        <td>User Engagement</td>
+                                        <td>1,000 monthly active traders</td>
+                                        <td>0 (Launch pending)</td>
+                                        <td>Launch trading competitions, improve onboarding flow</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Brand Awareness</strong></td>
-                                        <td>40% aided brand recall</td>
-                                        <td>Quarterly brand surveys</td>
-                                        <td>Expand influencer campaigns</td>
+                                        <td>Brand Awareness</td>
+                                        <td>40% aided recall in target segment</td>
+                                        <td>0 (Launch pending)</td>
+                                        <td>Expand influencer collaborations, increase webinar frequency</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Revenue Generation</strong></td>
-                                        <td>$250K transaction fees</td>
-                                        <td>Monthly revenue tracking</td>
-                                        <td>Fee discounts, expand segments</td>
+                                        <td>Revenue Generation</td>
+                                        <td>$250,000 in transaction fees</td>
+                                        <td>0 (Launch pending)</td>
+                                        <td>Offer promotional fee discounts, expand to adjacent segments</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+                        <div class="diagram-container">
+                            <div class="mermaid">
+flowchart LR
+    A[Monthly KPI Review] --> B[Performance Analysis]
+    B --> C[Identify Gaps]
+    C --> D[Apply Remediation]
+    D --> E[Monitor Results]
+    E --> A
+    
+    F[Remediation Toolkit] --> G[Budget Reallocation]
+    F --> H[Campaign Optimization]
+    F --> I[Channel Expansion]
+    F --> J[Offer Modification]
+    
+    style A fill:#21808D,color:#fff
+    style F fill:#B4413C,color:#fff
+            </div>
+                        </div>
+                        <div class="speaker-info">
+                            <p><strong>Speaker:</strong> Sour & Kennedy | <strong>Duration:</strong> 1-2 mins</p>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Slide 12: Survey Validation -->
-                <div class="slide" data-slide="12">
-                    <div class="slide-content">
-                        <h2>Market Validation & Survey Results</h2>
-                        <div class="survey-container">
-                            <div class="survey-header">
-                                <h3>Primary Research Validation (50 Respondents)</h3>
-                            </div>
-                            <div class="survey-metrics">
-                                <div class="metric-card">
-                                    <div class="metric-value">80%</div>
-                                    <div class="metric-label">Want real-time analytics</div>
-                                </div>
-                                <div class="metric-card">
-                                    <div class="metric-value">65%</div>
-                                    <div class="metric-label">Value community features</div>
-                                </div>
-                                <div class="metric-card">
-                                    <div class="metric-value">70%</div>
-                                    <div class="metric-label">Willing to pay premium</div>
-                                </div>
-                                <div class="metric-card">
-                                    <div class="metric-value">85%</div>
-                                    <div class="metric-label">Prefer mobile-first</div>
-                                </div>
-                            </div>
-                            <div class="validation-insights">
-                                <h3>Key Insights</h3>
-                                <ul>
-                                    <li>Strong product-market fit indicators</li>
-                                    <li>Premium pricing model validated</li>
-                                    <li>Mobile-first strategy confirmed</li>
-                                    <li>Community features highly valued</li>
-                                </ul>
-                            </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p>Our KPI framework provides monthly tracking with predefined remediation plans. This systematic approach de-risks our marketing investment and demonstrates operational maturity to potential investors.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 13: Team Contributions -->
-                <div class="slide" data-slide="13">
-                    <div class="slide-content">
-                        <h2>Team Expertise & Contributions</h2>
-                        <div class="team-container">
-                            <div class="team-grid">
-                                <div class="team-member">
-                                    <div class="member-avatar">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <h3>Derek</h3>
-                                    <p class="role">Market Research Lead</p>
-                                    <p class="contribution">Survey design, customer segmentation, competitive analysis</p>
-                                </div>
-                                <div class="team-member">
-                                    <div class="member-avatar">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <h3>Kennedy</h3>
-                                    <p class="role">Strategy & Pricing Lead</p>
-                                    <p class="contribution">Strategic planning, pricing models, market positioning</p>
-                                </div>
-                                <div class="team-member">
-                                    <div class="member-avatar">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <h3>Shang</h3>
-                                    <p class="role">Product & Distribution Lead</p>
-                                    <p class="contribution">Feature development, channel strategy, user experience</p>
-                                </div>
-                                <div class="team-member">
-                                    <div class="member-avatar">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <h3>Maryam</h3>
-                                    <p class="role">Marketing & Service Lead</p>
-                                    <p class="contribution">Campaign development, service design, brand strategy</p>
-                                </div>
-                                <div class="team-member">
-                                    <div class="member-avatar">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <h3>Scott</h3>
-                                    <p class="role">Financial Analysis Lead</p>
-                                    <p class="contribution">Financial projections, ROI modeling, budget optimization</p>
-                                </div>
-                                <div class="team-member">
-                                    <div class="member-avatar">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <h3>Sour</h3>
-                                    <p class="role">Performance & Analytics Lead</p>
-                                    <p class="contribution">KPI development, tracking systems, performance optimization</p>
-                                </div>
+                <!-- Slide 14: Survey Results -->
+                <div class="slide" id="slide-14">
+                    <div class="slide-header">
+                        <h1>Appendix 1 — Survey Results</h1>
+                        <h2>Primary Research Validation</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="survey-overview">
+                            <p><strong>Research Methodology:</strong> 50-respondent Qualtrics survey + secondary analysis</p>
+                            <p><strong>Target Demographic:</strong> US adults 22-40, college-educated, moderate+ income</p>
+                        </div>
+                        <div class="survey-insights">
+                            <div class="insight-item">
+                                <div class="insight-stat">80%</div>
+                                <div class="insight-text">Want real-time market analytics</div>
+                                <div class="insight-detail">Validates core product feature</div>
                             </div>
+                            <div class="insight-item">
+                                <div class="insight-stat">65%</div>
+                                <div class="insight-text">Value community features</div>
+                                <div class="insight-detail">Supports social trading approach</div>
+                            </div>
+                            <div class="insight-item">
+                                <div class="insight-stat">70%</div>
+                                <div class="insight-text">Willing to pay premium</div>
+                                <div class="insight-detail">Validates $9.99 pricing strategy</div>
+                            </div>
+                            <div class="insight-item">
+                                <div class="insight-stat">85%</div>
+                                <div class="insight-text">Prefer mobile-first design</div>
+                                <div class="insight-detail">Confirms platform strategy</div>
+                            </div>
+                        </div>
+                        <div class="additional-insights">
+                            <h4>📊 Additional Key Findings</h4>
+                            <ul>
+                                <li><strong>Trading Frequency:</strong> 78% trade monthly or more</li>
+                                <li><strong>Information Sources:</strong> 60% use multiple platforms for research</li>
+                                <li><strong>Pain Points:</strong> 72% find existing tools too complex or lack community</li>
+                                <li><strong>Feature Priorities:</strong> Real-time data (1st), Community insights (2nd), Educational content (3rd)</li>
+                            </ul>
+                        </div>
+                        <div class="speaker-info">
+                            <p><strong>Speaker:</strong> Derek</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p>Our primary research validates every major strategic decision—from mobile-first design to community features to premium pricing. The 85% mobile preference and 70% willingness-to-pay directly support our go-to-market strategy.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 14: Implementation Timeline -->
-                <div class="slide" data-slide="14">
-                    <div class="slide-content">
-                        <h2>Implementation Timeline & Milestones</h2>
-                        <div class="timeline-container">
-                            <div class="timeline-phases">
-                                <div class="phase">
-                                    <h3>Phase 1: Foundation (Months 1-3)</h3>
-                                    <ul>
-                                        <li>Complete market research</li>
-                                        <li>Develop MVP features</li>
-                                        <li>Launch initial campaigns</li>
-                                        <li><strong>Target:</strong> 1,000 sign-ups</li>
-                                    </ul>
-                                </div>
-                                <div class="phase">
-                                    <h3>Phase 2: Growth (Months 4-8)</h3>
-                                    <ul>
-                                        <li>Scale marketing campaigns</li>
-                                        <li>Launch premium features</li>
-                                        <li>Expand community features</li>
-                                        <li><strong>Target:</strong> 3,000 sign-ups, 500 active users</li>
-                                    </ul>
-                                </div>
-                                <div class="phase">
-                                    <h3>Phase 3: Optimization (Months 9-12)</h3>
-                                    <ul>
-                                        <li>Optimize conversion rates</li>
-                                        <li>Expand to new segments</li>
-                                        <li>Prepare for Series A funding</li>
-                                        <li><strong>Target:</strong> 5,000 sign-ups, 1,000 active users, $250K revenue</li>
-                                    </ul>
-                                </div>
+                <!-- Slide 15: Team Contributions -->
+                <div class="slide" id="slide-15">
+                    <div class="slide-header">
+                        <h1>Appendix 2 — Team Contributions</h1>
+                        <h2>Collaborative Excellence Framework</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="team-contributions">
+                            <div class="contribution-item">
+                                <h3>Derek</h3>
+                                <p><strong>Role:</strong> Target Analysis Lead</p>
+                                <p><strong>Contribution:</strong> Designed and executed 50-person Qualtrics survey, developed customer segmentation framework, created persona profiles with journey mapping</p>
+                                <p><strong>Key Deliverable:</strong> Primary research validation</p>
                             </div>
+                            <div class="contribution-item">
+                                <h3>Kennedy</h3>
+                                <p><strong>Role:</strong> Strategy & Pricing Lead</p>
+                                <p><strong>Contribution:</strong> Project coordination, requirements gathering, competitive pricing analysis, strategic framework development</p>
+                                <p><strong>Key Deliverable:</strong> Pricing strategy & team coordination</p>
+                            </div>
+                            <div class="contribution-item">
+                                <h3>Shang</h3>
+                                <p><strong>Role:</strong> Product & Distribution Lead</p>
+                                <p><strong>Contribution:</strong> Product feature specification, distribution channel mapping, platform architecture planning</p>
+                                <p><strong>Key Deliverable:</strong> Product-market fit analysis</p>
+                            </div>
+                            <div class="contribution-item">
+                                <h3>Maryam</h3>
+                                <p><strong>Role:</strong> Promotion & Service Design Lead</p>
+                                <p><strong>Contribution:</strong> Customer journey mapping, promotional campaign strategy, service design framework (3Ps)</p>
+                                <p><strong>Key Deliverable:</strong> Integrated marketing campaigns</p>
+                            </div>
+                            <div class="contribution-item">
+                                <h3>Scott</h3>
+                                <p><strong>Role:</strong> Financial Analysis Lead</p>
+                                <p><strong>Contribution:</strong> Financial modeling, ROI projections, budget allocation optimization, revenue stream analysis</p>
+                                <p><strong>Key Deliverable:</strong> Financial viability assessment</p>
+                            </div>
+                            <div class="contribution-item">
+                                <h3>Sour</h3>
+                                <p><strong>Role:</strong> KPI Development Lead</p>
+                                <p><strong>Contribution:</strong> Performance metrics framework, monitoring systems design, remediation planning</p>
+                                <p><strong>Key Deliverable:</strong> Success measurement framework</p>
+                            </div>
+                        </div>
+                        <div class="team-success">
+                            <h4>🎯 Collaborative Success Factors</h4>
+                            <p>Cross-functional expertise • Clear accountability • Integrated deliverables • Shared quality standards</p>
+                        </div>
+                        <div class="speaker-info">
+                            <p><strong>Speaker:</strong> Kennedy</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p>Each team member brought specialized expertise while maintaining alignment with our overall strategy. This collaborative approach ensures every element of our plan is both expert-driven and strategically integrated.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 15: Next Steps -->
-                <div class="slide" data-slide="15">
-                    <div class="slide-content">
-                        <h2>Next Steps & Call to Action</h2>
-                        <div class="next-steps-container">
-                            <div class="immediate-steps">
-                                <h3>Immediate Next Steps</h3>
-                                <div class="steps-grid">
-                                    <div class="step-item">
-                                        <h4>Week 1-2: Final Preparation</h4>
-                                        <ul>
-                                            <li>Complete final survey responses</li>
-                                            <li>Conduct financial review session</li>
-                                            <li>Finalize presentation materials</li>
-                                        </ul>
-                                    </div>
-                                    <div class="step-item">
-                                        <h4>Week 3-4: Execution</h4>
-                                        <ul>
-                                            <li>Record and edit presentation video</li>
-                                            <li>Submit final deliverables</li>
-                                            <li>Begin market research</li>
-                                        </ul>
-                                    </div>
-                                    <div class="step-item">
-                                        <h4>Month 2-3: Implementation</h4>
-                                        <ul>
-                                            <li>Launch MVP development</li>
-                                            <li>Initiate marketing planning</li>
-                                            <li>Begin partnership discussions</li>
-                                        </ul>
-                                    </div>
+                <!-- Slide 16: Next Steps -->
+                <div class="slide" id="slide-16">
+                    <div class="slide-header">
+                        <h1>Next Steps & Implementation Timeline</h1>
+                        <h2>Execution Roadmap & Milestones</h2>
+                    </div>
+                    <div class="slide-body">
+                        <div class="timeline">
+                            <div class="timeline-item status-progress">
+                                <div class="timeline-date">Sep 26</div>
+                                <div class="timeline-content">
+                                    <strong>Complete Marketing Survey</strong><br/>
+                                    Current: 42/50 responses (84% complete)
                                 </div>
+                                <div class="timeline-status">🟡 In Progress</div>
                             </div>
-                            <div class="investment-opportunity">
-                                <h3>Investment Opportunity</h3>
-                                <div class="investment-details">
-                                    <div class="investment-metric">
-                                        <h4>$500K</h4>
-                                        <p>Total Funding Needed</p>
-                                    </div>
-                                    <div class="investment-metric">
-                                        <h4>18 Months</h4>
-                                        <p>Runway</p>
-                                    </div>
-                                    <div class="investment-metric">
-                                        <h4>10x</h4>
-                                        <p>Expected Returns (3 years)</p>
-                                    </div>
+                            <div class="timeline-item status-scheduled">
+                                <div class="timeline-date">Sep 25</div>
+                                <div class="timeline-content">
+                                    <strong>Financial Review Meeting</strong><br/>
+                                    Team alignment session: 7 PM CST / 8 PM EST
+                                </div>
+                                <div class="timeline-status">📅 Scheduled</div>
+                            </div>
+                            <div class="timeline-item status-pending">
+                                <div class="timeline-date">Oct 3</div>
+                                <div class="timeline-content">
+                                    <strong>Deck Finalization</strong><br/>
+                                    Final content review & design polish
+                                </div>
+                                <div class="timeline-status">⏳ Pending</div>
+                            </div>
+                            <div class="timeline-item status-pending">
+                                <div class="timeline-date">Oct 4</div>
+                                <div class="timeline-content">
+                                    <strong>Team Feedback Session</strong><br/>
+                                    Integration & quality assurance review
+                                </div>
+                                <div class="timeline-status">⏳ Pending</div>
+                            </div>
+                            <div class="timeline-item status-pending">
+                                <div class="timeline-date">Oct 5</div>
+                                <div class="timeline-content">
+                                    <strong>Complete First Recording</strong><br/>
+                                    Initial video capture & timing validation
+                                </div>
+                                <div class="timeline-status">⏳ Pending</div>
+                            </div>
+                            <div class="timeline-item status-pending">
+                                <div class="timeline-date">Oct 6</div>
+                                <div class="timeline-content">
+                                    <strong>Finalize Video Production</strong><br/>
+                                    Editing, transitions & final quality check
+                                </div>
+                                <div class="timeline-status">⏳ Pending</div>
+                            </div>
+                            <div class="timeline-item status-target">
+                                <div class="timeline-date">Oct 7</div>
+                                <div class="timeline-content">
+                                    <strong>Final Submission</strong><br/>
+                                    Complete deliverable ready for investor presentation
+                                </div>
+                                <div class="timeline-status">🎯 Target</div>
+                            </div>
+                        </div>
+                        <div class="next-actions">
+                            <h4>🚀 Immediate Action Items</h4>
+                            <div class="action-grid">
+                                <div class="action-item">
+                                    <strong>Survey Completion</strong><br/>
+                                    8 remaining responses needed
+                                </div>
+                                <div class="action-item">
+                                    <strong>Financial Model</strong><br/>
+                                    Review ROI calculations tonight
+                                </div>
+                                <div class="action-item">
+                                    <strong>Presentation Flow</strong><br/>
+                                    Practice 15-20 minute timing
+                                </div>
+                                <div class="action-item">
+                                    <strong>VC Readiness</strong><br/>
+                                    Validate investment thesis
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="slide-footer">
+                        <div class="narrative">
+                            <h4>Speaker Notes:</h4>
+                            <p>Our implementation timeline demonstrates project discipline and readiness for immediate execution. With survey completion and financial review this week, we're on track to deliver a compelling, investor-ready presentation that showcases both strategic thinking and operational excellence.</p>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="slide-controls">
+                <button class="btn btn--secondary" id="prev-btn">← Previous</button>
+                <span class="slide-counter" id="slide-counter">1 / 16</span>
+                <button class="btn btn--secondary" id="next-btn">Next →</button>
             </div>
         </main>
-
-        <!-- Speaker Notes Panel -->
-        <div id="speakerNotes" class="speaker-notes">
-            <div class="notes-header">
-                <h3>Speaker Notes</h3>
-                <button id="toggleNotes" class="toggle-btn">
-                    <i class="fas fa-eye"></i>
-                </button>
-            </div>
-            <div class="notes-content">
-                <div id="notesText">Welcome to our Pulse Trading Final Marketing Plan. This presentation outlines our data-driven, community-focused strategy to scale our platform and deliver strong ROI for investors.</div>
-            </div>
-        </div>
-
-        <!-- AI Enhancement Panel -->
-        <div id="aiPanel" class="ai-panel">
-            <div class="ai-header">
-                <h3><i class="fas fa-robot"></i> AI Enhancement</h3>
-                <button id="toggleAI" class="toggle-btn">
-                    <i class="fas fa-chevron-up"></i>
-                </button>
-            </div>
-            <div class="ai-content">
-                <div class="ai-controls">
-                    <button id="enhanceContent" class="ai-btn">
-                        <i class="fas fa-magic"></i> Enhance Content
-                    </button>
-                    <button id="generateInsights" class="ai-btn">
-                        <i class="fas fa-lightbulb"></i> Generate Insights
-                    </button>
-                    <button id="improveNarrative" class="ai-btn">
-                        <i class="fas fa-comments"></i> Improve Narrative
-                    </button>
-                </div>
-                <div id="aiOutput" class="ai-output">
-                    <p>Click a button above to enhance your presentation with AI insights.</p>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
