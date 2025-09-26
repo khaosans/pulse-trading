@@ -1,34 +1,40 @@
 {
-  "name": "pulse-trading-presentation",
+  "name": "pulse-trading-marketing-plan",
   "version": "1.0.0",
-  "description": "Interactive presentation for Pulse Trading Final Marketing Plan - A comprehensive, data-driven strategy for retail trading platform growth",
-  "main": "index.html",
+  "description": "Pulse Trading Final Marketing Plan - Interactive Presentation",
+  "main": "public/index.html",
   "scripts": {
-    "start": "python -m http.server 8000",
-    "serve": "npx serve .",
-    "dev": "npx live-server --port=8000 --open=/index.html",
-    "build": "echo 'No build process needed for static files'",
-    "test": "echo 'No tests specified'"
+    "start": "python3 -m http.server 8080",
+    "dev": "python3 -m http.server 8080",
+    "build": "echo 'Static site - no build required'",
+    "serve": "python3 -m http.server 8080"
   },
   "keywords": [
-    "presentation",
-    "spa",
-    "ollama",
-    "ai",
-    "fintech",
     "marketing",
-    "pulse-trading"
+    "presentation",
+    "trading",
+    "fintech",
+    "business-plan",
+    "imba-uiuc"
   ],
   "author": "Pulse Trading Team (Kennedy, Derek, Shang, Maryam, Scott, Sour)",
   "license": "MIT",
-  "devDependencies": {
-    "live-server": "^1.2.2",
-    "serve": "^14.2.1"
-  },
-  "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/khaosans/pulse-trading.git"
+    "url": "https://github.com/your-username/pulse-trading-marketing-plan.git"
   },
-  "homepage": "https://github.com/khaosans/pulse-trading#readme"
+  "bugs": {
+    "url": "https://github.com/your-username/pulse-trading-marketing-plan/issues"
+  },
+  "homepage": "https://github.com/your-username/pulse-trading-marketing-plan#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }

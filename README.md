@@ -24,12 +24,12 @@ This interactive presentation showcases **Pulse Trading's comprehensive marketin
 git clone https://github.com/khaosans/pulse-trading.git
 cd pulse-trading
 python3 -m http.server 8080
-# Open: http://localhost:8080
+# Open: http://localhost:8080/public/index.html
 ```
 
 ### Presentation Features
 - **16 comprehensive slides** with professional business frameworks
-- **Interactive visualizations** using Mermaid.js and Chart.js
+- **Interactive visualizations** using Chart.js and custom HTML tables
 - **Audio narration** with complete speaker notes
 - **Responsive design** for all devices
 - **Keyboard navigation** for seamless presentation flow
@@ -74,7 +74,7 @@ python3 -m http.server 8080
 ## 🎨 Interactive Features
 
 ### Visualizations
-- **10 Mermaid Business Diagrams**: PESTLE, SWOT, Value Proposition, Customer Journey
+- **Clean HTML Tables**: PESTLE, SWOT, Value Proposition, Customer Journey
 - **3 Chart.js Data Charts**: Budget allocation, ROI projections, survey results
 - **Professional Styling**: Business-focused layouts with consistent branding
 
@@ -92,7 +92,7 @@ python3 -m http.server 8080
 
 ### Technology Stack
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Visualizations**: Mermaid.js, Chart.js, D3.js, Plotly.js
+- **Visualizations**: Chart.js for financial charts, Custom HTML tables
 - **Audio**: Web Speech API for narration
 - **Styling**: Custom CSS with Grid/Flexbox layouts
 
@@ -163,7 +163,7 @@ cd pulse-trading
 python3 -m http.server 8080
 
 # Open in browser
-open http://localhost:8080
+open http://localhost:8080/public/index.html
 ```
 
 ### Alternative Servers
@@ -180,14 +180,19 @@ npx live-server --port=8080
 
 ```
 pulse-trading/
-├── src/                          # Main presentation files
-│   ├── index.html               # Interactive presentation
-│   ├── app.js                   # JavaScript logic & narratives
-│   └── style.css                # Professional styling
-├── docs/                        # Documentation & assets
-│   ├── *.pptx                  # PowerPoint presentations
-│   ├── *.pdf                   # Survey questions & research
-│   └── *.md                    # Additional documentation
+├── public/                      # Main application files
+│   ├── index.html              # Interactive presentation
+│   ├── app.js                  # JavaScript logic & narratives
+│   └── style.css               # Professional styling
+├── docs/                       # Documentation & assets
+│   ├── financial/              # Financial documents
+│   ├── surveys/                # Survey materials
+│   ├── templates/              # Template files
+│   ├── archive/                # Archived documents
+│   └── *.pptx                  # PowerPoint presentations
+├── assets/                     # Images and media files
+│   ├── images/                 # Presentation images
+│   └── icons/                  # Icon assets
 ├── .gitignore                  # Git exclusion rules
 ├── package.json                # Project configuration
 └── README.md                   # This documentation
@@ -230,7 +235,7 @@ This is a final academic project. For questions or feedback:
 ## 📞 Contact Information
 
 - **Repository**: [https://github.com/khaosans/pulse-trading](https://github.com/khaosans/pulse-trading)
-- **Presentation**: [http://localhost:8080](http://localhost:8080) (when running locally)
+- **Presentation**: [http://localhost:8080/public/index.html](http://localhost:8080/public/index.html) (when running locally)
 - **Team**: Pulse Trading Marketing Team
 - **Academic**: BADM 520 - iMBA UIUC
 
@@ -242,6 +247,6 @@ This is a final academic project. For questions or feedback:
 
 *Empowering retail investors through data-driven insights and community support*
 
-[🚀 View Presentation](http://localhost:8080) • [📊 View Repository](https://github.com/khaosans/pulse-trading) • [📧 Contact Team](#contact-information)
+[🚀 View Presentation](http://localhost:8080/public/index.html) • [📊 View Repository](https://github.com/khaosans/pulse-trading) • [📧 Contact Team](#contact-information)
 
 </div>
