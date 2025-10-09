@@ -79,6 +79,13 @@ See **[Deployment Guide](docs/DEPLOYMENT.md)** for full instructions.
 - **AI recommendations** based on emotional state
 - **Impact metrics**: $3,240 average monthly savings
 
+### 📡 Live Market Data (NEW!)
+- **Real-time stock prices** via Yahoo Finance (free, no API key)
+- **Smart caching** (5-min cache) to prevent throttling
+- **Rate limiting** best practices built-in
+- **Automatic fallback** to synthetic data if API fails
+- **Toggle switch** between live and demo modes
+
 ### 🤖 AI Trading Assistant
 - **Local Ollama integration** for privacy
 - **Context-aware advice** (knows your emotional state and portfolio)

@@ -13,6 +13,14 @@ import random
 import requests
 import json
 
+# Import live data module (with fallback if not available)
+try:
+    from live_data import LiveMarketData, get_market_data_hybrid, get_portfolio_live_prices
+    LIVE_DATA_AVAILABLE = True
+except ImportError:
+    LIVE_DATA_AVAILABLE = False
+    print("Live data module not available, using synthetic data only")
+
 # Page configuration
 st.set_page_config(
     page_title="PulseTrade - Smart Trading Platform",
@@ -519,12 +527,40 @@ st.markdown("""
 
 # Generate synthetic data
 @st.cache_data
-def generate_market_data(symbol, days=30):
-    """Generate synthetic market data for demonstration"""
+def generate_market_data(symbol, days=30, use_live=False):
+    """
+    Generate market data - live or synthetic
+    
+    Args:
+        symbol: Stock ticker symbol
+        days: Number of days of data (for synthetic)
+        use_live: Whether to use live data (default: False for demo reliability)
+        
+    Returns:
+        DataFrame: Market data
+    """
+    # Try live data if enabled and available
+    if use_live and LIVE_DATA_AVAILABLE:
+        try:
+            return get_market_data_hybrid(symbol, use_live=True)
+        except Exception as e:
+            print(f"Live data failed, using synthetic: {e}")
+    
+    # Synthetic data (fallback or default)
     dates = pd.date_range(end=datetime.now(), periods=days*24*4, freq='15min')
     
-    # Simulate realistic price movement
-    base_price = random.uniform(50, 500)
+    # Base prices for known stocks (realistic ranges)
+    base_prices = {
+        'AAPL': 178.0,
+        'GOOGL': 142.0,
+        'MSFT': 385.0,
+        'TSLA': 238.0,
+        'NVDA': 502.0,
+        'AMZN': 145.0,
+        'META': 312.0
+    }
+    
+    base_price = base_prices.get(symbol, random.uniform(50, 500))
     returns = np.random.normal(0, 0.02, len(dates))
     price = base_price * (1 + returns).cumprod()
     
@@ -542,9 +578,17 @@ def generate_market_data(symbol, days=30):
     
     return df
 
-@st.cache_data
-def generate_portfolio_data():
-    """Generate synthetic portfolio data"""
+@st.cache_data(ttl=300)  # Cache for 5 minutes
+def generate_portfolio_data(use_live=False):
+    """
+    Generate portfolio data with optional live prices
+    
+    Args:
+        use_live: Whether to use live prices (default: False for demo reliability)
+        
+    Returns:
+        DataFrame: Portfolio data
+    """
     positions = [
         {'symbol': 'AAPL', 'shares': 50, 'avg_price': 172.50, 'current_price': 178.32},
         {'symbol': 'GOOGL', 'shares': 25, 'avg_price': 139.80, 'current_price': 142.15},
@@ -553,6 +597,20 @@ def generate_portfolio_data():
         {'symbol': 'NVDA', 'shares': 30, 'avg_price': 485.20, 'current_price': 502.40},
     ]
     
+    # Try to get live prices if enabled
+    if use_live and LIVE_DATA_AVAILABLE:
+        try:
+            symbols = [pos['symbol'] for pos in positions]
+            live_prices = get_portfolio_live_prices(symbols)
+            
+            # Update with live prices
+            for pos in positions:
+                if pos['symbol'] in live_prices:
+                    pos['current_price'] = live_prices[pos['symbol']]
+        except Exception as e:
+            print(f"Could not fetch live prices: {e}")
+    
+    # Calculate metrics
     for pos in positions:
         pos['market_value'] = pos['shares'] * pos['current_price']
         pos['cost_basis'] = pos['shares'] * pos['avg_price']
@@ -969,6 +1027,30 @@ def main():
         
         st.markdown("---")
         
+        # Live Data Toggle
+        st.markdown("#### 📡 Data Source")
+        
+        use_live_data = st.toggle(
+            "🔴 Live Market Data",
+            value=False,
+            help="Enable real-time market data from Yahoo Finance (updates every 5min). Disable for faster, reliable demo mode.",
+            key="live_data_toggle"
+        )
+        
+        if use_live_data:
+            if LIVE_DATA_AVAILABLE:
+                st.success("✅ Live data active (cached 5min)")
+            else:
+                st.warning("⚠️ yfinance not installed. Using demo data.")
+                use_live_data = False
+        else:
+            st.info("📊 Demo mode (synthetic data)")
+        
+        # Store in session state for use across tabs
+        st.session_state['use_live_data'] = use_live_data if LIVE_DATA_AVAILABLE else False
+        
+        st.markdown("---")
+        
         # Quick Stats
         st.markdown("#### 📊 Your Quick Stats")
         
@@ -1148,7 +1230,16 @@ def main():
         st.markdown("### 📊 Live Price Action")
         selected_symbol = st.selectbox("Select Stock", ['AAPL', 'GOOGL', 'MSFT', 'TSLA', 'NVDA'])
         
-        market_data = generate_market_data(selected_symbol)
+        # Get data source preference
+        use_live = st.session_state.get('use_live_data', False)
+        
+        # Show data source indicator
+        if use_live and LIVE_DATA_AVAILABLE:
+            st.caption("📡 Showing real-time Yahoo Finance data (5min cache)")
+        else:
+            st.caption("📊 Showing demo data for reliable presentation")
+        
+        market_data = generate_market_data(selected_symbol, use_live=use_live)
         price_chart = create_price_chart(market_data, selected_symbol)
         st.plotly_chart(price_chart, use_container_width=True, key='price_chart')
         
@@ -1528,7 +1619,16 @@ Provide helpful, concise advice (2-3 sentences)."""
         # Portfolio Section
         st.markdown("#### Your Portfolio")
         
-        portfolio_df = generate_portfolio_data()
+        # Get data source preference
+        use_live = st.session_state.get('use_live_data', False)
+        
+        # Show data source indicator
+        if use_live and LIVE_DATA_AVAILABLE:
+            st.caption("📡 Using live portfolio prices (5min cache)")
+        else:
+            st.caption("📊 Using demo portfolio data")
+        
+        portfolio_df = generate_portfolio_data(use_live=use_live)
         total_value = portfolio_df['market_value'].sum()
         total_cost = portfolio_df['cost_basis'].sum()
         total_gain = total_value - total_cost
