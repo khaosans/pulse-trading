@@ -262,7 +262,7 @@ This is PulseTrade - empowering retail investors through data and community."
 
 ### Option 2: Manual Restart
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py --server.port 8501
 ```

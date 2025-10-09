@@ -12,7 +12,7 @@
 ## ✨ Quick Start (3 Commands)
 
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py --server.port 8501
 ```

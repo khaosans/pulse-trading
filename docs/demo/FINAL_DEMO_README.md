@@ -257,7 +257,7 @@ During presentation:
 
 ### Start Fresh:
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py --server.port 8501
 ```
@@ -268,7 +268,7 @@ streamlit run demo_app.py --server.port 8501
 ollama serve
 
 # Terminal 2  
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py --server.port 8501
 ```

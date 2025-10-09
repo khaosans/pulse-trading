@@ -21,12 +21,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/pulse-trading-marketing-plan.git"
+    "url": "https://github.com/khaosans/pulse-trading.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/pulse-trading-marketing-plan/issues"
+    "url": "https://github.com/khaosans/pulse-trading/issues"
   },
-  "homepage": "https://github.com/your-username/pulse-trading-marketing-plan#readme",
+  "homepage": "https://github.com/khaosans/pulse-trading#readme",
   "engines": {
     "node": ">=14.0.0"
   },

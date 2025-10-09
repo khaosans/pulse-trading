@@ -19,7 +19,7 @@ Get a live public URL to share your demo with anyone!
 
 #### 1. Push to GitHub (First Time)
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 
 # Stage all changes
 git add -A
@@ -215,7 +215,7 @@ No installation required! Experience:
 
 ```bash
 # 1. Ensure everything is committed
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 git add -A
 git commit -m "feat: Add interactive Streamlit demo with emotion tracking"
 git push origin master

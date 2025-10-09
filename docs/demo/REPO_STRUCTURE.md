@@ -7,7 +7,7 @@
 ## 🎯 Root Directory (Clean & Minimal)
 
 ```
-/Users/Sour/pulse trading/
+pulse-trading/
 ├── README.md                    # Main project overview
 ├── LICENSE                      # MIT License
 ├── .gitignore                   # Git exclusions

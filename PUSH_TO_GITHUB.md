@@ -39,7 +39,7 @@
 
 ### Simple Push:
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 git push origin master
 ```
 
@@ -181,7 +181,7 @@ Ready to push:
 **Run this command to push:**
 
 ```bash
-cd "/Users/Sour/pulse trading" && git push origin master
+cd pulse-trading && git push origin master
 ```
 
 Then deploy to Streamlit Cloud and get your live demo URL!

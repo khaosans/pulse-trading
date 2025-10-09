@@ -101,7 +101,7 @@ Contributors will be recognized in:
 
 For questions about contributing:
 - **Course Platform**: BADM 520 Discussion Board
-- **GitHub Issues**: [Repository Issues](https://github.com/your-username/pulse-trading-marketing-plan/issues)
+- **GitHub Issues**: [Repository Issues](https://github.com/khaosans/pulse-trading/issues)
 - **Team Contact**: Pulse Trading Marketing Team
 
 ## 📄 License

@@ -178,7 +178,7 @@ ollama serve
 ollama pull llama2
 
 # Terminal 3: Run demo (if not already running)
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py --server.port 8501
 ```
@@ -241,7 +241,7 @@ streamlit run demo_app.py --server.port 8501
 
 **App won't load?**
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py --server.port 8501
 ```

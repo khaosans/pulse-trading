@@ -169,7 +169,7 @@ vs COMPETITORS:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Step 1: Navigate
-  cd "/Users/Sour/pulse trading"
+  cd pulse-trading
 
 Step 2: Activate environment
   source venv/bin/activate

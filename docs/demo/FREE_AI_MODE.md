@@ -186,7 +186,7 @@ Hosting:
 
 ```bash
 # No installations needed except Python packages
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 
 # Create virtual environment (one-time)
 python3 -m venv venv

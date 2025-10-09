@@ -148,7 +148,7 @@ The demo is currently running in the background.
 ## 🎨 Branding Assets
 
 ### Logo Location:
-`/Users/Sour/pulse trading/assets/images/logo.svg`
+`assets/images/logo.svg`
 
 ### Color Palette:
 ```css
@@ -170,7 +170,7 @@ The demo is currently running in the background.
 ## 📁 Project Structure
 
 ```
-/Users/Sour/pulse trading/
+pulse-trading/
 ├── demo_app.py                          # Main Streamlit application
 ├── assets/
 │   └── images/
@@ -200,7 +200,7 @@ Documentation:
 ./run_demo.sh
 
 # Option 2: Manual
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py --server.port 8501
 ```

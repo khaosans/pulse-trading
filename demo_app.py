@@ -884,7 +884,7 @@ def main():
         with col_logo:
             # Try to use local logo, fallback to placeholder
             try:
-                st.image("/Users/Sour/pulse trading/assets/images/logo.svg", width=80)
+                st.image("assets/images/logo.svg", width=80)
             except:
                 st.markdown("""
                 <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #1D6F7A 0%, #2AA5B3 100%); 

@@ -35,8 +35,9 @@ Real-time biometric monitoring via wearable device that:
 ### Run the Demo (No Installation Needed!)
 
 ```bash
-# Clone or navigate to repository
-cd "/Users/Sour/pulse trading"
+# Clone the repository
+git clone https://github.com/khaosans/pulse-trading.git
+cd pulse-trading
 
 # Option 1: Use the quick launch script
 ./run_demo.sh

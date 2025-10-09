@@ -280,7 +280,7 @@ If Ollama isn't running, provides helpful tips automatically:
 
 ### 1. Standard Demo (No Ollama)
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py --server.port 8501
 ```
@@ -297,7 +297,7 @@ ollama serve
 ollama pull llama2
 
 # Run demo
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py --server.port 8501
 ```

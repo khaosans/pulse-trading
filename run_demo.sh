@@ -18,7 +18,7 @@ source venv/bin/activate
 
 # Install dependencies
 echo "📥 Installing dependencies..."
-pip install -q -r requirements_demo.txt
+pip install -q -r requirements.txt
 
 echo ""
 echo "✅ Setup complete!"
