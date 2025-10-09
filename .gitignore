@@ -1,20 +1,18 @@
 # Python
 venv/
+env/
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-env/
 build/
 dist/
 *.egg-info/
+.eggs/
 
 # Streamlit
-.streamlit/
-
-# Playwright screenshots (optional - uncomment if you want to exclude)
-# .playwright-mcp/
+.streamlit/secrets.toml
 
 # OS files
 .DS_Store
@@ -22,24 +20,41 @@ dist/
 .LSOverride
 ._*
 Thumbs.db
-
-# IDEs
-.vscode/
-.idea/
 *.swp
 *.swo
 *~
 
+# IDEs
+.vscode/
+.idea/
+*.iml
+
 # Environment
 .env
 .env.local
+*.env
 
 # Logs
 *.log
+logs/
 
 # Temporary
 *.tmp
 *.bak
+~*
 
-# Optional: Uncomment to exclude archived files
-# archive_old_files/
+# Node (if used)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Optional: Uncomment to exclude screenshots
+# .playwright-mcp/
+
+# Optional: Uncomment to exclude archived files from tracking
+# docs/marketing/archive/

@@ -1,209 +1,197 @@
-# Pulse Trading Final Marketing Plan Presentation
+# 📚 PulseTrade Documentation
 
-A comprehensive, interactive presentation demo showcasing the Pulse Trading marketing strategy with professional business diagrams, audio narration, and smooth user experience.
-
-## 🎯 Overview
-
-This presentation demonstrates a complete marketing plan for Pulse Trading, a retail trading platform that combines real-time analytics with community-driven learning. The presentation features 16 slides covering market analysis, strategic objectives, value proposition, and implementation roadmap.
-
-## ✨ Key Features
-
-### 🎤 **Interactive Audio Narration**
-- **Professional Script**: Complete narrative for each slide with presenter attribution
-- **Text-to-Speech**: Built-in Web Speech API integration
-- **Visual Feedback**: Real-time text highlighting during narration
-- **Progress Tracking**: Visual progress bar and time display
-- **Playback Controls**: Play, pause, resume, and stop functionality
-
-### 🎬 **Presentation Modes**
-- **Individual Slide Narration**: Play narration for current slide
-- **Full Presentation Mode**: Auto-advancing slides with synchronized narration
-- **Manual Navigation**: Standard slide-by-slide navigation
-- **Keyboard Shortcuts**: Quick access to all features
-
-### 📊 **Professional Business Diagrams**
-- **Mermaid Integration**: Interactive, professional business diagrams
-- **Consistent Styling**: Corporate-grade visual design
-- **Business Frameworks**: PESTELE, SWOT, Value Proposition, Customer Journey
-- **Real-time Rendering**: Dynamic diagram generation
-
-### 🎨 **Modern UX Design**
-- **Smooth Animations**: Flicker-free transitions and interactions
-- **Glass-morphism Effects**: Modern backdrop blur and transparency
-- **Responsive Design**: Works across different screen sizes
-- **Professional Styling**: Corporate presentation aesthetics
-
-## 🚀 Quick Start
-
-1. **Open the Presentation**
-   ```bash
-   # Simply open index.html in any modern web browser
-   open index.html
-   ```
-
-2. **Navigate the Presentation**
-   - Use arrow keys or click navigation buttons
-   - Press `Space` to advance slides
-   - Use `Home`/`End` for first/last slide
-
-3. **Audio Narration**
-   - Press `N` to toggle narration for current slide
-   - Press `P` to start full presentation mode
-   - Use the control buttons at the bottom of the screen
-
-## ⌨️ Keyboard Shortcuts
-
-| Key | Action |
-|-----|--------|
-| `←` `→` | Navigate slides |
-| `Space` | Next slide |
-| `N` | Toggle narrative |
-| `P` | Play full presentation |
-| `T` | Toggle timer |
-| `R` | Reset timer |
-| `Ctrl/Cmd + F` | Fullscreen mode |
-| `Home` | First slide |
-| `End` | Last slide |
-| `ESC` | Exit fullscreen |
-
-## 📋 Presentation Structure
-
-### **Slide Overview**
-1. **Title Slide** - Introduction and team overview
-2. **Abstract/The Hook** - Market gap and solution overview
-3. **Environmental Analysis** - PESTELE & SWOT framework
-4. **Strategic Objectives** - 2026 roadmap and metrics
-5. **Value Proposition** - Feature-to-emotion brand ladder
-6. **Target Customer** - User journey and persona analysis
-7. **Product** - Core features and functionality
-8. **Price** - Pricing strategy and model
-9. **Promotion** - Marketing mix and customer journey
-10. **Place** - Distribution and accessibility
-11. **3Ps Service Design** - People, Process, Physical Evidence
-12. **Financial Projections** - Budget allocation and ROI
-13. **KPIs** - Key performance indicators
-14. **Survey Results** - Market research findings
-15. **Team Contributions** - Individual responsibilities
-16. **Next Steps** - Implementation roadmap
-
-### **Business Frameworks Used**
-- **PESTELE Analysis**: Political, Economic, Social, Technological, Environmental, Legal, Ethical factors
-- **SWOT Analysis**: Strengths, Weaknesses, Opportunities, Threats
-- **Value Proposition Canvas**: Feature-to-emotion brand ladder
-- **Customer Decision Journey**: Problem recognition to post-purchase loyalty
-- **Service Excellence Triangle**: People, Process, Physical Evidence
-- **Marketing Mix (4Ps + 3Ps)**: Product, Price, Promotion, Place + People, Process, Physical Evidence
-
-## 🛠️ Technical Implementation
-
-### **Technologies Used**
-- **HTML5**: Semantic structure and accessibility
-- **CSS3**: Modern styling with CSS Grid, Flexbox, and animations
-- **JavaScript ES6+**: Interactive functionality and state management
-- **Web Speech API**: Text-to-speech narration
-- **Mermaid.js**: Professional business diagram rendering
-
-### **Architecture**
-- **Modular Design**: Separated concerns for maintainability
-- **Event-Driven**: Responsive user interactions
-- **State Management**: Centralized presentation state
-- **Performance Optimized**: Efficient rendering and memory management
-
-### **Browser Compatibility**
-- ✅ Chrome 80+
-- ✅ Firefox 75+
-- ✅ Safari 13+
-- ✅ Edge 80+
-
-## 📁 File Structure
-
-```
-pulse-trading/
-├── index.html          # Main presentation file
-├── app.js             # Core JavaScript functionality
-├── style.css          # Styling and animations
-├── package.json       # Project dependencies
-├── README.md          # This file
-└── assets/            # Supporting documents
-    ├── BADM_520_FA25_023_FinalSlides.pptx
-    ├── FA25_023_Survey Questions.pdf
-    ├── Final Marketing Plan Presentation Fall 2025 (1).docx
-    ├── Pulse_Trading_Concise_Presentation.md
-    ├── Pulse_Trading_Final_Marketing_Plan.pptx
-    └── Pulse_Trading_Professional_Presentation.md
-```
-
-## 🎯 Target Audience
-
-- **Business Students**: Marketing strategy and presentation skills
-- **Investors**: Comprehensive business plan overview
-- **Stakeholders**: Strategic roadmap and financial projections
-- **Team Members**: Role clarity and contribution overview
-
-## 📈 Key Metrics & Goals
-
-### **Strategic Objectives (2026)**
-- **User Acquisition**: 5,000 new sign-ups by Q2
-- **User Retention**: 25% monthly active user retention
-- **Revenue Generation**: $250K annual revenue
-- **Market Position**: Top-3 community platform recognition
-
-### **Financial Projections**
-- **Marketing Budget**: $100,000
-- **Revenue Forecast**: $250,000
-- **Marketing ROI**: 2.5× MROI
-- **Break-even**: Month 18
-
-## 🔧 Development & Customization
-
-### **Adding New Slides**
-1. Add slide HTML structure in `index.html`
-2. Update navigation in the sidebar
-3. Add narrative data in `app.js`
-4. Include any required diagrams
-
-### **Modifying Narratives**
-1. Update `narrativeData` object in `app.js`
-2. Adjust timing and reading time
-3. Update speaker notes in HTML
-4. Test audio playback
-
-### **Customizing Styling**
-1. Modify CSS variables in `style.css`
-2. Update color schemes and typography
-3. Adjust animations and transitions
-4. Test responsive behavior
-
-## 🚀 Deployment
-
-### **Local Development**
-```bash
-# Clone the repository
-git clone <repository-url>
-cd pulse-trading
-
-# Open in browser
-open index.html
-```
-
-### **Web Deployment**
-- Upload files to any web server
-- Ensure HTTPS for Web Speech API
-- Test across different browsers
-- Optimize for mobile devices
-
-## 📞 Support & Contact
-
-For questions or issues with the presentation:
-- **Team**: Kennedy, Derek, Shang, Maryam, Scott, Sour
-- **Course**: BADM 520 - Marketing Strategy
-- **Institution**: iMBA UIUC (University of Illinois Urbana-Champaign)
-- **Date**: September 2025
-
-## 📄 License
-
-This project is created for educational purposes as part of the BADM 520 Marketing Strategy course at iMBA UIUC (University of Illinois Urbana-Champaign).
+Welcome to the PulseTrade documentation hub!
 
 ---
 
-**Built with ❤️ by the Pulse Trading Marketing Team**
+## 🚀 Quick Links
+
+- **[Main README](../README.md)** - Project overview and getting started
+- **[Quick Start](demo/QUICK_START.md)** - Run the demo in 2 minutes
+- **[Deployment Guide](DEPLOYMENT.md)** - Get a live public URL
+- **[Project Overview](PROJECT_OVERVIEW.md)** - Detailed project summary
+
+---
+
+## 📂 Documentation Structure
+
+### 🎯 Demo Guides (`demo/`)
+Comprehensive guides for the interactive Streamlit demo:
+
+- **[🎉 DEMO COMPLETE](demo/🎉_DEMO_COMPLETE.md)** - Master guide (start here!)
+- **[Quick Start](demo/QUICK_START.md)** - 2-minute setup
+- **[Emotion Tracker Guide](demo/EMOTION_TRACKER_GUIDE.md)** - Core feature explained
+- **[Free AI Mode](demo/FREE_AI_MODE.md)** - Built-in AI assistant
+- **[QA Report](demo/QA_REPORT.md)** - Testing results (Grade: A+ 95/100)
+- **[Presentation Ready](demo/PRESENTATION_READY.md)** - How to present
+- **[Ollama Setup](demo/OLLAMA_SETUP.md)** - Optional advanced AI
+
+### 📊 Marketing Materials (`marketing/`)
+BADM 520 marketing plan and research:
+
+- **Presentations** (`presentations/`)
+  - Final Marketing Plan (PPTX, PDF)
+  - Final Presentation Slides
+  - Survey Questions
+  
+- **Surveys** (`surveys/`)
+  - Complete Survey Results (50+ traders)
+  - Survey Data Compilation
+  - Market Validation Insights
+  
+- **Financial** (`financial/`)
+  - Team Financial Forecast
+  - Revenue Projections
+  - KPI Dashboard
+
+- **Archive** (`archive/`)
+  - Previous versions
+  - Deprecated files
+
+---
+
+## 🎯 What is PulseTrade?
+
+**PulseTrade** is an emotion-aware trading platform that uses wearable device data to help traders make better decisions.
+
+### Core Innovation
+💓 **Real-time Emotion Tracking** - Monitor 6 emotional states while trading
+- Prevents emotional trading (saved users $3,240/month avg)
+- 72% win rate when calm vs 38% when anxious
+- Green/Yellow/Red AI recommendation system
+
+### Market Validation
+Based on 50+ trader survey:
+- **83%** acknowledge emotions impact trading
+- **72%** find real-time feedback important  
+- **70%** willing to pay $9.99/month
+- **89%** purchase intent
+
+---
+
+## 📖 Documentation Categories
+
+### For Demo Users
+1. Start with **[Quick Start](demo/QUICK_START.md)**
+2. Read **[Emotion Tracker Guide](demo/EMOTION_TRACKER_GUIDE.md)**
+3. Check **[QA Report](demo/QA_REPORT.md)** for features
+
+### For Presenters
+1. Review **[Presentation Ready](demo/PRESENTATION_READY.md)**
+2. Use **[Marketing Materials](marketing/presentations/)**
+3. Reference **[Survey Results](marketing/surveys/)**
+
+### For Deployers
+1. Follow **[Deployment Guide](DEPLOYMENT.md)**
+2. Get live URL on Streamlit Cloud (FREE!)
+3. Share with anyone
+
+### For Developers
+1. Read **[Project Overview](PROJECT_OVERVIEW.md)**
+2. Check **[Repository Structure](../REPOSITORY_STRUCTURE.md)**
+3. See **[Contributing Guide](../CONTRIBUTING.md)**
+
+---
+
+## 🏗️ Project Structure
+
+```
+docs/
+├── README.md (you are here)
+├── DEPLOYMENT.md
+├── PROJECT_OVERVIEW.md
+├── GIT_UPDATE_GUIDE.md
+│
+├── demo/                    # Demo documentation
+│   ├── 🎉_DEMO_COMPLETE.md
+│   ├── QUICK_START.md
+│   ├── EMOTION_TRACKER_GUIDE.md
+│   ├── FREE_AI_MODE.md
+│   ├── QA_REPORT.md
+│   └── ... (14 guides total)
+│
+└── marketing/               # Marketing materials
+    ├── presentations/       # Slides and PDFs
+    ├── surveys/            # Research data
+    ├── financial/          # Forecasts
+    └── archive/            # Old files
+```
+
+---
+
+## 💡 Key Features
+
+### 1. **Emotion Tracking Dashboard** 💓
+- Real-time biometric monitoring
+- 6 emotional gauges (Calm, Confident, Optimistic, etc.)
+- Performance correlation chart
+- AI-powered insights
+
+### 2. **AI Trading Assistant** 🤖
+- Built-in free AI (no Ollama needed!)
+- Context-aware advice
+- Emotion-based recommendations
+- Trade timing suggestions
+
+### 3. **Portfolio & Analysis** 📊
+- Interactive charts (Plotly)
+- Real-time portfolio tracking
+- Market analysis tools
+- Risk management
+
+### 4. **Community Features** 👥
+- Social trading feed
+- Emotional state sharing
+- Top trader insights
+- Streak tracking
+
+### 5. **Educational Resources** 📚
+- Risk management guides
+- Emotional trading psychology
+- Technical analysis basics
+
+---
+
+## 📈 Market Opportunity
+
+**TAM**: $1.5B (3M active traders × $500/year)  
+**SAM**: $300M (600K emotion-aware traders)  
+**SOM**: $30M (60K early adopters)
+
+**Pricing**: $9.99/month ($119.88/year)
+
+---
+
+## 🔗 External Resources
+
+- **Live Demo**: (Deploy to get URL - see [DEPLOYMENT.md](DEPLOYMENT.md))
+- **GitHub**: https://github.com/khaosans/pulse-trading
+- **Streamlit Cloud**: https://streamlit.io/cloud
+
+---
+
+## 📞 Support & Contact
+
+**Team**: BADM 520 Fall 2025  
+**Course**: Marketing Management  
+**Project**: PulseTrade - Emotion-Aware Trading Platform
+
+---
+
+## ✅ Quick Reference
+
+| I want to... | Go to... |
+|--------------|----------|
+| Run the demo locally | [Quick Start](demo/QUICK_START.md) |
+| Deploy live demo | [Deployment Guide](DEPLOYMENT.md) |
+| Understand emotion tracking | [Emotion Tracker Guide](demo/EMOTION_TRACKER_GUIDE.md) |
+| See test results | [QA Report](demo/QA_REPORT.md) |
+| Present to class | [Presentation Ready](demo/PRESENTATION_READY.md) |
+| View survey data | [Marketing Surveys](marketing/surveys/) |
+| Check financials | [Financial Forecast](marketing/financial/) |
+
+---
+
+**Last Updated**: October 9, 2025  
+**Status**: Production-ready demo ✅
+
