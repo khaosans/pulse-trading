@@ -522,6 +522,186 @@ st.markdown("""
     .emotion-gauge:hover {
         transform: scale(1.05);
     }
+    
+    /* ============================================
+       AI APPLICATION ANIMATIONS
+       ============================================ */
+    
+    /* Animated Logo - Pulse Effect */
+    @keyframes logoPulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(29, 111, 122, 0.7);
+        }
+        50% {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px 10px rgba(29, 111, 122, 0);
+        }
+    }
+    
+    .logo-animated {
+        animation: logoPulse 2s ease-in-out infinite;
+    }
+    
+    /* AI Thinking Animation */
+    @keyframes aiThinking {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 1; }
+    }
+    
+    .ai-thinking {
+        animation: aiThinking 1.5s ease-in-out infinite;
+    }
+    
+    /* Skeleton Loader */
+    @keyframes skeleton {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+    
+    .skeleton-loader {
+        background: linear-gradient(
+            90deg,
+            #f0f0f0 25%,
+            #e0e0e0 50%,
+            #f0f0f0 75%
+        );
+        background-size: 200% 100%;
+        animation: skeleton 1.5s ease-in-out infinite;
+        border-radius: 8px;
+    }
+    
+    /* Floating Animation */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .float-animate {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Glow Effect */
+    @keyframes glow {
+        0%, 100% {
+            box-shadow: 0 0 5px rgba(29, 111, 122, 0.5);
+        }
+        50% {
+            box-shadow: 0 0 20px rgba(29, 111, 122, 0.8),
+                        0 0 30px rgba(42, 165, 179, 0.6);
+        }
+    }
+    
+    .glow-effect {
+        animation: glow 2s ease-in-out infinite;
+    }
+    
+    /* Card Stack Animation */
+    @keyframes cardStack {
+        0% {
+            transform: translateY(40px) scale(0.9);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+    
+    .card-stack {
+        animation: cardStack 0.5s ease-out backwards;
+    }
+    
+    .card-stack:nth-child(1) { animation-delay: 0.05s; }
+    .card-stack:nth-child(2) { animation-delay: 0.1s; }
+    .card-stack:nth-child(3) { animation-delay: 0.15s; }
+    .card-stack:nth-child(4) { animation-delay: 0.2s; }
+    .card-stack:nth-child(5) { animation-delay: 0.25s; }
+    .card-stack:nth-child(6) { animation-delay: 0.3s; }
+    
+    /* Gradient Text */
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    .gradient-text {
+        background: linear-gradient(
+            90deg,
+            #1D6F7A,
+            #2AA5B3,
+            #10B981,
+            #2AA5B3,
+            #1D6F7A
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradientShift 3s ease infinite;
+    }
+    
+    /* AI Processing Dots */
+    @keyframes dotPulse {
+        0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+        40% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    .ai-dot {
+        animation: dotPulse 1.4s ease-in-out infinite;
+    }
+    
+    .ai-dot:nth-child(1) { animation-delay: 0s; }
+    .ai-dot:nth-child(2) { animation-delay: 0.2s; }
+    .ai-dot:nth-child(3) { animation-delay: 0.4s; }
+    
+    /* Slide In Notifications */
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    .notification-slide {
+        animation: slideInRight 0.4s ease-out;
+    }
+    
+    /* 3D Card Tilt */
+    .card-3d {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card-3d:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Progress Bar Animation */
+    @keyframes progressLoad {
+        0% { width: 0%; }
+        100% { width: var(--progress-width, 100%); }
+    }
+    
+    .progress-animate {
+        animation: progressLoad 1.5s ease-out forwards;
+    }
+    
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -927,10 +1107,10 @@ def create_portfolio_pie(portfolio_df):
 
 # Main app
 def main():
-    # Header
+    # Header with animated gradient text
     st.markdown("""
     <div class="main-header">
-        <h1>📊 PulseTrade</h1>
+        <h1 class="gradient-text">📊 PulseTrade</h1>
         <p style="font-size: 1.2rem; margin: 0;">Smart Trading Through Data + Community</p>
     </div>
     """, unsafe_allow_html=True)
@@ -940,12 +1120,12 @@ def main():
         # Logo and Welcome Section
         col_logo, col_text = st.columns([1, 2])
         with col_logo:
-            # Try to use local logo, fallback to placeholder
+            # Try to use local logo, fallback to animated placeholder
             try:
                 st.image("assets/images/logo.svg", width=80)
             except:
                 st.markdown("""
-                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #1D6F7A 0%, #2AA5B3 100%); 
+                <div class="logo-animated float-animate" style="width: 80px; height: 80px; background: linear-gradient(135deg, #1D6F7A 0%, #2AA5B3 100%); 
                             border-radius: 50%; display: flex; align-items: center; justify-content: center;
                             font-size: 2rem; color: white; font-weight: 800;">PT</div>
                 """, unsafe_allow_html=True)
@@ -985,14 +1165,15 @@ def main():
         }
         
         st.markdown(f"""
-        <div style="background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); 
+        <div class="glow-effect" style="background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); 
                     padding: 1.5rem; border-radius: var(--radius-lg); text-align: center; margin-bottom: 1.5rem;
                     border: 3px solid #10B981; box-shadow: var(--shadow-md);
                     animation: fadeIn 0.6s ease-out;">
-            <div style="font-size: 2.5rem; margin-bottom: 0.75rem; animation: pulse 2s infinite;">{emotion_icons[current_emotion]}</div>
+            <div class="float-animate" style="font-size: 2.5rem; margin-bottom: 0.75rem;">{emotion_icons[current_emotion]}</div>
             <div style="font-weight: 800; color: #065F46; font-size: 1.3rem; margin-bottom: 0.5rem;">{current_emotion}</div>
             <div style="font-size: 0.9rem; color: #047857; font-weight: 600;">
-                🟢 Device Connected
+                <span class="ai-dot" style="display: inline-block; width: 8px; height: 8px; background: #10B981; border-radius: 50%; margin-right: 4px;"></span>
+                Device Connected
             </div>
             <div style="font-size: 0.8rem; color: #059669; margin-top: 0.25rem;">
                 ⚡ Syncing every 2 seconds
@@ -1168,12 +1349,12 @@ def main():
     with tab1:
         st.markdown("### Market Overview")
         
-        # Top metrics
+        # Top metrics with stacked animation
         col1, col2, col3, col4 = st.columns(4)
         
         with col1:
             st.markdown("""
-            <div class="stat-card">
+            <div class="stat-card card-stack card-3d">
                 <div class="stat-label">S&P 500</div>
                 <div class="stat-value">4,582.23</div>
                 <div style="color: #059669; font-weight: 700; font-size: 1.1rem;">+0.85% ↑</div>
@@ -1182,7 +1363,7 @@ def main():
         
         with col2:
             st.markdown("""
-            <div class="stat-card">
+            <div class="stat-card card-stack card-3d">
                 <div class="stat-label">NASDAQ</div>
                 <div class="stat-value">14,265.86</div>
                 <div style="color: #059669; font-weight: 700; font-size: 1.1rem;">+1.24% ↑</div>
@@ -1191,7 +1372,7 @@ def main():
         
         with col3:
             st.markdown("""
-            <div class="stat-card">
+            <div class="stat-card card-stack card-3d">
                 <div class="stat-label">DOW</div>
                 <div class="stat-value">35,908.42</div>
                 <div style="color: #DC2626; font-weight: 700; font-size: 1.1rem;">-0.32% ↓</div>
@@ -1200,7 +1381,7 @@ def main():
         
         with col4:
             st.markdown("""
-            <div class="stat-card">
+            <div class="stat-card card-stack card-3d">
                 <div class="stat-label">VIX</div>
                 <div class="stat-value">13.45</div>
                 <div style="color: #DC2626; font-weight: 700; font-size: 1.1rem;">+2.1% ↑</div>
@@ -1554,9 +1735,19 @@ User question: {user_input}
 
 Provide helpful, concise advice (2-3 sentences) considering their emotional state and trading psychology. Be supportive and data-driven."""
             
-            # Query Ollama
-            with st.spinner("🤔 Thinking..."):
-                ai_response = query_ollama(context)
+            # Query Ollama with animated loading
+            st.markdown("""
+            <div style="text-align: center; padding: 1rem;">
+                <div style="display: inline-flex; gap: 8px;">
+                    <span class="ai-dot" style="width: 12px; height: 12px; background: #1D6F7A; border-radius: 50%; display: inline-block;"></span>
+                    <span class="ai-dot" style="width: 12px; height: 12px; background: #1D6F7A; border-radius: 50%; display: inline-block;"></span>
+                    <span class="ai-dot" style="width: 12px; height: 12px; background: #1D6F7A; border-radius: 50%; display: inline-block;"></span>
+                </div>
+                <p class="ai-thinking" style="margin-top: 0.5rem; color: #4A5568;">AI thinking...</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            ai_response = query_ollama(context)
             
             # Add AI response
             st.session_state.chat_history.append({
