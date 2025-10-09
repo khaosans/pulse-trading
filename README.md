@@ -48,6 +48,25 @@ streamlit run demo_app.py --server.port 8501
 
 **Access at**: http://localhost:8501
 
+### 🌐 Deploy Live (FREE!)
+Get a public URL to share your demo with anyone:
+
+```bash
+# Push to GitHub
+git push origin master
+
+# Deploy to Streamlit Cloud (100% FREE!)
+# 1. Go to: https://streamlit.io/cloud
+# 2. Sign in with GitHub
+# 3. Select: khaosans/pulse-trading
+# 4. File: demo_app.py
+# 5. Deploy!
+
+# Get URL like: https://pulsetrade-demo.streamlit.app
+```
+
+See **[Deployment Guide](docs/DEPLOYMENT.md)** for full instructions.
+
 ---
 
 ## ✨ Key Features
@@ -229,20 +248,20 @@ pulse-trading/
 
 ## 📚 Documentation
 
-### Quick Access:
-- **🎉_DEMO_COMPLETE.md** - Complete demo guide (START HERE!)
-- **demo_docs/QUICK_START.md** - Fast reference
-- **demo_docs/QA_REPORT.md** - Playwright test results
-- **demo_docs/EMOTION_TRACKER_GUIDE.md** - Core feature deep-dive
-- **PROJECT_OVERVIEW.md** - Full project overview
+### 🎯 Demo Guides
+- **[🎉 Demo Master Guide](docs/demo/🎉_DEMO_COMPLETE.md)** - Complete demo documentation (START HERE!)
+- **[⚡ Quick Start](docs/demo/QUICK_START.md)** - Run in 2 minutes
+- **[💓 Emotion Tracker Guide](docs/demo/EMOTION_TRACKER_GUIDE.md)** - Core feature deep-dive
+- **[📊 QA Testing Report](docs/demo/QA_REPORT.md)** - Grade: A+ (95/100)
+- **[🎤 Presentation Guide](docs/demo/PRESENTATION_READY.md)** - Demo tips for class/investors
+- **[All Demo Docs](docs/demo/)** - 15 comprehensive guides
 
-### For Presentation:
-- **🎉_DEMO_COMPLETE.md** - 2-minute demo script
-- **demo_docs/PRESENTATION_READY.md** - Presentation tips
-- **demo_docs/QA_REPORT.md** - Testing verification
-
-### For Development:
-- **demo_docs/OLLAMA_SETUP.md** - AI assistant setup
+### 📖 Project Documentation
+- **[🌐 Deployment Guide](docs/DEPLOYMENT.md)** - Get free live public URL (Streamlit Cloud)
+- **[📋 Project Overview](docs/PROJECT_OVERVIEW.md)** - Complete project summary
+- **[📁 Repository Structure](REPOSITORY_STRUCTURE.md)** - File organization
+- **[📊 Marketing Materials](docs/marketing/)** - Presentations, surveys, financial forecasts
+- **[📚 All Documentation](docs/)** - Complete documentation index
 - **demo_docs/TAB_FIX_SUMMARY.md** - Architecture decisions
 
 ---
