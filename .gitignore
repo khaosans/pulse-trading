@@ -53,8 +53,8 @@ yarn-error.log
 .coverage
 htmlcov/
 
-# Optional: Uncomment to exclude screenshots
-# .playwright-mcp/
+# Test screenshots (not needed in public repo)
+.playwright-mcp/
 
 # Optional: Uncomment to exclude archived files from tracking
 # docs/marketing/archive/
