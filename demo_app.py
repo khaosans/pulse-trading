@@ -1,6 +1,8 @@
 """
 PulseTrade - Interactive Trading Platform Demo
 A demonstration of the PulseTrade social trading platform with synthetic data
+
+Performance Optimized | Accessible | Consistent Design
 """
 
 import streamlit as st
@@ -13,6 +15,43 @@ import random
 import requests
 import json
 
+# Import performance enhancements and optimizations
+try:
+    from app_enhancements import (
+        initialize_enhancements, 
+        enable_debug_mode,
+        add_debug_panel,
+        ErrorBoundary,
+        format_currency,
+        format_percentage
+    )
+    ENHANCEMENTS_AVAILABLE = True
+except ImportError:
+    ENHANCEMENTS_AVAILABLE = False
+    print("Enhancements module not available")
+
+# Import analytics engine
+try:
+    from analytics_engine import (
+        EmotionAnalytics,
+        PortfolioAnalytics,
+        MarketInsights,
+        generate_daily_insights
+    )
+    ANALYTICS_AVAILABLE = True
+except ImportError:
+    ANALYTICS_AVAILABLE = False
+    print("Analytics engine not available")
+
+# Import validation and SEO
+try:
+    from validation import InputValidator, ValidationError
+    from seo_meta import initialize_seo_and_meta
+    VALIDATION_AVAILABLE = True
+except ImportError:
+    VALIDATION_AVAILABLE = False
+    print("Validation module not available")
+
 # Import live data module (with fallback if not available)
 try:
     from live_data import LiveMarketData, get_market_data_hybrid, get_portfolio_live_prices
@@ -20,6 +59,15 @@ try:
 except ImportError:
     LIVE_DATA_AVAILABLE = False
     print("Live data module not available, using synthetic data only")
+
+# Initialize enhancements at app start
+if ENHANCEMENTS_AVAILABLE:
+    enable_debug_mode()
+    initialize_enhancements()
+
+# Initialize SEO and meta tags
+if VALIDATION_AVAILABLE:
+    initialize_seo_and_meta()
 
 # Page configuration
 st.set_page_config(
@@ -1335,6 +1383,10 @@ def main():
             </div>
         </div>
         """, unsafe_allow_html=True)
+    
+    # Add debug panel if enhancements are available
+    if ENHANCEMENTS_AVAILABLE:
+        add_debug_panel()
     
     # Main content tabs  
     tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([

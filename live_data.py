@@ -1,8 +1,16 @@
 """
 Live Market Data Module with Rate Limiting & Caching
 Uses yfinance (free, no API key required) with smart fallbacks
+
+Best Practices Implemented:
+- Type hints for better code clarity
+- Comprehensive error handling
+- Rate limiting to prevent API throttling
+- Smart caching for performance
+- Graceful fallbacks for reliability
 """
 
+from typing import Optional, Dict, List, Any
 import yfinance as yf
 import pandas as pd
 import numpy as np
@@ -10,6 +18,11 @@ from datetime import datetime, timedelta
 import streamlit as st
 from functools import lru_cache
 import time
+import logging
+
+# Configure logging for better debugging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class LiveMarketData:
     """
@@ -27,15 +40,16 @@ class LiveMarketData:
         self.cache_duration = 300  # Cache for 5 minutes
     
     @st.cache_data(ttl=300)  # Cache for 5 minutes
-    def get_live_price(_self, symbol):
+    def get_live_price(_self, symbol: str) -> Optional[Dict[str, Any]]:
         """
         Get live price with rate limiting and caching
         
         Args:
-            symbol: Stock ticker symbol
+            symbol: Stock ticker symbol (e.g., 'AAPL')
             
         Returns:
-            dict: Current price data or None if failed
+            dict: Current price data with keys: symbol, price, change, change_pct, etc.
+                  None if fetch failed
         """
         try:
             # Rate limiting check
@@ -73,24 +87,27 @@ class LiveMarketData:
             return live_data
             
         except Exception as e:
-            print(f"Error fetching live data for {symbol}: {e}")
+            logger.warning(f"Error fetching live data for {symbol}: {e}")
             # Return cached data if available
             if symbol in _self.cache:
+                logger.info(f"Returning cached data for {symbol}")
                 return _self.cache[symbol]
             return None
     
     @st.cache_data(ttl=900)  # Cache for 15 minutes
-    def get_historical_data(_self, symbol, period='1mo', interval='1d'):
+    def get_historical_data(_self, symbol: str, period: str = '1mo', 
+                           interval: str = '1d') -> Optional[pd.DataFrame]:
         """
         Get historical price data with caching
         
         Args:
-            symbol: Stock ticker symbol
+            symbol: Stock ticker symbol (e.g., 'AAPL')
             period: Data period (1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max)
             interval: Data interval (1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo)
             
         Returns:
-            DataFrame: Historical price data
+            DataFrame: Historical price data with columns: timestamp, open, high, low, close, volume
+                      None if fetch failed
         """
         try:
             ticker = yf.Ticker(symbol)
@@ -112,16 +129,17 @@ class LiveMarketData:
             return hist
             
         except Exception as e:
-            print(f"Error fetching historical data for {symbol}: {e}")
+            logger.warning(f"Error fetching historical data for {symbol}: {e}")
             return None
     
     @st.cache_data(ttl=600)  # Cache for 10 minutes
-    def get_market_indices(_self):
+    def get_market_indices(_self) -> Dict[str, Dict[str, float]]:
         """
         Get major market indices with caching
         
         Returns:
-            dict: Index data for S&P 500, NASDAQ, DOW
+            dict: Index data for S&P 500, NASDAQ, DOW with price, change, and change_pct
+                  Example: {'S&P 500': {'price': 4582.23, 'change': 38.5, 'change_pct': 0.85}}
         """
         indices = {
             '^GSPC': 'S&P 500',
@@ -142,15 +160,16 @@ class LiveMarketData:
         
         return results
     
-    def get_multiple_quotes(_self, symbols):
+    def get_multiple_quotes(_self, symbols: List[str]) -> Dict[str, Dict[str, Any]]:
         """
         Get quotes for multiple symbols efficiently
         
         Args:
-            symbols: List of ticker symbols
+            symbols: List of ticker symbols (e.g., ['AAPL', 'GOOGL', 'MSFT'])
             
         Returns:
             dict: Symbol -> price data mapping
+                  Example: {'AAPL': {'price': 178.32, 'change': 2.45, ...}}
         """
         results = {}
         
@@ -162,10 +181,17 @@ class LiveMarketData:
         return results
 
 
-def generate_synthetic_fallback(symbol, days=30):
+def generate_synthetic_fallback(symbol: str, days: int = 30) -> pd.DataFrame:
     """
     Generate synthetic data as fallback when live data fails
-    This ensures the demo always works
+    This ensures the demo always works reliably
+    
+    Args:
+        symbol: Stock ticker symbol
+        days: Number of days of historical data to generate
+        
+    Returns:
+        DataFrame: Synthetic price data with realistic patterns
     """
     dates = pd.date_range(end=datetime.now(), periods=days*24*4, freq='15min')
     
@@ -201,16 +227,17 @@ def generate_synthetic_fallback(symbol, days=30):
     return df
 
 
-def get_market_data_hybrid(symbol, use_live=True):
+def get_market_data_hybrid(symbol: str, use_live: bool = True) -> pd.DataFrame:
     """
     Hybrid function that tries live data first, falls back to synthetic
+    Ensures the application always has data to display
     
     Args:
         symbol: Stock ticker symbol
-        use_live: Whether to attempt live data fetch
+        use_live: Whether to attempt live data fetch (default: True)
         
     Returns:
-        DataFrame: Market data (live or synthetic)
+        DataFrame: Market data (live if available, synthetic as fallback)
     """
     if use_live:
         try:
@@ -220,22 +247,23 @@ def get_market_data_hybrid(symbol, use_live=True):
             if hist is not None and not hist.empty:
                 return hist
         except Exception as e:
-            print(f"Live data failed for {symbol}, using synthetic: {e}")
+            logger.info(f"Live data unavailable for {symbol}, using synthetic: {e}")
     
     # Fallback to synthetic
     return generate_synthetic_fallback(symbol)
 
 
 @st.cache_data(ttl=300)
-def get_portfolio_live_prices(symbols):
+def get_portfolio_live_prices(symbols: List[str]) -> Dict[str, float]:
     """
-    Get live prices for portfolio symbols with caching
+    Get live prices for portfolio symbols with caching and fallbacks
     
     Args:
-        symbols: List of stock symbols
+        symbols: List of stock symbols (e.g., ['AAPL', 'GOOGL'])
         
     Returns:
         dict: Symbol -> current price mapping
+              Example: {'AAPL': 178.32, 'GOOGL': 142.15}
     """
     live_data = LiveMarketData()
     prices = {}
