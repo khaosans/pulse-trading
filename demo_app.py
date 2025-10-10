@@ -1152,18 +1152,177 @@ def create_portfolio_pie(portfolio_df):
     
     return fig
 
+# Demo user profiles for switching between scenarios
+DEMO_USERS = {
+    'Sarah_Conservative': {
+        'name': 'Sarah',
+        'style': 'Conservative Trader',
+        'portfolio_value': 68450,
+        'today_pl': 892,
+        'emotion_state': 'Calm',
+        'calm_level': 75,
+        'stress_level': 25,
+        'trades_prevented': 15,
+        'money_saved': 3240,
+        'win_rate_calm': 72,
+        'win_rate_stressed': 38
+    },
+    'Mike_Aggressive': {
+        'name': 'Mike',
+        'style': 'Growth Focused',
+        'portfolio_value': 142380,
+        'today_pl': -1240,
+        'emotion_state': 'Anxious',
+        'calm_level': 45,
+        'stress_level': 65,
+        'trades_prevented': 23,
+        'money_saved': 5120,
+        'win_rate_calm': 68,
+        'win_rate_stressed': 32
+    },
+    'Emma_Balanced': {
+        'name': 'Emma',
+        'style': 'Balanced Investor',
+        'portfolio_value': 95220,
+        'today_pl': 445,
+        'emotion_state': 'Confident',
+        'calm_level': 82,
+        'stress_level': 18,
+        'trades_prevented': 8,
+        'money_saved': 2180,
+        'win_rate_calm': 78,
+        'win_rate_stressed': 42
+    }
+}
+
+def get_relative_time(minutes_ago):
+    """Generate live-feeling relative timestamps"""
+    if minutes_ago < 1:
+        return "just now"
+    elif minutes_ago < 60:
+        return f"{int(minutes_ago)} min{'s' if minutes_ago != 1 else ''} ago"
+    elif minutes_ago < 1440:
+        hours = int(minutes_ago / 60)
+        return f"{hours} hour{'s' if hours != 1 else ''} ago"
+    else:
+        days = int(minutes_ago / 1440)
+        return f"{days} day{'s' if days != 1 else ''} ago"
+
+def generate_live_alerts(user_profile):
+    """Generate real-time looking alerts based on user profile"""
+    alerts = []
+    emotion = user_profile['emotion_state']
+    
+    # Recent trade alert (feels live)
+    if user_profile['calm_level'] > 70:
+        alerts.append({
+            'type': 'success',
+            'icon': '✅',
+            'message': f"AAPL crossed $178 resistance",
+            'time': get_relative_time(random.randint(2, 15)),
+            'detail': 'Bullish signal'
+        })
+    else:
+        alerts.append({
+            'type': 'warning',
+            'icon': '⚠️',
+            'message': f"High stress detected - trade blocked",
+            'time': get_relative_time(random.randint(1, 8)),
+            'detail': f'Prevented potential ${random.randint(200, 800)} loss'
+        })
+    
+    # Market alert (real-time feel)
+    alerts.append({
+        'type': 'info',
+        'icon': '📊',
+        'message': "TSLA volume spike detected",
+        'time': get_relative_time(random.randint(5, 25)),
+        'detail': 'Monitor closely'
+    })
+    
+    # Emotion alert (live monitoring)
+    if user_profile['stress_level'] > 40:
+        alerts.append({
+            'type': 'danger',
+            'icon': '💓',
+            'message': "Stress rising - take a breath",
+            'time': get_relative_time(random.randint(1, 3)),
+            'detail': 'Device is monitoring your vitals'
+        })
+    else:
+        alerts.append({
+            'type': 'success',
+            'icon': '💓',
+            'message': "Optimal emotional state detected",
+            'time': get_relative_time(random.randint(0, 2)),
+            'detail': 'Good time for important decisions'
+        })
+    
+    return alerts
+
 # Main app
 def main():
-    # Header with animated gradient text
-    st.markdown("""
+    # Initialize default user before anything else
+    if 'current_user' not in st.session_state:
+        st.session_state['current_user'] = DEMO_USERS['Sarah_Conservative']
+        st.session_state['selected_user_key'] = 'Sarah_Conservative'
+    
+    current_user = st.session_state['current_user']
+    
+    # Header with animated gradient text and live indicator
+    st.markdown(f"""
+    <style>
+        @keyframes pulse {{
+            0%, 100% {{ opacity: 1; transform: scale(1); }}
+            50% {{ opacity: 0.7; transform: scale(1.1); }}
+        }}
+        .live-indicator {{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #10B981;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }}
+        .live-badge {{
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 12px;
+        }}
+    </style>
     <div class="main-header">
-        <h1 class="gradient-text">📊 PulseTrade</h1>
-        <p style="font-size: 1.2rem; margin: 0;">Smart Trading Through Data + Community</p>
+        <h1 class="gradient-text">📊 PulseTrade <span class="live-badge"><span class="live-indicator"></span>LIVE</span></h1>
+        <p style="font-size: 1.2rem; margin: 0;">Smart Trading Through Data + Community • Tracking: {current_user['name']}</p>
     </div>
     """, unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:
+        # Demo User Switcher (Live Demo Feature!)
+        st.markdown("### 🎭 Demo Mode")
+        selected_user_key = st.selectbox(
+            "Switch User Profile",
+            options=list(DEMO_USERS.keys()),
+            format_func=lambda x: f"{DEMO_USERS[x]['name']} ({DEMO_USERS[x]['style']})",
+            help="Switch between different demo scenarios to show various emotional states and outcomes",
+            index=list(DEMO_USERS.keys()).index(st.session_state.get('selected_user_key', 'Sarah_Conservative'))
+        )
+        
+        # Update session state if user changed
+        if st.session_state.get('selected_user_key') != selected_user_key:
+            st.session_state['current_user'] = DEMO_USERS[selected_user_key]
+            st.session_state['selected_user_key'] = selected_user_key
+            current_user = DEMO_USERS[selected_user_key]
+            st.rerun()
+        
+        st.markdown("---")
+        
         # Logo and Welcome Section
         col_logo, col_text = st.columns([1, 2])
         with col_logo:
@@ -1398,7 +1557,82 @@ def main():
     ])
     
     with tab1:
-        st.markdown("### Market Overview")
+        st.markdown(f"### 👋 Welcome back, {current_user['name']}!")
+        st.markdown(f"<p style='color: #718096; font-size: 0.95rem;'>Live monitoring active • Last update: {get_relative_time(0)}</p>", unsafe_allow_html=True)
+        
+        # Live Alerts Section (feels real-time)
+        st.markdown("#### 🔔 Live Activity Feed")
+        live_alerts = generate_live_alerts(current_user)
+        for alert in live_alerts:
+            alert_color = {
+                'success': '#10B981',
+                'warning': '#F59E0B',
+                'info': '#3B82F6',
+                'danger': '#EF4444'
+            }.get(alert['type'], '#6B7280')
+            
+            st.markdown(f"""
+            <div style="background: linear-gradient(to right, {alert_color}15, transparent); 
+                        padding: 12px; border-left: 3px solid {alert_color}; 
+                        border-radius: 6px; margin-bottom: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <span style="font-size: 1.2rem;">{alert['icon']}</span>
+                        <strong style="margin-left: 8px;">{alert['message']}</strong>
+                        <p style="margin: 4px 0 0 32px; color: #718096; font-size: 0.85rem;">{alert['detail']}</p>
+                    </div>
+                    <span style="color: #9CA3AF; font-size: 0.8rem; white-space: nowrap;">{alert['time']}</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        st.markdown("---")
+        
+        # Live Portfolio Stats (using current user)
+        st.markdown("### 💼 Your Portfolio")
+        pcol1, pcol2, pcol3, pcol4 = st.columns(4)
+        
+        pl_color = '#059669' if current_user['today_pl'] >= 0 else '#DC2626'
+        pl_symbol = '+' if current_user['today_pl'] >= 0 else ''
+        
+        with pcol1:
+            st.markdown(f"""
+            <div class="stat-card card-stack card-3d">
+                <div class="stat-label">Portfolio Value</div>
+                <div class="stat-value">${current_user['portfolio_value']:,.0f}</div>
+                <div style="color: {pl_color}; font-weight: 700; font-size: 1.1rem;">{pl_symbol}${abs(current_user['today_pl']):,.0f} today</div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with pcol2:
+            st.markdown(f"""
+            <div class="stat-card card-stack card-3d">
+                <div class="stat-label">Emotional State</div>
+                <div class="stat-value" style="font-size: 1.8rem;">💓 {current_user['emotion_state']}</div>
+                <div style="color: #3B82F6; font-weight: 700; font-size: 1.1rem;">Monitoring active</div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with pcol3:
+            st.markdown(f"""
+            <div class="stat-card card-stack card-3d">
+                <div class="stat-label">Trades Prevented</div>
+                <div class="stat-value">{current_user['trades_prevented']}</div>
+                <div style="color: #059669; font-weight: 700; font-size: 1.1rem;">This month</div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with pcol4:
+            st.markdown(f"""
+            <div class="stat-card card-stack card-3d">
+                <div class="stat-label">Money Saved</div>
+                <div class="stat-value">${current_user['money_saved']:,.0f}</div>
+                <div style="color: #059669; font-weight: 700; font-size: 1.1rem;">From prevented trades</div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        st.markdown("---")
+        st.markdown("### 📊 Market Overview")
         
         # Top metrics with stacked animation
         col1, col2, col3, col4 = st.columns(4)
@@ -1500,17 +1734,41 @@ def main():
     
     with tab2:
         st.markdown("### 💓 Real-Time Emotion Tracking")
+        st.markdown(f"<p style='color: #10B981; font-size: 0.95rem;'>🟢 Device connected • Streaming live biometric data • Last heartbeat: {get_relative_time(0)}</p>", unsafe_allow_html=True)
         
-        st.markdown("""
-        <div style="background: linear-gradient(135deg, rgba(42, 165, 179, 0.1) 0%, rgba(29, 111, 122, 0.1) 100%); 
-                    padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #1D6F7A;">
-            <h4 style="color: #1D6F7A; margin-top: 0;">🎯 Your PulseTrade Wearable</h4>
-            <p style="margin-bottom: 0; color: #4A5F66;">
-                Track your emotional state in real-time while trading. Our AI-powered wearable monitors heart rate,
-                HRV, and skin conductance to detect stress, anxiety, and overconfidence—helping you make rational decisions.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+        # Live Device Status
+        device_status_col1, device_status_col2 = st.columns([2, 1])
+        with device_status_col1:
+            st.markdown(f"""
+            <div style="background: linear-gradient(135deg, rgba(42, 165, 179, 0.1) 0%, rgba(29, 111, 122, 0.1) 100%); 
+                        padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid #1D6F7A;">
+                <h4 style="color: #1D6F7A; margin-top: 0;">🎯 Your PulseTrade Wearable</h4>
+                <p style="margin: 8px 0; color: #4A5F66;">
+                    <strong>Current State:</strong> <span style="color: #1D6F7A; font-size: 1.1rem;">{current_user['emotion_state']}</span>
+                </p>
+                <p style="margin: 8px 0; color: #4A5F66;">
+                    <strong>Calm Level:</strong> <span style="color: #10B981;">{current_user['calm_level']}%</span> | 
+                    <strong>Stress Level:</strong> <span style="color: #EF4444;">{current_user['stress_level']}%</span>
+                </p>
+                <p style="margin-bottom: 0; color: #718096; font-size: 0.9rem;">
+                    📊 Monitoring: Heart rate, HRV, skin conductance, breathing patterns
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with device_status_col2:
+            # Real-time stats card
+            st.markdown(f"""
+            <div style="background: white; padding: 1.5rem; border-radius: 12px; 
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;">
+                <div style="color: #718096; font-size: 0.85rem; margin-bottom: 8px;">WIN RATE</div>
+                <div style="font-size: 2.5rem; font-weight: 700; color: #1D6F7A; margin-bottom: 4px;">
+                    {current_user['win_rate_calm']}%
+                </div>
+                <div style="color: #10B981; font-size: 0.9rem;">When calm</div>
+                <div style="color: #EF4444; font-size: 0.9rem; margin-top: 4px;">{current_user['win_rate_stressed']}% when stressed</div>
+            </div>
+            """, unsafe_allow_html=True)
         
         # Device Status
         col1, col2, col3 = st.columns(3)
@@ -2040,8 +2298,11 @@ Provide helpful, concise advice (2-3 sentences)."""
             
             posts = generate_community_posts()
             
-            for post in posts[:5]:
+            for idx, post in enumerate(posts[:5]):
                 signal_class = f"signal-{post['signal'].lower()}"
+                # Calculate relative time for live feel
+                minutes_elapsed = (datetime.now() - post['timestamp']).total_seconds() / 60
+                live_timestamp = get_relative_time(minutes_elapsed)
                 
                 st.markdown(f"""
                 <div class="community-post">
@@ -2050,7 +2311,7 @@ Provide helpful, concise advice (2-3 sentences)."""
                             <strong>{post['user']}</strong>
                             <span class="user-badge">VERIFIED</span>
                         </div>
-                        <small style="color: #626C71;">{post['timestamp'].strftime('%I:%M %p')}</small>
+                        <small style="color: #626C71;">{live_timestamp}</small>
                     </div>
                     <p style="margin: 0.5rem 0;">{post['content']}</p>
                     <div style="margin-top: 0.5rem;">
