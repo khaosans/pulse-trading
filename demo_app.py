@@ -2231,7 +2231,8 @@ def main():
             st.markdown("### 📈 Cash Flow Forecasting")
             
             # Generate forecast
-            income_history = st.session_state.get('transactions_df', pd.DataFrame()).query('transaction_type == "credit"')
+            transactions_df = st.session_state.get('transactions_df', pd.DataFrame())
+            income_history = transactions_df.query('transaction_type == "credit"') if not transactions_df.empty else pd.DataFrame()
             expense_history = st.session_state.get('expenses_df', pd.DataFrame())
             invoices_df = st.session_state.get('invoices_df', pd.DataFrame())
             outstanding_invoices = invoices_df[invoices_df['status'] != 'paid'].to_dict('records') if not invoices_df.empty else []
