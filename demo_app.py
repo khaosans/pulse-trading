@@ -1309,7 +1309,7 @@ def main():
             tax_balance = st.session_state.get('tax_pot', {}).get('balance', 8500)
             portfolio_value = 68450
             invoices_df = st.session_state.get('invoices_df', pd.DataFrame())
-            outstanding = invoices_df[invoices_df['status'] != 'paid']['total'].sum() if not invoices_df.empty else 0
+            outstanding = invoices_df[invoices_df['status'] != 'paid']['total_amount'].sum() if not invoices_df.empty else 0
             total_net_worth = bank_balance + tax_balance + portfolio_value + outstanding
             
             st.markdown(f"""
@@ -1507,7 +1507,7 @@ def main():
             bank_balance = st.session_state.get('bank_account', {}).get('balance', 25000)
             tax_balance = st.session_state.get('tax_pot', {}).get('balance', 8500)
             portfolio_value = 68450  # From trading
-            invoices_outstanding = st.session_state.get('invoices_df', pd.DataFrame()).query('status != "paid"')['total'].sum() if not st.session_state.get('invoices_df', pd.DataFrame()).empty else 12000
+            invoices_outstanding = st.session_state.get('invoices_df', pd.DataFrame()).query('status != "paid"')['total_amount'].sum() if not st.session_state.get('invoices_df', pd.DataFrame()).empty else 12000
             
             total_net_worth = bank_balance + tax_balance + portfolio_value + invoices_outstanding
             
@@ -2125,8 +2125,8 @@ def main():
                 
                 col1, col2, col3 = st.columns(3)
                 
-                total_invoiced = invoices_df['total'].sum()
-                total_paid = invoices_df[invoices_df['status'] == 'paid']['total'].sum()
+                total_invoiced = invoices_df['total_amount'].sum()
+                total_paid = invoices_df[invoices_df['status'] == 'paid']['total_amount'].sum()
                 outstanding = total_invoiced - total_paid
                 
                 with col1:
@@ -2448,7 +2448,7 @@ def main():
             if NEW_FEATURES_AVAILABLE:
                 bank_balance = st.session_state.get('bank_account', {}).get('balance', 25000)
                 tax_balance = st.session_state.get('tax_pot', {}).get('balance', 8500)
-                outstanding = st.session_state.get('invoices_df', pd.DataFrame()).query('status != "paid"')['total'].sum() if not st.session_state.get('invoices_df', pd.DataFrame()).empty else 0
+                outstanding = st.session_state.get('invoices_df', pd.DataFrame()).query('status != "paid"')['total_amount'].sum() if not st.session_state.get('invoices_df', pd.DataFrame()).empty else 0
                 
                 context = f"""You are a professional financial advisor for PulseTrade, a comprehensive financial platform for freelancers.
 

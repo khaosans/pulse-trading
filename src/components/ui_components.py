@@ -382,7 +382,7 @@ def render_invoice_card(invoice: Dict[str, Any]):
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div>
                 <div style="color: #1D6F7A; font-size: 1.75rem; font-weight: 800;">
-                    ${invoice.get('total', 0):,.2f}
+                    ${invoice.get('total_amount', 0):,.2f}
                 </div>
             </div>
             <div style="text-align: right; color: #718096; font-size: 0.875rem;">

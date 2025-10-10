@@ -33,7 +33,7 @@ class Invoice:
     tax_rate: float
     tax_amount: float
     discount: float
-    total: float
+    total_amount: float
     status: str  # 'draft', 'sent', 'viewed', 'paid', 'overdue', 'cancelled'
     payment_date: Optional[datetime]
     payment_method: Optional[str]
@@ -114,7 +114,7 @@ class InvoiceEngine:
             tax_rate=tax_rate,
             tax_amount=tax_amount,
             discount=discount,
-            total=total,
+            total_amount=total,
             status='draft',
             payment_date=None,
             payment_method=None,
@@ -323,7 +323,7 @@ class InvoiceEngine:
                 issue_date = datetime.fromisoformat(issue_date)
             
             days_old = (now - issue_date).days
-            amount = inv.get('total', 0)
+            amount = inv.get('total_amount', 0)
             
             if days_old <= 30:
                 current.append(inv)
@@ -337,21 +337,21 @@ class InvoiceEngine:
         return {
             'current': {
                 'count': len(current),
-                'total': sum(inv.get('total', 0) for inv in current)
+                'total': sum(inv.get('total_amount', 0) for inv in current)
             },
             '31_60_days': {
                 'count': len(days_31_60),
-                'total': sum(inv.get('total', 0) for inv in days_31_60)
+                'total': sum(inv.get('total_amount', 0) for inv in days_31_60)
             },
             '61_90_days': {
                 'count': len(days_61_90),
-                'total': sum(inv.get('total', 0) for inv in days_61_90)
+                'total': sum(inv.get('total_amount', 0) for inv in days_61_90)
             },
             'over_90_days': {
                 'count': len(over_90),
-                'total': sum(inv.get('total', 0) for inv in over_90)
+                'total': sum(inv.get('total_amount', 0) for inv in over_90)
             },
-            'total_outstanding': sum(inv.get('total', 0) for inv in unpaid),
+            'total_outstanding': sum(inv.get('total_amount', 0) for inv in unpaid),
             'total_invoices': len(unpaid)
         }
     
@@ -414,9 +414,9 @@ class InvoiceEngine:
                 'avg_payment_days': 0
             }
         
-        total_invoiced = sum(inv.get('total', 0) for inv in client_invoices)
+        total_invoiced = sum(inv.get('total_amount', 0) for inv in client_invoices)
         paid_invoices = [inv for inv in client_invoices if inv.get('status') == 'paid']
-        total_paid = sum(inv.get('total', 0) for inv in paid_invoices)
+        total_paid = sum(inv.get('total_amount', 0) for inv in paid_invoices)
         outstanding = total_invoiced - total_paid
         
         # Calculate average payment time
