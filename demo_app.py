@@ -1599,17 +1599,48 @@ def main():
             with col2:
                 st.markdown("### ⚡ Quick Actions")
                 
-                if st.button("💸 Send Payment", use_container_width=True):
-                    st.info("Navigate to Banking tab to send payments")
+                # Interactive Net Worth Breakdown
+                with st.expander("💰 Net Worth Breakdown", expanded=True):
+                    st.markdown(f"""
+                    <div style="padding: 0.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                            <span style="color: #718096;">Business Cash</span>
+                            <span style="font-weight: 700;">${bank_balance:,.0f}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                            <span style="color: #718096;">Tax Savings</span>
+                            <span style="font-weight: 700;">${tax_balance:,.0f}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                            <span style="color: #718096;">Portfolio</span>
+                            <span style="font-weight: 700;">${portfolio_value:,.0f}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                            <span style="color: #718096;">Receivables</span>
+                            <span style="font-weight: 700;">${invoices_outstanding:,.0f}</span>
+                        </div>
+                        <div style="border-top: 2px solid #E5E7EB; margin-top: 0.75rem; padding-top: 0.75rem;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="font-weight: 700; color: #1D6F7A;">Total</span>
+                                <span style="font-weight: 800; color: #1D6F7A; font-size: 1.2rem;">${total_net_worth:,.0f}</span>
+                            </div>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                if st.button("💸 Send Payment", use_container_width=True, type="primary"):
+                    st.session_state['active_tab'] = 'banking'
+                    st.info("💡 Click 'Banking' tab above to send payments")
                 
                 if st.button("🧾 Create Invoice", use_container_width=True):
-                    st.info("Navigate to Invoicing tab to create invoices")
+                    st.session_state['active_tab'] = 'invoicing'
+                    st.info("💡 Click 'Invoicing' tab above to create invoices")
                 
                 if st.button("📊 View Cash Flow", use_container_width=True):
-                    st.info("Navigate to Cash Flow tab for forecasting")
+                    st.info("💡 Click 'Cash Flow' tab above for forecasting")
                 
                 if st.button("📈 Make Trade", use_container_width=True):
-                    st.info("Navigate to Trading tab to execute trades")
+                    st.info("💡 Click 'Trading & Portfolio' tab above")
                 
                 st.markdown("---")
                 
@@ -1899,6 +1930,56 @@ def main():
         
         st.plotly_chart(fig, use_container_width=True, key='emotion_chart')
         
+        # Interactive Emotion Controls
+        st.markdown("---")
+        st.markdown("### ⚙️ Alert Settings")
+        
+        with st.expander("🎚️ Customize Your Emotion Thresholds", expanded=False):
+            st.markdown("**Set when you want to receive alerts:**")
+            
+            ctrl_col1, ctrl_col2 = st.columns(2)
+            
+            with ctrl_col1:
+                calm_threshold = st.slider(
+                    "😌 Calm Level for Trading",
+                    min_value=50,
+                    max_value=90,
+                    value=70,
+                    help="Minimum calm level before trading (default: 70%)"
+                )
+                
+                stress_limit = st.slider(
+                    "😓 Max Stress Level",
+                    min_value=20,
+                    max_value=60,
+                    value=40,
+                    help="Alert when stress exceeds this (default: 40%)"
+                )
+            
+            with ctrl_col2:
+                alert_method = st.multiselect(
+                    "📱 Alert Methods",
+                    options=["App Notification", "Email", "SMS", "Vibration (Watch)"],
+                    default=["App Notification", "Vibration (Watch)"]
+                )
+                
+                st.checkbox("🔔 Enable Trading Prevention", value=True, help="Block trades when emotional state is poor")
+                st.checkbox("💰 Enable Purchase Warnings", value=True, help="Warn before large purchases when stressed")
+            
+            st.markdown(f"""
+            <div style="background: #DBEAFE; padding: 1.25rem; border-radius: 8px; margin-top: 1rem;">
+                <strong style="color: #1E40AF;">Your Current Settings:</strong>
+                <div style="margin-top: 0.75rem; color: #1E3A8A;">
+                    • Trading allowed when Calm ≥ {calm_threshold}%<br/>
+                    • Alert triggered when Stress > {stress_limit}%<br/>
+                    • Notifications: {', '.join(alert_method)}<br/>
+                    • Prevention features: Active ✅
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        st.markdown("---")
+        
         # Insights
         col1, col2 = st.columns(2)
         
@@ -2057,6 +2138,36 @@ def main():
         with tab4:
             st.markdown("### 🧾 Invoicing & Collections")
             
+            # Interactive Invoice Calculator
+            with st.expander("🧮 Quick Invoice Calculator", expanded=False):
+                st.markdown("**Calculate invoice amount in real-time:**")
+                
+                calc_col1, calc_col2 = st.columns(2)
+                with calc_col1:
+                    calc_hours = st.number_input("Hours", min_value=0.0, value=10.0, step=0.5, key="calc_hours")
+                    calc_rate = st.number_input("Hourly Rate ($)", min_value=0.0, value=150.0, step=5.0, key="calc_rate")
+                with calc_col2:
+                    calc_tax_rate = st.slider("Tax Rate (%)", min_value=0.0, max_value=15.0, value=0.0, step=0.5, key="calc_tax")
+                    calc_discount = st.number_input("Discount ($)", min_value=0.0, value=0.0, step=10.0, key="calc_discount")
+                
+                # Live calculation
+                calc_subtotal = calc_hours * calc_rate
+                calc_tax_amount = calc_subtotal * (calc_tax_rate / 100)
+                calc_total = calc_subtotal + calc_tax_amount - calc_discount
+                
+                st.markdown(f"""
+                <div style="background: linear-gradient(135deg, #1D6F7A 0%, #2AA5B3 100%);
+                            color: white; padding: 2rem; border-radius: 12px; margin-top: 1rem; text-align: center;">
+                    <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem;">Invoice Total</div>
+                    <div style="font-size: 3rem; font-weight: 800; margin: 1rem 0;">${calc_total:,.2f}</div>
+                    <div style="font-size: 0.875rem; opacity: 0.95;">
+                        Subtotal: ${calc_subtotal:,.2f} | Tax: ${calc_tax_amount:,.2f} | Discount: ${calc_discount:,.2f}
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            st.markdown("---")
+            
             # Create Invoice Section
             with st.expander("✍️ Create New Invoice", expanded=False):
                 with st.form("invoice_form"):
@@ -2143,12 +2254,59 @@ def main():
         with tab5:
             st.markdown("### 🧮 Tax Management & Expenses")
             
+            # Interactive Tax Calculator
+            with st.expander("🧮 Interactive Tax Calculator", expanded=True):
+                col_a, col_b = st.columns(2)
+                with col_a:
+                    estimated_income = st.slider(
+                        "📊 Estimated Annual Income",
+                        min_value=30000,
+                        max_value=200000,
+                        value=100000,
+                        step=5000,
+                        help="Adjust to see real-time tax estimates"
+                    )
+                with col_b:
+                    savings_percentage = st.slider(
+                        "💰 Tax Savings Rate",
+                        min_value=20,
+                        max_value=40,
+                        value=30,
+                        step=1,
+                        help="Percentage to auto-save from each payment"
+                    )
+                
+                # Live calculation display
+                expenses_df = st.session_state.get('expenses_df', pd.DataFrame())
+                total_expenses = expenses_df['amount'].sum() if not expenses_df.empty else 5000
+                tax_estimate = TaxManager.estimate_taxes(gross_income=estimated_income, deductible_expenses=total_expenses)
+                
+                st.markdown(f"""
+                <div style="background: linear-gradient(135deg, rgba(29, 111, 122, 0.05) 0%, rgba(42, 165, 179, 0.05) 100%);
+                            padding: 1.5rem; border-radius: 12px; margin-top: 1rem;">
+                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                        <span style="color: #718096;">Estimated Tax Liability</span>
+                        <span style="font-weight: 800; color: #1D6F7A; font-size: 1.3rem;">${tax_estimate['total_estimated_tax']:,.0f}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                        <span style="color: #718096;">Quarterly Payment</span>
+                        <span style="font-weight: 700; color: #4A5568;">${tax_estimate['quarterly_payment']:,.0f}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                        <span style="color: #718096;">Effective Tax Rate</span>
+                        <span style="font-weight: 700; color: #F59E0B;">{tax_estimate['effective_tax_rate']:.1f}%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0; padding-top: 0.75rem; border-top: 1px solid #E5E7EB;">
+                        <span style="font-weight: 600;">With {savings_percentage}% auto-save:</span>
+                        <span style="font-weight: 700; color: #10B981;">${(estimated_income * savings_percentage / 100):,.0f}/year</span>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            st.markdown("---")
+            
             # Tax Summary
             st.markdown("#### 💰 Tax Savings Status")
-            
-            expenses_df = st.session_state.get('expenses_df', pd.DataFrame())
-            total_expenses = expenses_df['amount'].sum() if not expenses_df.empty else 5000
-            tax_estimate = TaxManager.estimate_taxes(gross_income=100000, deductible_expenses=total_expenses)
             
             col1, col2 = st.columns(2)
             
@@ -2203,18 +2361,68 @@ def main():
                 with col3:
                     st.metric("This Month", f"${expenses_df['amount'].head(10).sum():,.2f}")
                 
+                # Interactive Expense Filters
+                st.markdown("#### 🔍 Filter Expenses")
+                filter_col1, filter_col2, filter_col3 = st.columns(3)
+                
+                with filter_col1:
+                    category_filter = st.multiselect(
+                        "Categories",
+                        options=expenses_df['category'].unique().tolist() if not expenses_df.empty else [],
+                        default=None,
+                        help="Filter by expense category"
+                    )
+                
+                with filter_col2:
+                    deductible_filter = st.radio(
+                        "Tax Status",
+                        options=["All", "Deductible Only", "Non-Deductible"],
+                        horizontal=True
+                    )
+                
+                with filter_col3:
+                    amount_range = st.slider(
+                        "Amount Range ($)",
+                        min_value=0,
+                        max_value=int(expenses_df['amount'].max()) if not expenses_df.empty else 1000,
+                        value=(0, int(expenses_df['amount'].max()) if not expenses_df.empty else 1000),
+                        help="Filter by expense amount"
+                    )
+                
+                # Apply filters
+                filtered_expenses = expenses_df.copy() if not expenses_df.empty else pd.DataFrame()
+                if not filtered_expenses.empty:
+                    if category_filter:
+                        filtered_expenses = filtered_expenses[filtered_expenses['category'].isin(category_filter)]
+                    if deductible_filter == "Deductible Only":
+                        filtered_expenses = filtered_expenses[filtered_expenses['tax_deductible'] == True]
+                    elif deductible_filter == "Non-Deductible":
+                        filtered_expenses = filtered_expenses[filtered_expenses['tax_deductible'] == False]
+                    filtered_expenses = filtered_expenses[
+                        (filtered_expenses['amount'] >= amount_range[0]) & 
+                        (filtered_expenses['amount'] <= amount_range[1])
+                    ]
+                    
+                    st.caption(f"Showing {len(filtered_expenses)} of {len(expenses_df)} expenses")
+                
                 # Expense by category
                 st.markdown("#### 💳 Expenses by Category")
-                category_totals = expenses_df.groupby('category')['amount'].sum().to_dict()
-                render_expense_category_chart(category_totals)
+                if not filtered_expenses.empty:
+                    category_totals = filtered_expenses.groupby('category')['amount'].sum().to_dict()
+                    render_expense_category_chart(category_totals)
+                else:
+                    st.info("No expenses match your filters")
                 
                 # Recent expenses
-                st.markdown("#### 📜 Recent Expenses")
-                st.dataframe(
-                    expenses_df.head(10)[['date', 'merchant', 'amount', 'category', 'tax_deductible']],
-                    use_container_width=True,
-                    hide_index=True
-                )
+                st.markdown("#### 📜 Filtered Expenses")
+                if not filtered_expenses.empty:
+                    st.dataframe(
+                        filtered_expenses.head(20)[['date', 'merchant', 'amount', 'category', 'tax_deductible']],
+                        use_container_width=True,
+                        hide_index=True
+                    )
+                else:
+                    st.info("No expenses to display")
                 
                 # Tax deduction tips
                 st.markdown("---")
@@ -2282,6 +2490,73 @@ def main():
             
             if runway['runway_months'] < 6 and runway['runway_months'] != float('inf'):
                 st.warning(f"⚠️ {runway['recommendation']}")
+            
+            # Interactive Scenario Planning
+            st.markdown("---")
+            st.markdown("### 🎯 Interactive Scenario Planning")
+            
+            with st.expander("💡 What-If Analysis", expanded=False):
+                st.markdown("**Adjust the sliders to see how changes affect your runway:**")
+                
+                col_s1, col_s2 = st.columns(2)
+                with col_s1:
+                    income_change = st.slider(
+                        "📈 Income Change",
+                        min_value=-50,
+                        max_value=100,
+                        value=0,
+                        step=10,
+                        help="Percentage change in monthly income",
+                        format="%d%%"
+                    )
+                with col_s2:
+                    expense_change = st.slider(
+                        "📉 Expense Change",
+                        min_value=-50,
+                        max_value=100,
+                        value=0,
+                        step=10,
+                        help="Percentage change in monthly expenses",
+                        format="%d%%"
+                    )
+                
+                # Calculate scenario
+                new_income = monthly_income * (1 + income_change / 100)
+                new_expenses = monthly_expenses * (1 + expense_change / 100)
+                new_net = new_income - new_expenses
+                
+                if new_expenses > new_income:
+                    new_runway = current_balance / (new_expenses - new_income)
+                else:
+                    new_runway = float('inf')
+                
+                # Display scenario results
+                st.markdown("#### 📊 Scenario Results")
+                
+                col_r1, col_r2, col_r3 = st.columns(3)
+                
+                with col_r1:
+                    delta_income = new_income - monthly_income
+                    st.metric("New Monthly Income", f"${new_income:,.0f}", f"{delta_income:+,.0f}")
+                
+                with col_r2:
+                    delta_expense = new_expenses - monthly_expenses
+                    st.metric("New Monthly Expenses", f"${new_expenses:,.0f}", f"{delta_expense:+,.0f}")
+                
+                with col_r3:
+                    if new_runway == float('inf'):
+                        st.metric("New Runway", "Infinite ✅", "Cash Positive!")
+                    else:
+                        delta_runway = new_runway - runway.get('runway_months', 0) if runway.get('runway_months') != float('inf') else new_runway
+                        st.metric("New Runway", f"{new_runway:.1f} mo", f"{delta_runway:+.1f} mo")
+                
+                # Impact summary
+                if income_change > 0 or expense_change < 0:
+                    st.success(f"✅ This scenario improves your financial position by ${abs(new_net - (monthly_income - monthly_expenses)):,.0f}/month")
+                elif income_change < 0 or expense_change > 0:
+                    st.warning(f"⚠️ This scenario reduces your monthly net by ${abs(new_net - (monthly_income - monthly_expenses)):,.0f}/month")
+                else:
+                    st.info("💡 Adjust the sliders above to see different scenarios")
     
     # TRADING & PORTFOLIO TAB (tab7 - was tab4)
     # This preserves the existing trading functionality
