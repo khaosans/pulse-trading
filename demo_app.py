@@ -2344,7 +2344,7 @@ def main():
         with col2:
             st.markdown("##### Allocation")
             pie_chart = create_portfolio_pie(portfolio_df)
-            st.plotly_chart(pie_chart, use_container_width=True, key='portfolio_pie')
+            st.plotly_chart(pie_chart, use_container_width=True, key='portfolio_pie_tab7')
         
         # Performance chart
         st.markdown("##### 📈 Portfolio Performance (30 Days)")
@@ -2365,7 +2365,7 @@ def main():
         )
         fig.update_traces(line_color='#1D6F7A', line_width=3)
         fig.update_layout(height=400, template='plotly_white')
-        st.plotly_chart(fig, use_container_width=True, key='perf_chart')
+        st.plotly_chart(fig, use_container_width=True, key='perf_chart_tab7')
     
     # AI ASSISTANT TAB (tab8 - was tab3)  
     # Enhanced with business, trading, and emotion context
@@ -2837,8 +2837,10 @@ Provide helpful, concise advice (2-3 sentences)."""
             ]
             st.rerun()
     
-    with tab4:
-        st.markdown("### 💼 Portfolio & Market Analysis")
+    # OLD FALLBACK CONTENT (only when NEW_FEATURES_AVAILABLE is False)
+    if not NEW_FEATURES_AVAILABLE:
+        with tab4:
+            st.markdown("### 💼 Portfolio & Market Analysis")
         
         # Portfolio Section
         st.markdown("#### Your Portfolio")
@@ -2895,7 +2897,7 @@ Provide helpful, concise advice (2-3 sentences)."""
         with col2:
             st.markdown("##### Allocation")
             pie_chart = create_portfolio_pie(portfolio_df)
-            st.plotly_chart(pie_chart, use_container_width=True, key='portfolio_pie')
+            st.plotly_chart(pie_chart, use_container_width=True, key='portfolio_pie_tab4_fallback')
         
         # Performance chart
         st.markdown("##### 📈 Portfolio Performance (30 Days)")
@@ -2916,7 +2918,7 @@ Provide helpful, concise advice (2-3 sentences)."""
         )
         fig.update_traces(line_color='#1D6F7A', line_width=3)
         fig.update_layout(height=400, template='plotly_white')
-        st.plotly_chart(fig, use_container_width=True, key='perf_chart')
+        st.plotly_chart(fig, use_container_width=True, key='perf_chart_tab4_fallback')
         
         st.markdown("---")
         
@@ -2995,9 +2997,9 @@ Provide helpful, concise advice (2-3 sentences)."""
             })
             
             st.dataframe(screener_results, width='stretch', hide_index=True)
-    
-    with tab5:
-        st.markdown("### Community Feed")
+        
+        with tab5:
+            st.markdown("### Community Feed")
         
         col1, col2 = st.columns([2, 1])
         
@@ -3071,9 +3073,9 @@ Provide helpful, concise advice (2-3 sentences)."""
             topics = ['#TechEarnings', '#FedMinutes', '#MarketRally', '#OptionsTrading', '#DividendStocks']
             for topic in topics:
                 st.markdown(f"**{topic}** • 523 posts")
-    
-    with tab6:
-        st.markdown("### Learning Center")
+        
+        with tab6:
+            st.markdown("### Learning Center")
         
         col1, col2 = st.columns(2)
         
