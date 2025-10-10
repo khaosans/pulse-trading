@@ -1152,47 +1152,18 @@ def create_portfolio_pie(portfolio_df):
     
     return fig
 
-# Demo user profiles for switching between scenarios
-DEMO_USERS = {
-    'Sarah_Conservative': {
-        'name': 'Sarah',
-        'style': 'Conservative Trader',
-        'portfolio_value': 68450,
-        'today_pl': 892,
-        'emotion_state': 'Calm',
-        'calm_level': 75,
-        'stress_level': 25,
-        'trades_prevented': 15,
-        'money_saved': 3240,
-        'win_rate_calm': 72,
-        'win_rate_stressed': 38
-    },
-    'Mike_Aggressive': {
-        'name': 'Mike',
-        'style': 'Growth Focused',
-        'portfolio_value': 142380,
-        'today_pl': -1240,
-        'emotion_state': 'Anxious',
-        'calm_level': 45,
-        'stress_level': 65,
-        'trades_prevented': 23,
-        'money_saved': 5120,
-        'win_rate_calm': 68,
-        'win_rate_stressed': 32
-    },
-    'Emma_Balanced': {
-        'name': 'Emma',
-        'style': 'Balanced Investor',
-        'portfolio_value': 95220,
-        'today_pl': 445,
-        'emotion_state': 'Confident',
-        'calm_level': 82,
-        'stress_level': 18,
-        'trades_prevented': 8,
-        'money_saved': 2180,
-        'win_rate_calm': 78,
-        'win_rate_stressed': 42
-    }
+# Single user profile for live demo
+CURRENT_USER = {
+    'name': 'Alex',
+    'portfolio_value': 87650,
+    'today_pl': 1240,
+    'emotion_state': 'Calm',
+    'calm_level': 78,
+    'stress_level': 22,
+    'trades_prevented': 12,
+    'money_saved': 3840,
+    'win_rate_calm': 74,
+    'win_rate_stressed': 36
 }
 
 def get_relative_time(minutes_ago):
@@ -1208,28 +1179,18 @@ def get_relative_time(minutes_ago):
         days = int(minutes_ago / 1440)
         return f"{days} day{'s' if days != 1 else ''} ago"
 
-def generate_live_alerts(user_profile):
-    """Generate real-time looking alerts based on user profile"""
+def generate_live_alerts():
+    """Generate real-time looking alerts"""
     alerts = []
-    emotion = user_profile['emotion_state']
     
     # Recent trade alert (feels live)
-    if user_profile['calm_level'] > 70:
-        alerts.append({
-            'type': 'success',
-            'icon': '✅',
-            'message': f"AAPL crossed $178 resistance",
-            'time': get_relative_time(random.randint(2, 15)),
-            'detail': 'Bullish signal'
-        })
-    else:
-        alerts.append({
-            'type': 'warning',
-            'icon': '⚠️',
-            'message': f"High stress detected - trade blocked",
-            'time': get_relative_time(random.randint(1, 8)),
-            'detail': f'Prevented potential ${random.randint(200, 800)} loss'
-        })
+    alerts.append({
+        'type': 'success',
+        'icon': '✅',
+        'message': f"AAPL crossed $178 resistance",
+        'time': get_relative_time(random.randint(2, 15)),
+        'detail': 'Bullish signal detected'
+    })
     
     # Market alert (real-time feel)
     alerts.append({
@@ -1237,45 +1198,49 @@ def generate_live_alerts(user_profile):
         'icon': '📊',
         'message': "TSLA volume spike detected",
         'time': get_relative_time(random.randint(5, 25)),
-        'detail': 'Monitor closely'
+        'detail': 'Monitor for breakout'
     })
     
     # Emotion alert (live monitoring)
-    if user_profile['stress_level'] > 40:
-        alerts.append({
-            'type': 'danger',
-            'icon': '💓',
-            'message': "Stress rising - take a breath",
-            'time': get_relative_time(random.randint(1, 3)),
-            'detail': 'Device is monitoring your vitals'
-        })
-    else:
-        alerts.append({
-            'type': 'success',
-            'icon': '💓',
-            'message': "Optimal emotional state detected",
-            'time': get_relative_time(random.randint(0, 2)),
-            'detail': 'Good time for important decisions'
-        })
+    alerts.append({
+        'type': 'success',
+        'icon': '💓',
+        'message': "Optimal emotional state detected",
+        'time': get_relative_time(random.randint(0, 2)),
+        'detail': 'Good time for trading decisions'
+    })
     
     return alerts
 
 # Main app
 def main():
-    # Initialize default user before anything else
-    if 'current_user' not in st.session_state:
-        st.session_state['current_user'] = DEMO_USERS['Sarah_Conservative']
-        st.session_state['selected_user_key'] = 'Sarah_Conservative'
-    
-    current_user = st.session_state['current_user']
-    
-    # Header with animated gradient text and live indicator
+    # Header with animated gradient text, live indicator, and smooth animations
     st.markdown(f"""
     <style>
+        /* Pulse animation for live indicator */
         @keyframes pulse {{
             0%, 100% {{ opacity: 1; transform: scale(1); }}
-            50% {{ opacity: 0.7; transform: scale(1.1); }}
+            50% {{ opacity: 0.7; transform: scale(1.15); }}
         }}
+        
+        /* Smooth fade-in for page load */
+        @keyframes fadeIn {{
+            from {{ opacity: 0; transform: translateY(10px); }}
+            to {{ opacity: 1; transform: translateY(0); }}
+        }}
+        
+        /* Slide in from left */
+        @keyframes slideInLeft {{
+            from {{ opacity: 0; transform: translateX(-20px); }}
+            to {{ opacity: 1; transform: translateX(0); }}
+        }}
+        
+        /* Gentle scale on hover */
+        @keyframes gentleScale {{
+            from {{ transform: scale(1); }}
+            to {{ transform: scale(1.02); }}
+        }}
+        
         .live-indicator {{
             display: inline-block;
             width: 10px;
@@ -1284,7 +1249,9 @@ def main():
             border-radius: 50%;
             margin-right: 8px;
             animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
         }}
+        
         .live-badge {{
             background: linear-gradient(135deg, #10B981, #059669);
             color: white;
@@ -1294,34 +1261,87 @@ def main():
             font-weight: 600;
             display: inline-block;
             margin-left: 12px;
+            animation: fadeIn 0.6s ease-out;
+        }}
+        
+        .main-header {{
+            animation: slideInLeft 0.5s ease-out;
+        }}
+        
+        /* Smooth hover effects for cards */
+        .stat-card {{
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }}
+        
+        .stat-card:hover {{
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+        }}
+        
+        .community-post {{
+            transition: all 0.3s ease;
+        }}
+        
+        .community-post:hover {{
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }}
+        
+        /* Button hover effects */
+        .stButton > button {{
+            transition: all 0.2s ease;
+        }}
+        
+        .stButton > button:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 111, 122, 0.3);
+        }}
+        
+        /* Smooth progress bars */
+        .stProgress > div > div {{
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }}
+        
+        /* Metric animations */
+        .metric-container {{
+            animation: fadeIn 0.6s ease-out;
+        }}
+        
+        /* Alert animations */
+        .alert-item {{
+            animation: slideInLeft 0.4s ease-out;
+        }}
+        
+        /* Tabs smooth transition */
+        .stTabs [data-baseweb="tab-panel"] {{
+            animation: fadeIn 0.4s ease-out;
+        }}
+        
+        /* Input focus effects */
+        .stTextInput > div > div > input:focus,
+        .stTextArea > div > div > textarea:focus {{
+            border-color: #1D6F7A !important;
+            box-shadow: 0 0 0 3px rgba(29, 111, 122, 0.1) !important;
+            transition: all 0.2s ease;
+        }}
+        
+        /* Expander smooth animation */
+        .streamlit-expanderHeader {{
+            transition: all 0.2s ease;
+        }}
+        
+        .streamlit-expanderHeader:hover {{
+            background-color: rgba(29, 111, 122, 0.05);
         }}
     </style>
     <div class="main-header">
         <h1 class="gradient-text">📊 PulseTrade <span class="live-badge"><span class="live-indicator"></span>LIVE</span></h1>
-        <p style="font-size: 1.2rem; margin: 0;">Smart Trading Through Data + Community • Tracking: {current_user['name']}</p>
+        <p style="font-size: 1.2rem; margin: 0;">Smart Trading Through Data + Community</p>
     </div>
     """, unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:
-        # Demo User Switcher (Live Demo Feature!)
-        st.markdown("### 🎭 Demo Mode")
-        selected_user_key = st.selectbox(
-            "Switch User Profile",
-            options=list(DEMO_USERS.keys()),
-            format_func=lambda x: f"{DEMO_USERS[x]['name']} ({DEMO_USERS[x]['style']})",
-            help="Switch between different demo scenarios to show various emotional states and outcomes",
-            index=list(DEMO_USERS.keys()).index(st.session_state.get('selected_user_key', 'Sarah_Conservative'))
-        )
-        
-        # Update session state if user changed
-        if st.session_state.get('selected_user_key') != selected_user_key:
-            st.session_state['current_user'] = DEMO_USERS[selected_user_key]
-            st.session_state['selected_user_key'] = selected_user_key
-            current_user = DEMO_USERS[selected_user_key]
-            st.rerun()
-        
-        st.markdown("---")
         
         # Logo and Welcome Section
         col_logo, col_text = st.columns([1, 2])
@@ -1557,12 +1577,12 @@ def main():
     ])
     
     with tab1:
-        st.markdown(f"### 👋 Welcome back, {current_user['name']}!")
+        st.markdown(f"### 👋 Welcome back, {CURRENT_USER['name']}!")
         st.markdown(f"<p style='color: #718096; font-size: 0.95rem;'>Live monitoring active • Last update: {get_relative_time(0)}</p>", unsafe_allow_html=True)
         
         # Live Alerts Section (feels real-time)
         st.markdown("#### 🔔 Live Activity Feed")
-        live_alerts = generate_live_alerts(current_user)
+        live_alerts = generate_live_alerts()
         for alert in live_alerts:
             alert_color = {
                 'success': '#10B981',
@@ -1572,9 +1592,10 @@ def main():
             }.get(alert['type'], '#6B7280')
             
             st.markdown(f"""
-            <div style="background: linear-gradient(to right, {alert_color}15, transparent); 
+            <div class="alert-item" style="background: linear-gradient(to right, {alert_color}15, transparent); 
                         padding: 12px; border-left: 3px solid {alert_color}; 
-                        border-radius: 6px; margin-bottom: 10px;">
+                        border-radius: 6px; margin-bottom: 10px; cursor: pointer;
+                        transition: all 0.3s ease;">
                 <div style="display: flex; justify-content: space-between; align-items: start;">
                     <div>
                         <span style="font-size: 1.2rem;">{alert['icon']}</span>
@@ -1588,45 +1609,45 @@ def main():
         
         st.markdown("---")
         
-        # Live Portfolio Stats (using current user)
+        # Live Portfolio Stats
         st.markdown("### 💼 Your Portfolio")
         pcol1, pcol2, pcol3, pcol4 = st.columns(4)
         
-        pl_color = '#059669' if current_user['today_pl'] >= 0 else '#DC2626'
-        pl_symbol = '+' if current_user['today_pl'] >= 0 else ''
+        pl_color = '#059669' if CURRENT_USER['today_pl'] >= 0 else '#DC2626'
+        pl_symbol = '+' if CURRENT_USER['today_pl'] >= 0 else ''
         
         with pcol1:
             st.markdown(f"""
-            <div class="stat-card card-stack card-3d">
+            <div class="stat-card card-stack card-3d metric-container">
                 <div class="stat-label">Portfolio Value</div>
-                <div class="stat-value">${current_user['portfolio_value']:,.0f}</div>
-                <div style="color: {pl_color}; font-weight: 700; font-size: 1.1rem;">{pl_symbol}${abs(current_user['today_pl']):,.0f} today</div>
+                <div class="stat-value">${CURRENT_USER['portfolio_value']:,.0f}</div>
+                <div style="color: {pl_color}; font-weight: 700; font-size: 1.1rem;">{pl_symbol}${abs(CURRENT_USER['today_pl']):,.0f} today</div>
             </div>
             """, unsafe_allow_html=True)
         
         with pcol2:
             st.markdown(f"""
-            <div class="stat-card card-stack card-3d">
+            <div class="stat-card card-stack card-3d metric-container">
                 <div class="stat-label">Emotional State</div>
-                <div class="stat-value" style="font-size: 1.8rem;">💓 {current_user['emotion_state']}</div>
+                <div class="stat-value" style="font-size: 1.8rem;">💓 {CURRENT_USER['emotion_state']}</div>
                 <div style="color: #3B82F6; font-weight: 700; font-size: 1.1rem;">Monitoring active</div>
             </div>
             """, unsafe_allow_html=True)
         
         with pcol3:
             st.markdown(f"""
-            <div class="stat-card card-stack card-3d">
+            <div class="stat-card card-stack card-3d metric-container">
                 <div class="stat-label">Trades Prevented</div>
-                <div class="stat-value">{current_user['trades_prevented']}</div>
+                <div class="stat-value">{CURRENT_USER['trades_prevented']}</div>
                 <div style="color: #059669; font-weight: 700; font-size: 1.1rem;">This month</div>
             </div>
             """, unsafe_allow_html=True)
         
         with pcol4:
             st.markdown(f"""
-            <div class="stat-card card-stack card-3d">
+            <div class="stat-card card-stack card-3d metric-container">
                 <div class="stat-label">Money Saved</div>
-                <div class="stat-value">${current_user['money_saved']:,.0f}</div>
+                <div class="stat-value">${CURRENT_USER['money_saved']:,.0f}</div>
                 <div style="color: #059669; font-weight: 700; font-size: 1.1rem;">From prevented trades</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1740,15 +1761,16 @@ def main():
         device_status_col1, device_status_col2 = st.columns([2, 1])
         with device_status_col1:
             st.markdown(f"""
-            <div style="background: linear-gradient(135deg, rgba(42, 165, 179, 0.1) 0%, rgba(29, 111, 122, 0.1) 100%); 
-                        padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid #1D6F7A;">
+            <div class="metric-container" style="background: linear-gradient(135deg, rgba(42, 165, 179, 0.1) 0%, rgba(29, 111, 122, 0.1) 100%); 
+                        padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid #1D6F7A;
+                        transition: all 0.3s ease;">
                 <h4 style="color: #1D6F7A; margin-top: 0;">🎯 Your PulseTrade Wearable</h4>
                 <p style="margin: 8px 0; color: #4A5F66;">
-                    <strong>Current State:</strong> <span style="color: #1D6F7A; font-size: 1.1rem;">{current_user['emotion_state']}</span>
+                    <strong>Current State:</strong> <span style="color: #1D6F7A; font-size: 1.1rem;">{CURRENT_USER['emotion_state']}</span>
                 </p>
                 <p style="margin: 8px 0; color: #4A5F66;">
-                    <strong>Calm Level:</strong> <span style="color: #10B981;">{current_user['calm_level']}%</span> | 
-                    <strong>Stress Level:</strong> <span style="color: #EF4444;">{current_user['stress_level']}%</span>
+                    <strong>Calm Level:</strong> <span style="color: #10B981;">{CURRENT_USER['calm_level']}%</span> | 
+                    <strong>Stress Level:</strong> <span style="color: #EF4444;">{CURRENT_USER['stress_level']}%</span>
                 </p>
                 <p style="margin-bottom: 0; color: #718096; font-size: 0.9rem;">
                     📊 Monitoring: Heart rate, HRV, skin conductance, breathing patterns
@@ -1759,14 +1781,15 @@ def main():
         with device_status_col2:
             # Real-time stats card
             st.markdown(f"""
-            <div style="background: white; padding: 1.5rem; border-radius: 12px; 
-                        box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;">
+            <div class="metric-container" style="background: white; padding: 1.5rem; border-radius: 12px; 
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;
+                        transition: all 0.3s ease;">
                 <div style="color: #718096; font-size: 0.85rem; margin-bottom: 8px;">WIN RATE</div>
                 <div style="font-size: 2.5rem; font-weight: 700; color: #1D6F7A; margin-bottom: 4px;">
-                    {current_user['win_rate_calm']}%
+                    {CURRENT_USER['win_rate_calm']}%
                 </div>
                 <div style="color: #10B981; font-size: 0.9rem;">When calm</div>
-                <div style="color: #EF4444; font-size: 0.9rem; margin-top: 4px;">{current_user['win_rate_stressed']}% when stressed</div>
+                <div style="color: #EF4444; font-size: 0.9rem; margin-top: 4px;">{CURRENT_USER['win_rate_stressed']}% when stressed</div>
             </div>
             """, unsafe_allow_html=True)
         
