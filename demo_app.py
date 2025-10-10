@@ -51,6 +51,22 @@ except ImportError:
     VALIDATION_AVAILABLE = False
     print("Validation module not available")
 
+# Import new banking, freelancer, and unified analytics modules
+try:
+    from src.banking import AccountManager, PaymentEngine, CardManager
+    from src.freelancer import InvoiceEngine, TaxManager, ExpenseTracker
+    from src.analytics import CashFlowEngine, UnifiedInsights
+    from src.utils.data_generator import DataGenerator
+    from src.components.ui_components import (
+        render_account_card, render_invoice_card, render_payment_status,
+        render_tax_savings_widget, render_cash_flow_forecast,
+        render_expense_category_chart, render_quick_action_button
+    )
+    NEW_FEATURES_AVAILABLE = True
+except ImportError as e:
+    NEW_FEATURES_AVAILABLE = False
+    print(f"New features not available: {e}")
+
 # Import live data module (with fallback if not available)
 try:
     from src.data import LiveMarketData, get_market_data_hybrid, get_portfolio_live_prices
@@ -1155,10 +1171,15 @@ def create_portfolio_pie(portfolio_df):
 # Main app
 def main():
     # Header with animated gradient text
-    st.markdown("""
+    if NEW_FEATURES_AVAILABLE:
+        tagline = "Complete Financial OS for Freelancers • Banking + Business + Wealth + Emotion Intelligence"
+    else:
+        tagline = "Smart Trading Through Data + Community"
+    
+    st.markdown(f"""
     <div class="main-header">
         <h1 class="gradient-text">📊 PulseTrade</h1>
-        <p style="font-size: 1.2rem; margin: 0;">Smart Trading Through Data + Community</p>
+        <p style="font-size: 1.2rem; margin: 0;">{tagline}</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -1282,35 +1303,89 @@ def main():
         # Quick Stats
         st.markdown("#### 📊 Your Quick Stats")
         
-        st.markdown("""
-        <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md);
-                    box-shadow: var(--shadow-sm); margin-bottom: 0.75rem;">
-            <div style="color: var(--text-light); font-size: 0.85rem; font-weight: 700; 
-                        text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">
-                Portfolio Value
+        if NEW_FEATURES_AVAILABLE:
+            # Calculate total net worth
+            bank_balance = st.session_state.get('bank_account', {}).get('balance', 25000)
+            tax_balance = st.session_state.get('tax_pot', {}).get('balance', 8500)
+            portfolio_value = 68450
+            invoices_df = st.session_state.get('invoices_df', pd.DataFrame())
+            outstanding = invoices_df[invoices_df['status'] != 'paid']['total'].sum() if not invoices_df.empty else 0
+            total_net_worth = bank_balance + tax_balance + portfolio_value + outstanding
+            
+            st.markdown(f"""
+            <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md);
+                        box-shadow: var(--shadow-sm); margin-bottom: 0.75rem;">
+                <div style="color: var(--text-light); font-size: 0.85rem; font-weight: 700; 
+                            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">
+                    Total Net Worth
+                </div>
+                <div style="color: var(--primary-color); font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem;">
+                    ${total_net_worth:,.0f}
+                </div>
+                <div style="color: #10B981; font-weight: 700; font-size: 1rem;">
+                    Business + Trading
+                </div>
             </div>
-            <div style="color: var(--primary-color); font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem;">
-                $68,450
+            
+            <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md);
+                        box-shadow: var(--shadow-sm); margin-bottom: 0.75rem;">
+                <div style="color: var(--text-light); font-size: 0.85rem; font-weight: 700; 
+                            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">
+                    Business Cash
+                </div>
+                <div style="color: var(--primary-color); font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem;">
+                    ${bank_balance:,.0f}
+                </div>
+                <div style="color: #718096; font-weight: 600; font-size: 0.9rem;">
+                    Tax Pot: ${tax_balance:,.0f}
+                </div>
             </div>
-            <div style="color: #10B981; font-weight: 700; font-size: 1rem;">
-                +5.2% ↑
+            
+            <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md);
+                        box-shadow: var(--shadow-sm);">
+                <div style="color: var(--text-light); font-size: 0.85rem; font-weight: 700; 
+                            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">
+                    Today's Activity
+                </div>
+                <div style="color: var(--primary-color); font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem;">
+                    +$3,392
+                </div>
+                <div style="color: #10B981; font-weight: 700; font-size: 1rem;">
+                    Invoice + Trading
+                </div>
             </div>
-        </div>
-        
-        <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md);
-                    box-shadow: var(--shadow-sm);">
-            <div style="color: var(--text-light); font-size: 0.85rem; font-weight: 700; 
-                        text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">
-                Today's P/L
+            """, unsafe_allow_html=True)
+        else:
+            # Original stats for trading-only version
+            st.markdown("""
+            <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md);
+                        box-shadow: var(--shadow-sm); margin-bottom: 0.75rem;">
+                <div style="color: var(--text-light); font-size: 0.85rem; font-weight: 700; 
+                            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">
+                    Portfolio Value
+                </div>
+                <div style="color: var(--primary-color); font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem;">
+                    $68,450
+                </div>
+                <div style="color: #10B981; font-weight: 700; font-size: 1rem;">
+                    +5.2% ↑
+                </div>
             </div>
-            <div style="color: var(--primary-color); font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem;">
-                +$892
+            
+            <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md);
+                        box-shadow: var(--shadow-sm);">
+                <div style="color: var(--text-light); font-size: 0.85rem; font-weight: 700; 
+                            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">
+                    Today's P/L
+                </div>
+                <div style="color: var(--primary-color); font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem;">
+                    +$892
+                </div>
+                <div style="color: #10B981; font-weight: 700; font-size: 1rem;">
+                    +1.3% ↑
+                </div>
             </div>
-            <div style="color: #10B981; font-weight: 700; font-size: 1rem;">
-                +1.3% ↑
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
         
         st.markdown("---")
         
@@ -1387,21 +1462,194 @@ def main():
     if ENHANCEMENTS_AVAILABLE:
         add_debug_panel()
     
-    # Main content tabs  
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-        "📈 Dashboard", 
-        "💓 Emotion Tracker",
-        "🤖 AI Assistant",
-        "💼 Portfolio & Analysis", 
-        "👥 Community", 
-        "🎓 Learn"
-    ])
+    # Generate synthetic data for new features (if available)
+    if NEW_FEATURES_AVAILABLE:
+        if 'bank_account' not in st.session_state:
+            st.session_state['bank_account'] = DataGenerator.generate_bank_account()
+            st.session_state['tax_pot'] = DataGenerator.generate_tax_pot_account()
+            st.session_state['invoices_df'] = DataGenerator.generate_invoices(10)
+            st.session_state['expenses_df'] = DataGenerator.generate_expenses(30)
+            st.session_state['transactions_df'] = DataGenerator.generate_transactions(30)
+            st.session_state['clients_df'] = DataGenerator.generate_clients(10)
+    
+    # Main content tabs - Enhanced with new features!
+    if NEW_FEATURES_AVAILABLE:
+        tabs = st.tabs([
+            "🏦 Dashboard", 
+            "💓 Emotion Tracker",
+            "💸 Banking",
+            "🧾 Invoicing",
+            "🧮 Tax & Expenses",
+            "📈 Cash Flow",
+            "📊 Trading & Portfolio",
+            "🤖 AI Assistant",
+            "👥 Community", 
+            "🎓 Learn"
+        ])
+        tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = tabs
+    else:
+        # Fallback to original tabs if new features not available
+        tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+            "📈 Dashboard", 
+            "💓 Emotion Tracker",
+            "🤖 AI Assistant",
+            "💼 Portfolio & Analysis", 
+            "👥 Community", 
+            "🎓 Learn"
+        ])
     
     with tab1:
-        st.markdown("### Market Overview")
+        if NEW_FEATURES_AVAILABLE:
+            # UNIFIED FINANCIAL DASHBOARD
+            st.markdown("### 💼 Your Complete Financial Overview")
+            
+            # Calculate total net worth
+            bank_balance = st.session_state.get('bank_account', {}).get('balance', 25000)
+            tax_balance = st.session_state.get('tax_pot', {}).get('balance', 8500)
+            portfolio_value = 68450  # From trading
+            invoices_outstanding = st.session_state.get('invoices_df', pd.DataFrame()).query('status != "paid"')['total'].sum() if not st.session_state.get('invoices_df', pd.DataFrame()).empty else 12000
+            
+            total_net_worth = bank_balance + tax_balance + portfolio_value + invoices_outstanding
+            
+            # Top financial metrics
+            col1, col2, col3, col4 = st.columns(4)
+            
+            with col1:
+                st.markdown(f"""
+                <div class="stat-card card-stack card-3d">
+                    <div class="stat-label">Total Net Worth</div>
+                    <div class="stat-value">${total_net_worth:,.0f}</div>
+                    <div style="color: #059669; font-weight: 700; font-size: 1.1rem;">+$4,892 ↑</div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col2:
+                st.markdown(f"""
+                <div class="stat-card card-stack card-3d">
+                    <div class="stat-label">Business Cash</div>
+                    <div class="stat-value">${bank_balance:,.0f}</div>
+                    <div style="color: #059669; font-weight: 700; font-size: 1.1rem;">Available</div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col3:
+                st.markdown(f"""
+                <div class="stat-card card-stack card-3d">
+                    <div class="stat-label">Investment Portfolio</div>
+                    <div class="stat-value">${portfolio_value:,.0f}</div>
+                    <div style="color: #059669; font-weight: 700; font-size: 1.1rem;">+5.2% ↑</div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col4:
+                st.markdown(f"""
+                <div class="stat-card card-stack card-3d">
+                    <div class="stat-label">Receivables</div>
+                    <div class="stat-value">${invoices_outstanding:,.0f}</div>
+                    <div style="color: #F59E0B; font-weight: 700; font-size: 1.1rem;">Due Soon</div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            st.markdown("---")
+            
+            # Today's Activity & Quick Actions
+            col1, col2 = st.columns([2, 1])
+            
+            with col1:
+                st.markdown("### 📊 Today's Activity")
+                
+                # Business activity
+                st.markdown("""
+                <div class="card" style="padding: 1.5rem; margin-bottom: 1rem;">
+                    <h4 style="color: #1D6F7A; margin-top: 0;">💼 Business</h4>
+                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                        <span>✅ Invoice #1023 paid</span>
+                        <span style="color: #10B981; font-weight: 700;">+$2,500</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                        <span>📤 Sent 2 invoices</span>
+                        <span style="color: #718096;">$5,400</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                        <span>💳 Business expenses</span>
+                        <span style="color: #EF4444;">-$287</span>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                # Trading activity
+                st.markdown("""
+                <div class="card" style="padding: 1.5rem;">
+                    <h4 style="color: #1D6F7A; margin-top: 0;">📈 Trading & Investments</h4>
+                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                        <span>Portfolio performance</span>
+                        <span style="color: #10B981; font-weight: 700;">+$892</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                        <span>AAPL position</span>
+                        <span style="color: #10B981;">+2.45%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                        <span>Emotion prevented 1 trade</span>
+                        <span style="color: #10B981;">Saved $450</span>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col2:
+                st.markdown("### ⚡ Quick Actions")
+                
+                if st.button("💸 Send Payment", use_container_width=True):
+                    st.info("Navigate to Banking tab to send payments")
+                
+                if st.button("🧾 Create Invoice", use_container_width=True):
+                    st.info("Navigate to Invoicing tab to create invoices")
+                
+                if st.button("📊 View Cash Flow", use_container_width=True):
+                    st.info("Navigate to Cash Flow tab for forecasting")
+                
+                if st.button("📈 Make Trade", use_container_width=True):
+                    st.info("Navigate to Trading tab to execute trades")
+                
+                st.markdown("---")
+                
+                # Emotion status
+                current_emotion = random.choice(['Calm', 'Confident', 'Optimistic'])
+                st.markdown(f"""
+                <div style="background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); 
+                            padding: 1.5rem; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">😌</div>
+                    <div style="font-weight: 700; color: #065F46; font-size: 1.1rem;">{current_emotion}</div>
+                    <div style="color: #047857; font-size: 0.875rem; margin-top: 0.5rem;">✅ Optimal for decisions</div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            st.markdown("---")
+            
+            # Upcoming & Alerts
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("### 📅 Upcoming This Week")
+                st.markdown("""
+                - 💰 Q4 Estimated Tax Due (Jan 15) - $7,200
+                - 🧾 Follow up: Invoice #1019 (overdue 3 days)
+                - 💳 Adobe subscription renewal - $79.99
+                - 📊 Review cash flow forecast
+                """)
+            
+            with col2:
+                st.markdown("### 🎯 Smart Recommendations")
+                st.success("✅ Transfer $2,500 from today's payment to tax pot")
+                st.info("💡 Your cash flow is strong - consider investing surplus")
+                st.warning("⚠️ 2 invoices overdue - send friendly reminders")
         
-        # Top metrics with stacked animation
-        col1, col2, col3, col4 = st.columns(4)
+        else:
+            # Original dashboard for fallback
+            st.markdown("### Market Overview")
+            
+            # Top metrics with stacked animation
+            col1, col2, col3, col4 = st.columns(4)
         
         with col1:
             st.markdown("""
@@ -1704,8 +1952,741 @@ def main():
         with col4:
             st.metric("Money Saved", "$3,240", help="Est. savings from emotion alerts")
     
-    with tab3:
-        st.markdown("### 🤖 AI Trading Assistant")
+    # NEW BANKING TAB (tab3)
+    if NEW_FEATURES_AVAILABLE:
+        with tab3:
+            st.markdown("### 💸 Banking & Payments")
+            
+            # Account Overview
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                account = st.session_state.get('bank_account', {})
+                render_account_card(account)
+            
+            with col2:
+                tax_pot = st.session_state.get('tax_pot', {})
+                render_account_card(tax_pot)
+            
+            st.markdown("---")
+            
+            # Payment Actions
+            st.markdown("### 💳 Send Money")
+            
+            tab_ach, tab_wire, tab_p2p = st.tabs(["ACH Transfer", "Wire Transfer", "P2P Payment"])
+            
+            with tab_ach:
+                with st.form("ach_form"):
+                    recipient_name = st.text_input("Recipient Name")
+                    routing = st.text_input("Routing Number", placeholder="9 digits")
+                    account_num = st.text_input("Account Number")
+                    amount = st.number_input("Amount ($)", min_value=0.01, step=100.0)
+                    description = st.text_input("Description (optional)")
+                    
+                    if st.form_submit_button("Send ACH Transfer", use_container_width=True):
+                        if amount > 0 and routing and account_num:
+                            payment = PaymentEngine.initiate_ach_transfer(
+                                from_account=account.get('account_id', 'acc_demo'),
+                                to_account=recipient_name,
+                                routing_number=routing,
+                                account_number=account_num,
+                                amount=amount,
+                                description=description
+                            )
+                            st.success(f"✅ ACH transfer initiated! Expected completion: {payment['estimated_days']} business days")
+                            render_payment_status(payment)
+                        else:
+                            st.error("Please fill in all required fields")
+            
+            with tab_wire:
+                with st.form("wire_form"):
+                    st.info("💡 Wire transfers complete same-day if initiated before 2 PM ET ($25-35 fee)")
+                    recipient_name = st.text_input("Recipient Name")
+                    routing = st.text_input("Routing Number")
+                    account_num = st.text_input("Account Number")
+                    amount = st.number_input("Amount ($)", min_value=0.01, step=500.0)
+                    description = st.text_input("Wire Description")
+                    
+                    if st.form_submit_button("Send Wire Transfer", use_container_width=True):
+                        if amount > 0:
+                            payment = PaymentEngine.initiate_wire_transfer(
+                                from_account=account.get('account_id', 'acc_demo'),
+                                to_account=recipient_name,
+                                routing_number=routing,
+                                account_number=account_num,
+                                amount=amount,
+                                description=description
+                            )
+                            st.success(f"✅ Wire transfer initiated! Fee: ${payment['fee']:.2f}")
+                            render_payment_status(payment)
+            
+            with tab_p2p:
+                with st.form("p2p_form"):
+                    st.info("💡 P2P payments are instant and free!")
+                    email = st.text_input("Recipient Email")
+                    amount = st.number_input("Amount ($)", min_value=0.01, step=50.0)
+                    description = st.text_input("What's this for?")
+                    
+                    if st.form_submit_button("Send P2P Payment", use_container_width=True):
+                        if amount > 0 and email:
+                            payment = PaymentEngine.initiate_p2p_transfer(
+                                from_account=account.get('account_id', 'acc_demo'),
+                                to_email=email,
+                                amount=amount,
+                                description=description
+                            )
+                            st.success(f"✅ ${amount:,.2f} sent instantly to {email}!")
+                            render_payment_status(payment)
+            
+            st.markdown("---")
+            
+            # Recent Transactions
+            st.markdown("### 📜 Recent Transactions")
+            transactions_df = st.session_state.get('transactions_df', pd.DataFrame())
+            if not transactions_df.empty:
+                st.dataframe(
+                    transactions_df.head(10)[['date', 'description', 'amount', 'category', 'status']],
+                    use_container_width=True,
+                    hide_index=True
+                )
+            else:
+                st.info("No transactions yet")
+    
+    # NEW INVOICING TAB (tab4)
+    if NEW_FEATURES_AVAILABLE:
+        with tab4:
+            st.markdown("### 🧾 Invoicing & Collections")
+            
+            # Create Invoice Section
+            with st.expander("✍️ Create New Invoice", expanded=False):
+                with st.form("invoice_form"):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        client_name = st.text_input("Client Name", placeholder="Acme Corporation")
+                        client_email = st.text_input("Client Email", placeholder="billing@acme.com")
+                    
+                    with col2:
+                        payment_terms = st.selectbox("Payment Terms", ["net_30", "net_15", "net_45", "due_on_receipt"])
+                        issue_date = st.date_input("Issue Date", datetime.now())
+                    
+                    st.markdown("#### Line Items")
+                    description = st.text_input("Service Description", placeholder="Website Design")
+                    quantity = st.number_input("Hours/Quantity", min_value=1, value=10)
+                    unit_price = st.number_input("Rate/Price ($)", min_value=0.01, value=150.0)
+                    
+                    notes = st.text_area("Notes (optional)", placeholder="Thank you for your business!")
+                    
+                    if st.form_submit_button("Create & Send Invoice", use_container_width=True):
+                        line_items = [{
+                            'description': description,
+                            'quantity': quantity,
+                            'unit_price': unit_price
+                        }]
+                        
+                        invoice = InvoiceEngine.create_invoice(
+                            client_id=f"client_{hash(client_name) % 10000}",
+                            client_name=client_name,
+                            client_email=client_email,
+                            line_items=line_items,
+                            payment_terms=payment_terms,
+                            notes=notes
+                        )
+                        
+                        st.success(f"✅ Invoice {invoice['invoice_number']} created and sent!")
+                        st.info(f"📎 Payment link: {invoice['payment_link']}")
+                        
+                        # Add to session state
+                        new_invoice = pd.DataFrame([invoice])
+                        st.session_state['invoices_df'] = pd.concat([st.session_state.get('invoices_df', pd.DataFrame()), new_invoice], ignore_index=True)
+            
+            st.markdown("---")
+            
+            # Invoice List
+            st.markdown("### 📋 Your Invoices")
+            invoices_df = st.session_state.get('invoices_df', pd.DataFrame())
+            
+            if not invoices_df.empty:
+                # Filter options
+                status_filter = st.selectbox("Filter by Status", ["All", "paid", "sent", "overdue", "draft"])
+                
+                if status_filter != "All":
+                    filtered = invoices_df[invoices_df['status'] == status_filter]
+                else:
+                    filtered = invoices_df
+                
+                # Display invoices
+                for _, invoice in filtered.head(5).iterrows():
+                    render_invoice_card(invoice.to_dict())
+                
+                # Invoice Analytics
+                st.markdown("---")
+                st.markdown("### 📊 Invoice Analytics")
+                
+                col1, col2, col3 = st.columns(3)
+                
+                total_invoiced = invoices_df['total'].sum()
+                total_paid = invoices_df[invoices_df['status'] == 'paid']['total'].sum()
+                outstanding = total_invoiced - total_paid
+                
+                with col1:
+                    st.metric("Total Invoiced", f"${total_invoiced:,.2f}")
+                with col2:
+                    st.metric("Paid", f"${total_paid:,.2f}", f"{(total_paid/total_invoiced*100):.0f}%")
+                with col3:
+                    st.metric("Outstanding", f"${outstanding:,.2f}")
+            else:
+                st.info("No invoices yet. Create your first invoice above!")
+    
+    # NEW TAX & EXPENSES TAB (tab5)
+    if NEW_FEATURES_AVAILABLE:
+        with tab5:
+            st.markdown("### 🧮 Tax Management & Expenses")
+            
+            # Tax Summary
+            st.markdown("#### 💰 Tax Savings Status")
+            
+            expenses_df = st.session_state.get('expenses_df', pd.DataFrame())
+            total_expenses = expenses_df['amount'].sum() if not expenses_df.empty else 5000
+            tax_estimate = TaxManager.estimate_taxes(gross_income=100000, deductible_expenses=total_expenses)
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                tax_pot_balance = st.session_state.get('tax_pot', {}).get('balance', 8500)
+                render_tax_savings_widget({
+                    'saved': tax_pot_balance,
+                    'recommended': tax_estimate['quarterly_payment'] * 3  # 3 quarters so far
+                })
+            
+            with col2:
+                st.markdown("""
+                <div class="card" style="padding: 1.5rem;">
+                    <h4 style="color: #1D6F7A; margin-top: 0;">📅 Quarterly Estimates</h4>
+                    <div style="margin: 1rem 0;">
+                        <div style="font-size: 0.875rem; color: #718096;">Next Payment Due</div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #1D6F7A; margin: 0.5rem 0;">
+                            Jan 15, 2025
+                        </div>
+                        <div style="font-size: 1.25rem; font-weight: 600;">
+                            $7,200
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #E5E7EB;">
+                        <div style="font-size: 0.875rem; color: #718096;">Estimated Annual Tax</div>
+                        <div style="font-weight: 700; color: #1D6F7A;">
+                            ${tax_estimate['total_estimated_tax']:,.0f}
+                        </div>
+                        <div style="font-size: 0.75rem; color: #718096; margin-top: 0.25rem;">
+                            Effective rate: {tax_estimate['effective_tax_rate']:.1f}%
+                        </div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            st.markdown("---")
+            
+            # Expense Tracking
+            st.markdown("#### 📊 Business Expenses")
+            
+            if not expenses_df.empty:
+                # Expense summary
+                col1, col2, col3 = st.columns(3)
+                
+                deductible = expenses_df[expenses_df['tax_deductible'] == True]['amount'].sum()
+                non_deductible = total_expenses - deductible
+                
+                with col1:
+                    st.metric("Total Expenses", f"${total_expenses:,.2f}")
+                with col2:
+                    st.metric("Tax Deductible", f"${deductible:,.2f}", f"{(deductible/total_expenses*100):.0f}%")
+                with col3:
+                    st.metric("This Month", f"${expenses_df['amount'].head(10).sum():,.2f}")
+                
+                # Expense by category
+                st.markdown("#### 💳 Expenses by Category")
+                category_totals = expenses_df.groupby('category')['amount'].sum().to_dict()
+                render_expense_category_chart(category_totals)
+                
+                # Recent expenses
+                st.markdown("#### 📜 Recent Expenses")
+                st.dataframe(
+                    expenses_df.head(10)[['date', 'merchant', 'amount', 'category', 'tax_deductible']],
+                    use_container_width=True,
+                    hide_index=True
+                )
+                
+                # Tax deduction tips
+                st.markdown("---")
+                st.markdown("#### 💡 Tax Deduction Tips")
+                tips = TaxManager.get_deduction_tips(expenses_df)
+                for tip in tips:
+                    st.info(tip)
+            else:
+                st.info("No expenses tracked yet")
+    
+    # NEW CASH FLOW TAB (tab6)
+    if NEW_FEATURES_AVAILABLE:
+        with tab6:
+            st.markdown("### 📈 Cash Flow Forecasting")
+            
+            # Generate forecast
+            income_history = st.session_state.get('transactions_df', pd.DataFrame()).query('transaction_type == "credit"')
+            expense_history = st.session_state.get('expenses_df', pd.DataFrame())
+            invoices_df = st.session_state.get('invoices_df', pd.DataFrame())
+            outstanding_invoices = invoices_df[invoices_df['status'] != 'paid'].to_dict('records') if not invoices_df.empty else []
+            
+            forecast = CashFlowEngine.forecast_cash_flow(
+                income_history=income_history,
+                expense_history=expense_history,
+                outstanding_invoices=outstanding_invoices,
+                forecast_days=90
+            )
+            
+            # Display forecast
+            render_cash_flow_forecast(forecast)
+            
+            st.markdown("---")
+            
+            # Financial metrics
+            col1, col2, col3 = st.columns(3)
+            
+            current_balance = st.session_state.get('bank_account', {}).get('balance', 25000)
+            monthly_expenses = forecast['summary']['avg_monthly_expenses']
+            monthly_income = forecast['summary']['avg_monthly_income']
+            
+            runway = CashFlowEngine.calculate_runway(
+                current_balance=current_balance,
+                monthly_burn_rate=monthly_expenses,
+                monthly_income=monthly_income
+            )
+            
+            with col1:
+                st.metric("Current Balance", f"${current_balance:,.0f}")
+            with col2:
+                st.metric("Monthly Net", f"${monthly_income - monthly_expenses:,.0f}", 
+                         f"${monthly_income:,.0f} in, ${monthly_expenses:,.0f} out")
+            with col3:
+                if runway['runway_months'] < float('inf'):
+                    st.metric("Runway", f"{runway['runway_months']:.1f} months", runway['status'])
+                else:
+                    st.metric("Cash Flow", "Positive ✅", "Sustainable")
+            
+            # Insights
+            st.markdown("---")
+            st.markdown("### 💡 Cash Flow Insights")
+            
+            st.info(runway['message'])
+            st.success(f"📊 {forecast['summary']['forecast_accuracy']} forecast accuracy")
+            
+            if runway['runway_months'] < 6 and runway['runway_months'] != float('inf'):
+                st.warning(f"⚠️ {runway['recommendation']}")
+    
+    # TRADING & PORTFOLIO TAB (tab7 - was tab4)
+    # This preserves the existing trading functionality
+    tab_to_use = tab7 if NEW_FEATURES_AVAILABLE else tab4
+    with tab_to_use:
+        st.markdown("### 📊 Trading & Portfolio")
+        
+        # Portfolio Section
+        st.markdown("#### Your Investment Portfolio")
+        
+        # Get data source preference
+        use_live = st.session_state.get('use_live_data', False)
+        
+        # Show data source indicator
+        if use_live and LIVE_DATA_AVAILABLE:
+            st.caption("📡 Using live portfolio prices (5min cache)")
+        else:
+            st.caption("📊 Using demo portfolio data")
+        
+        portfolio_df = generate_portfolio_data(use_live=use_live)
+        total_value = portfolio_df['market_value'].sum()
+        total_cost = portfolio_df['cost_basis'].sum()
+        total_gain = total_value - total_cost
+        total_gain_pct = (total_gain / total_cost) * 100
+        
+        # Portfolio summary
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            st.metric("Total Value", f"${total_value:,.2f}")
+        with col2:
+            st.metric("Total Cost", f"${total_cost:,.2f}")
+        with col3:
+            st.metric("Total Gain/Loss", f"${total_gain:,.2f}", f"{total_gain_pct:+.2f}%")
+        with col4:
+            st.metric("Cash Balance", "$12,450.00")
+        
+        st.markdown("---")
+        
+        # Portfolio breakdown
+        col1, col2 = st.columns([2, 1])
+        
+        with col1:
+            st.markdown("##### Holdings")
+            st.dataframe(
+                portfolio_df[[
+                    'symbol', 'shares', 'avg_price', 'current_price', 
+                    'market_value', 'gain_loss', 'gain_loss_pct'
+                ]].style.format({
+                    'avg_price': '${:.2f}',
+                    'current_price': '${:.2f}',
+                    'market_value': '${:,.2f}',
+                    'gain_loss': '${:,.2f}',
+                    'gain_loss_pct': '{:+.2f}%'
+                }),
+                width='stretch',
+                hide_index=True
+            )
+        
+        with col2:
+            st.markdown("##### Allocation")
+            pie_chart = create_portfolio_pie(portfolio_df)
+            st.plotly_chart(pie_chart, use_container_width=True, key='portfolio_pie')
+        
+        # Performance chart
+        st.markdown("##### 📈 Portfolio Performance (30 Days)")
+        
+        dates = pd.date_range(end=datetime.now(), periods=30, freq='D')
+        performance = total_cost * (1 + np.random.normal(0.001, 0.02, 30)).cumprod()
+        
+        perf_df = pd.DataFrame({
+            'Date': dates,
+            'Portfolio Value': performance
+        })
+        
+        fig = px.line(
+            perf_df, 
+            x='Date', 
+            y='Portfolio Value',
+            title='Portfolio Growth'
+        )
+        fig.update_traces(line_color='#1D6F7A', line_width=3)
+        fig.update_layout(height=400, template='plotly_white')
+        st.plotly_chart(fig, use_container_width=True, key='perf_chart')
+    
+    # AI ASSISTANT TAB (tab8 - was tab3)  
+    # Enhanced with business, trading, and emotion context
+    tab_to_use_ai = tab8 if NEW_FEATURES_AVAILABLE else tab3
+    with tab_to_use_ai:
+        st.markdown("### 🤖 AI Financial Assistant")
+        
+        if NEW_FEATURES_AVAILABLE:
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 111, 122, 0.1) 100%); 
+                        padding: 2rem; border-radius: 16px; margin-bottom: 2rem; border-left: 4px solid #3B82F6;
+                        animation: fadeIn 0.6s ease-out;">
+                <h4 style="color: #1D6F7A; margin-top: 0; font-size: 1.5rem;">💬 Your Complete Financial Advisor</h4>
+                <p style="margin-bottom: 0; color: #4A5568; font-size: 1.05rem; line-height: 1.7;">
+                    Get personalized advice that considers your <strong>emotional state</strong>, 
+                    <strong>business cash flow</strong>, <strong>tax obligations</strong>, and <strong>investment portfolio</strong>. 
+                    Ask about invoicing, taxes, trading, or any financial decision!
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 111, 122, 0.1) 100%); 
+                        padding: 2rem; border-radius: 16px; margin-bottom: 2rem; border-left: 4px solid #3B82F6;
+                        animation: fadeIn 0.6s ease-out;">
+                <h4 style="color: #1D6F7A; margin-top: 0; font-size: 1.5rem;">💬 Your Personal Trading Advisor</h4>
+                <p style="margin-bottom: 0; color: #4A5568; font-size: 1.05rem; line-height: 1.7;">
+                    Powered by local Ollama AI, get personalized trading advice that considers your <strong>emotional state</strong>, 
+                    <strong>portfolio performance</strong>, and <strong>market conditions</strong>. Ask anything about trading strategies, 
+                    technical analysis, or risk management!
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        # Initialize chat history
+        if 'chat_history' not in st.session_state:
+            welcome_msg = "👋 Hi! I'm your PulseTrade AI Assistant. I can help you with business management, tax strategies, trading decisions, and emotional guidance. What would you like to know?" if NEW_FEATURES_AVAILABLE else "👋 Hi! I'm your PulseTrade AI Assistant. I can help you with trading strategies, market analysis, and emotional trading guidance. What would you like to know?"
+            st.session_state.chat_history = [{'role': 'assistant', 'content': welcome_msg}]
+        
+        # Display chat history
+        st.markdown('<div class="chat-container">', unsafe_allow_html=True)
+        
+        for message in st.session_state.chat_history:
+            if message['role'] == 'user':
+                st.markdown(f"""
+                <div class="chat-message user">
+                    <strong>You:</strong><br/>
+                    {message['content']}
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.markdown(f"""
+                <div class="chat-message assistant">
+                    <strong>🤖 AI Assistant:</strong><br/>
+                    {message['content']}
+                </div>
+                """, unsafe_allow_html=True)
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Chat input
+        st.markdown("---")
+        
+        col1, col2 = st.columns([5, 1])
+        
+        with col1:
+            user_input = st.text_input(
+                "Ask me anything...",
+                placeholder="e.g., Should I invest my invoice payment or save for taxes?",
+                key="chat_input",
+                label_visibility="collapsed"
+            )
+        
+        with col2:
+            send_button = st.button("Send 📤", use_container_width=True, type="primary")
+        
+        if send_button and user_input:
+            st.session_state.chat_history.append({'role': 'user', 'content': user_input})
+            
+            # Enhanced context for business + trading
+            if NEW_FEATURES_AVAILABLE:
+                bank_balance = st.session_state.get('bank_account', {}).get('balance', 25000)
+                tax_balance = st.session_state.get('tax_pot', {}).get('balance', 8500)
+                outstanding = st.session_state.get('invoices_df', pd.DataFrame()).query('status != "paid"')['total'].sum() if not st.session_state.get('invoices_df', pd.DataFrame()).empty else 0
+                
+                context = f"""You are a professional financial advisor for PulseTrade, a comprehensive financial platform for freelancers.
+
+Current user financial context:
+- Emotional state: Calm (72%) - Optimal for decision-making
+- Business account: ${bank_balance:,.0f}
+- Tax savings pot: ${tax_balance:,.0f}
+- Outstanding invoices: ${outstanding:,.0f}
+- Investment portfolio: $68,450 (+5.2% today)
+- Recent alert: Prevented panic sell, saved $450
+
+User question: {user_input}
+
+Provide helpful, concise advice (2-4 sentences) considering their complete financial picture and emotional state."""
+            else:
+                context = f"""You are a professional trading advisor for PulseTrade.
+User emotional state: Calm (72%)
+User question: {user_input}
+Provide helpful, concise advice (2-3 sentences)."""
+            
+            with st.spinner("🤔 Thinking..."):
+                ai_response = query_ollama(context)
+            
+            st.session_state.chat_history.append({'role': 'assistant', 'content': ai_response})
+            st.rerun()
+        
+        # Suggested questions
+        st.markdown("---")
+        st.markdown("### 💡 Suggested Questions")
+        
+        if NEW_FEATURES_AVAILABLE:
+            suggestions = [
+                "Should I pay estimated taxes now?",
+                "When to follow up on overdue invoices?",
+                "Can I afford to hire a contractor?",
+                "Should I invest surplus cash?",
+                "How to optimize my tax deductions?",
+                "Best time to make trades?"
+            ]
+        else:
+            suggestions = [
+                "Should I trade when anxious?",
+                "How to set stop losses?",
+                "Best time to buy stocks?",
+                "What's RSI indicator?",
+                "How to manage risk?",
+                "Portfolio diversification tips?"
+            ]
+        
+        col1, col2, col3 = st.columns(3)
+        for idx, suggestion in enumerate(suggestions[:3]):
+            with [col1, col2, col3][idx]:
+                if st.button(f"💬 {suggestion}", key=f"sug_{idx}", use_container_width=True):
+                    st.session_state.chat_history.append({'role': 'user', 'content': suggestion})
+                    context = f"""You are a professional financial advisor for PulseTrade.
+User question: {suggestion}
+Provide helpful, concise advice."""
+                    ai_response = query_ollama(context)
+                    st.session_state.chat_history.append({'role': 'assistant', 'content': ai_response})
+                    st.rerun()
+        
+        # Clear chat button
+        if st.button("🗑️ Clear Chat History", key="clear_chat"):
+            welcome_msg = "👋 Hi! I'm your PulseTrade AI Assistant. What would you like to know?"
+            st.session_state.chat_history = [{'role': 'assistant', 'content': welcome_msg}]
+            st.rerun()
+    
+    # COMMUNITY TAB (tab9 - was tab5)
+    tab_to_use_community = tab9 if NEW_FEATURES_AVAILABLE else tab5
+    with tab_to_use_community:
+        st.markdown("### 👥 Community Feed")
+        
+        if NEW_FEATURES_AVAILABLE:
+            st.info("💡 Share both trading insights AND freelance tips! Connect with traders and freelancers worldwide.")
+        
+        col1, col2 = st.columns([2, 1])
+        
+        with col1:
+            # Post creation
+            with st.expander("✍️ Create a Post", expanded=False):
+                post_content = st.text_area("Share your insights...", placeholder="What are you working on today?")
+                post_ticker = st.text_input("Topic/Ticker (optional)", placeholder="e.g., AAPL or #FreelanceTips")
+                
+                col_a, col_b, col_c = st.columns(3)
+                with col_a:
+                    post_signal = st.selectbox("Signal/Type", ["BUY", "SELL", "HOLD", "TIP", "QUESTION"])
+                with col_b:
+                    if st.button("📤 Post", type="primary", key="post_btn"):
+                        st.success("Post shared with community!")
+                with col_c:
+                    if st.button("📷 Add Chart", key="chart_btn"):
+                        st.info("Chart upload coming soon!")
+            
+            # Community posts
+            st.markdown("#### Recent Community Posts")
+            
+            posts = generate_community_posts()
+            
+            for post in posts[:5]:
+                signal_class = f"signal-{post['signal'].lower()}"
+                
+                st.markdown(f"""
+                <div class="community-post">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <div>
+                            <strong>{post['user']}</strong>
+                            <span class="user-badge">VERIFIED</span>
+                        </div>
+                        <small style="color: #626C71;">{post['timestamp'].strftime('%I:%M %p')}</small>
+                    </div>
+                    <p style="margin: 0.5rem 0;">{post['content']}</p>
+                    <div style="margin-top: 0.5rem;">
+                        <span class="trade-signal {signal_class}">${post['ticker']} - {post['signal']}</span>
+                    </div>
+                    <div style="margin-top: 0.75rem; color: #626C71; font-size: 0.9rem;">
+                        <span style="margin-right: 1rem;">❤️ {post['likes']}</span>
+                        <span>💬 {post['comments']}</span>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                st.markdown("")
+        
+        with col2:
+            st.markdown("#### 🏆 Top Contributors")
+            
+            traders = pd.DataFrame({
+                'User': ['Mike_Investor', 'Emma_Finance', 'Sarah_Trader', 'Alex_Markets', 'Jordan_Tech'],
+                'Performance': ['+15.2%', '+12.8%', '+11.3%', '+9.7%', '+8.5%'],
+                'Followers': ['2.4K', '1.8K', '1.5K', '1.2K', '950']
+            })
+            
+            for idx, row in traders.iterrows():
+                st.markdown(f"""
+                <div style="background: white; padding: 1rem; border-radius: 10px; margin: 0.75rem 0; border: 2px solid #E1E8EB; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
+                    <div style="font-weight: 700; color: #0F2B33; font-size: 1rem;">{row['User']}</div>
+                    <div style="color: #059669; font-size: 1.25rem; font-weight: 700; margin: 0.25rem 0;">{row['Performance']}</div>
+                    <div style="color: #4A5F66; font-size: 0.875rem; font-weight: 500;">{row['Followers']} followers</div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            st.markdown("---")
+            
+            st.markdown("#### 💡 Trending Topics")
+            topics = ['#TechEarnings', '#FreelanceTips', '#TaxStrategy', '#InvoicingHacks', '#MarketRally']
+            for topic in topics:
+                st.markdown(f"**{topic}** • 523 posts")
+    
+    # LEARN TAB (tab10 - was tab6)
+    tab_to_use_learn = tab10 if NEW_FEATURES_AVAILABLE else tab6
+    with tab_to_use_learn:
+        st.markdown("### 🎓 Learning Center")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("#### 📚 Featured Courses")
+            
+            if NEW_FEATURES_AVAILABLE:
+                courses = [
+                    {'title': 'Freelance Finance Fundamentals', 'duration': '1 hour', 'level': 'Beginner', 'students': '3,245'},
+                    {'title': 'Tax Strategies for Freelancers', 'duration': '2 hours', 'level': 'Intermediate', 'students': '2,892'},
+                    {'title': 'Cash Flow Management Mastery', 'duration': '1.5 hours', 'level': 'Intermediate', 'students': '1,834'},
+                    {'title': 'Investment Portfolio Building', 'duration': '2.5 hours', 'level': 'Advanced', 'students': '1,234'}
+                ]
+            else:
+                courses = [
+                    {'title': 'Technical Analysis Fundamentals', 'duration': '45 mins', 'level': 'Beginner', 'students': '2,345'},
+                    {'title': 'Options Trading Strategies', 'duration': '2 hours', 'level': 'Intermediate', 'students': '1,892'},
+                    {'title': 'Portfolio Risk Management', 'duration': '1.5 hours', 'level': 'Advanced', 'students': '1,234'}
+                ]
+            
+            for course in courses:
+                with st.container():
+                    st.markdown(f"""
+                    <div style="background: white; padding: 1.75rem; border-radius: 12px; margin: 1rem 0; border: 2px solid #E1E8EB; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                        <h4 style="color: #1D6F7A; margin: 0 0 0.75rem 0; font-size: 1.25rem; font-weight: 700;">{course['title']}</h4>
+                        <div style="color: #4A5F66; font-size: 0.95rem; font-weight: 500;">
+                            <span>⏱️ {course['duration']}</span> • 
+                            <span>📊 {course['level']}</span> • 
+                            <span>👥 {course['students']} students</span>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    if st.button(f"Start Course →", key=f"course_{course['title']}", type="primary"):
+                        st.success(f"Starting '{course['title']}'...")
+        
+        with col2:
+            st.markdown("#### 📖 Latest Articles")
+            
+            if NEW_FEATURES_AVAILABLE:
+                articles = [
+                    "Complete Guide to Quarterly Tax Estimates",
+                    "Invoicing Best Practices for Freelancers",
+                    "Building Emergency Funds on Irregular Income",
+                    "Investment Strategies for Self-Employed"
+                ]
+            else:
+                articles = [
+                    "Understanding Market Volatility in 2024",
+                    "Top 5 Technical Indicators Every Trader Should Know",
+                    "Building a Balanced Portfolio: A Step-by-Step Guide",
+                    "The Psychology of Trading: Avoiding Common Mistakes"
+                ]
+            
+            for article in articles:
+                st.markdown(f"""
+                <div style="background: #F8F9FA; padding: 1.25rem; border-radius: 10px; margin: 0.75rem 0; border: 2px solid #E1E8EB;">
+                    <div style="font-weight: 700; color: #0F2B33; font-size: 1rem; line-height: 1.4;">{article}</div>
+                    <div style="color: #4A5F66; font-size: 0.875rem; margin-top: 0.5rem; font-weight: 500;">
+                        📖 5 min read • Published today
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+        
+        st.markdown("---")
+        
+        st.markdown("#### 🎥 Video Tutorials")
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+            st.markdown("**Cash Flow Forecasting Basics**" if NEW_FEATURES_AVAILABLE else "**How to Read Candlestick Charts**")
+        
+        with col2:
+            st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+            st.markdown("**Tax Deductions You're Missing**" if NEW_FEATURES_AVAILABLE else "**Understanding Support & Resistance**")
+        
+        with col3:
+            st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+            st.markdown("**Invoice Collection Strategies**" if NEW_FEATURES_AVAILABLE else "**Risk Management Basics**")
+    
+    # Original tab3 content (fallback for old version)
+    if not NEW_FEATURES_AVAILABLE:
+        with tab3:
+            st.markdown("### 🤖 AI Trading Assistant")
         
         st.markdown("""
         <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 111, 122, 0.1) 100%); 
@@ -2178,7 +3159,10 @@ Provide helpful, concise advice (2-3 sentences)."""
     st.markdown("""
     <div style="text-align: center; color: #4A5F66; padding: 2.5rem 0; background: #F8F9FA; border-radius: 12px; margin-top: 2rem;">
         <p style="font-size: 1.25rem; font-weight: 700; color: #1D6F7A; margin-bottom: 0.5rem;">PulseTrade</p>
-        <p style="font-weight: 600; margin-bottom: 1rem;">Empowering Retail Investors Through Data + Community</p>
+        <p style="font-weight: 600; margin-bottom: 1rem;">""" + (
+            "The Complete Financial OS for Freelancers" if NEW_FEATURES_AVAILABLE else 
+            "Empowering Retail Investors Through Data + Community"
+        ) + """</p>
         <p style="font-size: 0.875rem; color: #6B7280;">Demo Version • All data is synthetic for demonstration purposes</p>
         <p style="font-size: 0.875rem; color: #6B7280;">© 2025 PulseTrade. All rights reserved.</p>
     </div>
