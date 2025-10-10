@@ -17,7 +17,7 @@ import json
 
 # Import performance enhancements and optimizations
 try:
-    from app_enhancements import (
+    from src.utils import (
         initialize_enhancements, 
         enable_debug_mode,
         add_debug_panel,
@@ -32,7 +32,7 @@ except ImportError:
 
 # Import analytics engine
 try:
-    from analytics_engine import (
+    from src.analytics import (
         EmotionAnalytics,
         PortfolioAnalytics,
         MarketInsights,
@@ -45,8 +45,7 @@ except ImportError:
 
 # Import validation and SEO
 try:
-    from validation import InputValidator, ValidationError
-    from seo_meta import initialize_seo_and_meta
+    from src.utils import InputValidator, ValidationError, initialize_seo_and_meta
     VALIDATION_AVAILABLE = True
 except ImportError:
     VALIDATION_AVAILABLE = False
@@ -54,7 +53,7 @@ except ImportError:
 
 # Import live data module (with fallback if not available)
 try:
-    from live_data import LiveMarketData, get_market_data_hybrid, get_portfolio_live_prices
+    from src.data import LiveMarketData, get_market_data_hybrid, get_portfolio_live_prices
     LIVE_DATA_AVAILABLE = True
 except ImportError:
     LIVE_DATA_AVAILABLE = False
