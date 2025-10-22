@@ -893,6 +893,86 @@ def generate_emotion_data():
     }
     return emotions
 
+def get_enhanced_ai_response(question, context):
+    """Enhanced AI responses using pattern matching and contextual analysis"""
+    
+    question_lower = question.lower()
+    
+    # Analyze emotional context from the prompt
+    emotional_state = "Calm"
+    if "anxious" in context.lower() or "stress" in context.lower():
+        emotional_state = "Anxious"
+    elif "confident" in context.lower() or "optimistic" in context.lower():
+        emotional_state = "Confident"
+    
+    # Risk management questions
+    if any(word in question_lower for word in ['risk', 'stop loss', 'stop-loss', 'position size', 'portfolio']):
+        return f"""🎯 **Risk Management Strategy**
+
+Based on your current emotional state ({emotional_state}), here's your personalized approach:
+
+**Position Sizing**: Never risk more than 2% of your portfolio on a single trade. With your current portfolio ($68,450), that's ~$1,370 max per trade.
+
+**Stop Losses**: Set at 2% below entry for most trades. This limits your downside while allowing for normal market volatility.
+
+**Emotional Check**: Your current state ({emotional_state}) is {'good' if emotional_state == 'Calm' else 'concerning'}. {'Proceed with confidence!' if emotional_state == 'Calm' else 'Consider waiting for a calmer state before trading.'}
+
+**Pro Tip**: Your wearable device will alert you if stress levels spike during trading. Trust the system - it's saved you $450 this month!"""
+
+    # Market timing questions
+    elif any(word in question_lower for word in ['when', 'timing', 'time', 'best time', 'market hours']):
+        return f"""⏰ **Optimal Trading Timing**
+
+**Your Best Times** (based on your emotional patterns):
+- **Morning (9:30-11:30 AM)**: High volume, clear signals
+- **Afternoon (2:00-4:00 PM)**: Good for swing trades
+- **Avoid**: First 30 minutes (too volatile) and last 30 minutes (low liquidity)
+
+**Emotional Timing**: Your data shows 72% win rate when calm vs 38% when anxious. Trade only when your calm level is 70%+.
+
+**Today's Recommendation**: {'Good time to trade' if emotional_state == 'Calm' else 'Wait for emotional state to improve before trading.'}
+
+**Market Context**: Current market shows moderate volatility - perfect for your risk tolerance."""
+
+    # Technical analysis questions
+    elif any(word in question_lower for word in ['rsi', 'macd', 'indicator', 'technical', 'chart', 'signal']):
+        return f"""📊 **Technical Analysis Guide**
+
+**RSI (Relative Strength Index)**:
+- Above 70: Overbought (consider selling)
+- Below 30: Oversold (consider buying)
+- 50: Neutral zone
+
+**MACD (Moving Average Convergence Divergence)**:
+- Bullish: MACD line crosses above signal line
+- Bearish: MACD line crosses below signal line
+
+**Your Current Setup**: With your emotional state ({emotional_state}), focus on:
+- {'Trend-following strategies' if emotional_state == 'Calm' else 'Conservative, low-risk trades'}
+- Use multiple indicators for confirmation
+- Set strict stop-losses
+
+**Pro Tip**: Your AI assistant considers both technical signals AND your emotional state for better accuracy."""
+
+    # General trading advice
+    else:
+        return f"""💡 **Personalized Trading Advice**
+
+**Your Current Status**:
+- Emotional State: {emotional_state}
+- Portfolio Value: $68,450
+- Win Rate: 72% (when calm) vs 38% (when anxious)
+
+**Key Principles**:
+1. **Emotion Management**: Only trade when calm (70%+ calm level)
+2. **Risk Control**: Never risk more than 2% per trade
+3. **Diversification**: Spread risk across different sectors
+4. **Patience**: Wait for high-probability setups
+
+**Today's Focus**: {'Consider new positions' if emotional_state == 'Calm' else 'Focus on managing existing positions and emotional state'}
+
+**Remember**: Your wearable device is your secret weapon - it prevents costly emotional decisions!"""
+
 def get_free_ai_response(question, context):
     """Generate helpful trading advice using built-in logic (100% free, no external dependencies)"""
     
@@ -1036,25 +1116,8 @@ For YOUR portfolio ($68,450):
 
 *For specific questions, try asking about: stop losses, risk management, RSI indicators, or timing your trades.*"""
 
-def query_ollama(prompt, model="llama2"):
-    """Query local Ollama model for AI responses, with free fallback"""
-    
-    # Try Ollama first (if available)
-    try:
-        response = requests.post(
-            'http://localhost:11434/api/generate',
-            json={
-                'model': model,
-                'prompt': prompt,
-                'stream': False
-            },
-            timeout=10  # Reduced timeout
-        )
-        
-        if response.status_code == 200:
-            return response.json().get('response', 'Error: No response generated')
-    except:
-        pass  # Fall through to free AI
+def query_ai_model(prompt, model="huggingface"):
+    """Query AI model for responses - tries multiple free options"""
     
     # Extract question from context
     question = ""
@@ -1063,8 +1126,89 @@ def query_ollama(prompt, model="llama2"):
     else:
         question = prompt
     
-    # Use free built-in AI (no external dependencies)
+    # Try enhanced built-in AI first (most reliable)
+    try:
+        enhanced_response = get_enhanced_ai_response(question, prompt)
+        if enhanced_response and len(enhanced_response.strip()) > 20:
+            return enhanced_response
+    except Exception as e:
+        print(f"Enhanced AI error: {e}")
+    
+    # Try Hugging Face Inference API (free, no API key needed for basic models)
+    try:
+        response = query_huggingface(question, prompt)
+        if response and len(response.strip()) > 10:  # Valid response
+            return response
+    except Exception as e:
+        print(f"Hugging Face API error: {e}")
+    
+    # Try Ollama (if available locally)
+    try:
+        response = requests.post(
+            'http://localhost:11434/api/generate',
+            json={
+                'model': 'llama2',
+                'prompt': prompt,
+                'stream': False
+            },
+            timeout=10
+        )
+        
+        if response.status_code == 200:
+            return response.json().get('response', 'Error: No response generated')
+    except:
+        pass  # Fall through to built-in AI
+    
+    # Fallback to built-in AI responses
     return get_free_ai_response(question, prompt)
+
+def query_huggingface(question, context):
+    """Query free AI models for responses"""
+    
+    # Try multiple free AI services
+    ai_services = [
+        {
+            "name": "Hugging Face GPT-2",
+            "url": "https://api-inference.huggingface.co/models/gpt2",
+            "payload": {
+                "inputs": f"Trading advice for: {question}",
+                "parameters": {"max_length": 120, "temperature": 0.8}
+            }
+        },
+        {
+            "name": "Hugging Face DistilGPT-2", 
+            "url": "https://api-inference.huggingface.co/models/distilgpt2",
+            "payload": {
+                "inputs": f"Financial advice: {question}",
+                "parameters": {"max_length": 100, "temperature": 0.7}
+            }
+        }
+    ]
+    
+    for service in ai_services:
+        try:
+            response = requests.post(
+                service["url"],
+                json=service["payload"],
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                if isinstance(result, list) and len(result) > 0:
+                    generated = result[0].get('generated_text', '')
+                    # Clean up the response
+                    if 'Trading advice for:' in generated:
+                        return generated.split('Trading advice for:')[1].strip()
+                    elif 'Financial advice:' in generated:
+                        return generated.split('Financial advice:')[1].strip()
+                    return generated.strip()
+                    
+        except Exception as e:
+            print(f"{service['name']} error: {e}")
+            continue
+    
+    return None
 
 @st.cache_data
 def generate_emotion_history():
@@ -2079,7 +2223,7 @@ Provide helpful, concise advice (2-3 sentences) considering their emotional stat
             </div>
             """, unsafe_allow_html=True)
             
-            ai_response = query_ollama(context)
+            ai_response = query_ai_model(context)
             
             # Add AI response
             st.session_state.chat_history.append({
@@ -2117,7 +2261,7 @@ User emotional state: Calm (72%)
 User question: {suggestion}
 Provide helpful, concise advice (2-3 sentences)."""
                     
-                    ai_response = query_ollama(context)
+                    ai_response = query_ai_model(context)
                     
                     st.session_state.chat_history.append({
                         'role': 'assistant',
