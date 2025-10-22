@@ -532,32 +532,225 @@ st.markdown("""
     }
     
     /* Chat Container */
-    .chat-container {
+    /* Enhanced Chat Container */
+    .chat-container-enhanced {
         background: var(--bg-primary);
         border-radius: var(--radius-lg);
-        padding: 1.5rem;
-        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-color);
         animation: fadeIn 0.5s ease-out;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     }
     
-    .chat-message {
+    .chat-header {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--text-white);
+    }
+    
+    .ai-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+    }
+    
+    .status-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+    
+    .status-indicator.online {
+        background: #10B981;
+    }
+    
+    .chat-info {
+        font-size: 0.85rem;
+        opacity: 0.9;
+    }
+    
+    .chat-messages {
+        max-height: 500px;
+        overflow-y: auto;
         padding: 1rem;
-        border-radius: var(--radius-md);
-        margin: 0.75rem 0;
-        animation: slideIn 0.3s ease-out;
     }
     
-    .chat-message.user {
+    .chat-message.enhanced {
+        margin: 1rem 0;
+        padding: 0;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        animation: slideInUp 0.4s ease-out;
+    }
+    
+    .chat-message.user.enhanced {
         background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
         color: var(--text-white);
         margin-left: 2rem;
     }
     
-    .chat-message.assistant {
+    .chat-message.assistant.enhanced {
         background: var(--bg-secondary);
         color: var(--text-primary);
         margin-right: 2rem;
-        border: 1px solid var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+    }
+    
+    .message-header {
+        padding: 0.75rem 1rem 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .chat-message.assistant.enhanced .message-header {
+        border-bottom: 1px solid var(--border-color);
+        background: var(--bg-primary);
+    }
+    
+    .timestamp {
+        font-size: 0.75rem;
+        opacity: 0.7;
+        font-weight: 400;
+    }
+    
+    .message-content {
+        padding: 1rem;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+    
+    .message-actions {
+        padding: 0.5rem 1rem;
+        display: flex;
+        gap: 0.5rem;
+        background: var(--bg-primary);
+        border-top: 1px solid var(--border-color);
+    }
+    
+    .action-btn {
+        background: none;
+        border: 1px solid var(--border-color);
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .action-btn:hover {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+    
+    /* Thinking indicator */
+    .chat-message.thinking {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+    }
+    
+    .thinking-indicator {
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .typing-animation {
+        display: flex;
+        gap: 4px;
+    }
+    
+    .typing-animation span {
+        width: 8px;
+        height: 8px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        animation: typing 1.4s infinite ease-in-out;
+    }
+    
+    .typing-animation span:nth-child(1) { animation-delay: -0.32s; }
+    .typing-animation span:nth-child(2) { animation-delay: -0.16s; }
+    
+    .thinking-text {
+        color: var(--text-secondary);
+        font-style: italic;
+    }
+    
+    /* Enhanced input container */
+    .chat-input-container {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 1rem;
+        margin-top: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .input-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+    
+    .input-tips {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
+    
+    /* Suggestions container */
+    .suggestions-container {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(29, 111, 122, 0.05) 100%);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .suggestions-container h4 {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .suggestions-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Animations */
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    
+    @keyframes typing {
+        0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+        40% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     
     /* Emotion Gauge Animation */
@@ -2138,47 +2331,106 @@ def main():
                     animation: fadeIn 0.6s ease-out;">
             <h4 style="color: #1D6F7A; margin-top: 0; font-size: 1.5rem;">💬 Your Personal Trading Advisor</h4>
             <p style="margin-bottom: 0; color: #4A5568; font-size: 1.05rem; line-height: 1.7;">
-                Powered by local Ollama AI, get personalized trading advice that considers your <strong>emotional state</strong>, 
+                Powered by advanced AI, get personalized trading advice that considers your <strong>emotional state</strong>, 
                 <strong>portfolio performance</strong>, and <strong>market conditions</strong>. Ask anything about trading strategies, 
                 technical analysis, or risk management!
             </p>
         </div>
         """, unsafe_allow_html=True)
         
-        # Initialize chat history
+        # Initialize chat history with timestamps
         if 'chat_history' not in st.session_state:
             st.session_state.chat_history = [
                 {
                     'role': 'assistant',
-                    'content': "👋 Hi! I'm your PulseTrade AI Assistant. I can help you with trading strategies, market analysis, and emotional trading guidance. What would you like to know?"
+                    'content': "👋 Hi! I'm your PulseTrade AI Assistant. I can help you with trading strategies, market analysis, and emotional trading guidance. What would you like to know?",
+                    'timestamp': datetime.now().strftime("%H:%M")
                 }
             ]
         
-        # Display chat history
-        st.markdown('<div class="chat-container">', unsafe_allow_html=True)
+        # Initialize AI thinking state
+        if 'ai_thinking' not in st.session_state:
+            st.session_state.ai_thinking = False
         
-        for message in st.session_state.chat_history:
+        # Enhanced chat container with professional styling
+        st.markdown("""
+        <div class="chat-container-enhanced">
+            <div class="chat-header">
+                <div class="ai-status">
+                    <div class="status-indicator online"></div>
+                    <span>AI Assistant Online</span>
+                </div>
+                <div class="chat-info">
+                    <span>💡 Powered by advanced AI</span>
+                </div>
+            </div>
+            <div class="chat-messages">
+        """, unsafe_allow_html=True)
+        
+        # Display chat history with enhanced styling
+        for i, message in enumerate(st.session_state.chat_history):
             if message['role'] == 'user':
                 st.markdown(f"""
-                <div class="chat-message user">
-                    <strong>You:</strong><br/>
-                    {message['content']}
+                <div class="chat-message user enhanced">
+                    <div class="message-header">
+                        <strong>You</strong>
+                        <span class="timestamp">{message.get('timestamp', datetime.now().strftime('%H:%M'))}</span>
+                    </div>
+                    <div class="message-content">
+                        {message['content']}
+                    </div>
                 </div>
                 """, unsafe_allow_html=True)
             else:
                 st.markdown(f"""
-                <div class="chat-message assistant">
-                    <strong>🤖 AI Assistant:</strong><br/>
-                    {message['content']}
+                <div class="chat-message assistant enhanced">
+                    <div class="message-header">
+                        <strong>🤖 AI Assistant</strong>
+                        <span class="timestamp">{message.get('timestamp', datetime.now().strftime('%H:%M'))}</span>
+                    </div>
+                    <div class="message-content">
+                        {message['content']}
+                    </div>
+                    <div class="message-actions">
+                        <button class="action-btn" onclick="copyMessage('{i}')">📋 Copy</button>
+                        <button class="action-btn" onclick="likeMessage('{i}')">👍 Helpful</button>
+                    </div>
                 </div>
                 """, unsafe_allow_html=True)
         
-        st.markdown('</div>', unsafe_allow_html=True)
+        # Show AI thinking indicator
+        if st.session_state.ai_thinking:
+            st.markdown("""
+            <div class="chat-message assistant enhanced thinking">
+                <div class="message-header">
+                    <strong>🤖 AI Assistant</strong>
+                    <span class="timestamp">Thinking...</span>
+                </div>
+                <div class="thinking-indicator">
+                    <div class="typing-animation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span class="thinking-text">Analyzing your question and emotional state...</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
         
-        # Chat input
-        st.markdown("---")
+        st.markdown("</div></div>", unsafe_allow_html=True)
         
-        col1, col2 = st.columns([5, 1])
+        # Enhanced chat input section
+        st.markdown("""
+        <div class="chat-input-container">
+            <div class="input-header">
+                <span>💬 Ask your trading question</span>
+                <div class="input-tips">
+                    <span class="tip">💡 Be specific for better advice</span>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        col1, col2, col3 = st.columns([6, 1, 1])
         
         with col1:
             user_input = st.text_input(
@@ -2189,14 +2441,25 @@ def main():
             )
         
         with col2:
-            send_button = st.button("Send 📤", use_container_width=True, type="primary")
+            send_button = st.button("🚀 Send", key="send_button", use_container_width=True, type="primary")
         
+        with col3:
+            clear_button = st.button("🗑️", key="clear_button", use_container_width=True, help="Clear chat history")
+        
+        st.markdown("</div>", unsafe_allow_html=True)
+        
+        # Handle send message with enhanced UX
         if send_button and user_input:
-            # Add user message
+            # Add user message with timestamp
             st.session_state.chat_history.append({
                 'role': 'user',
-                'content': user_input
+                'content': user_input,
+                'timestamp': datetime.now().strftime("%H:%M")
             })
+            
+            # Set AI thinking state
+            st.session_state.ai_thinking = True
+            st.rerun()
             
             # Create context-aware prompt
             context = f"""You are a professional trading advisor for PulseTrade, a platform that monitors traders' emotions in real-time.
@@ -2211,74 +2474,111 @@ User question: {user_input}
 
 Provide helpful, concise advice (2-3 sentences) considering their emotional state and trading psychology. Be supportive and data-driven."""
             
-            # Query Ollama with animated loading
-            st.markdown("""
-            <div style="text-align: center; padding: 1rem;">
-                <div style="display: inline-flex; gap: 8px;">
-                    <span class="ai-dot" style="width: 12px; height: 12px; background: #1D6F7A; border-radius: 50%; display: inline-block;"></span>
-                    <span class="ai-dot" style="width: 12px; height: 12px; background: #1D6F7A; border-radius: 50%; display: inline-block;"></span>
-                    <span class="ai-dot" style="width: 12px; height: 12px; background: #1D6F7A; border-radius: 50%; display: inline-block;"></span>
-                </div>
-                <p class="ai-thinking" style="margin-top: 0.5rem; color: #4A5568;">AI thinking...</p>
-            </div>
-            """, unsafe_allow_html=True)
+            # Get AI response with enhanced error handling
+            try:
+                ai_response = query_ai_model(context)
+                if not ai_response or len(ai_response.strip()) < 10:
+                    ai_response = "I apologize, but I'm having trouble processing your request right now. Please try rephrasing your question or ask about risk management, trading strategies, or market analysis."
+            except Exception as e:
+                ai_response = "I'm experiencing some technical difficulties. Please try again in a moment, or ask about trading strategies, risk management, or market analysis."
             
-            ai_response = query_ai_model(context)
-            
-            # Add AI response
+            # Add AI response with timestamp
             st.session_state.chat_history.append({
                 'role': 'assistant',
-                'content': ai_response
+                'content': ai_response,
+                'timestamp': datetime.now().strftime("%H:%M")
             })
             
+            # Clear AI thinking state
+            st.session_state.ai_thinking = False
             st.rerun()
         
-        # Suggested questions
-        st.markdown("---")
-        st.markdown("### 💡 Suggested Questions")
-        
-        col1, col2, col3 = st.columns(3)
-        
-        suggestions = [
-            "Should I trade when anxious?",
-            "How to set stop losses?",
-            "Best time to buy stocks?",
-            "What's RSI indicator?",
-            "How to manage risk?",
-            "Portfolio diversification tips?"
-        ]
-        
-        for idx, suggestion in enumerate(suggestions[:3]):
-            with col1 if idx == 0 else col2 if idx == 1 else col3:
-                if st.button(f"💬 {suggestion}", key=f"sug_{idx}", use_container_width=True):
-                    st.session_state.chat_history.append({
-                        'role': 'user',
-                        'content': suggestion
-                    })
-                    
-                    context = f"""You are a professional trading advisor for PulseTrade.
-User emotional state: Calm (72%)
-User question: {suggestion}
-Provide helpful, concise advice (2-3 sentences)."""
-                    
-                    ai_response = query_ai_model(context)
-                    
-                    st.session_state.chat_history.append({
-                        'role': 'assistant',
-                        'content': ai_response
-                    })
-                    
-                    st.rerun()
-        
-        # Clear chat button
-        if st.button("🗑️ Clear Chat History", key="clear_chat"):
+        # Handle clear chat
+        if clear_button:
             st.session_state.chat_history = [
                 {
                     'role': 'assistant',
-                    'content': "👋 Hi! I'm your PulseTrade AI Assistant. I can help you with trading strategies, market analysis, and emotional trading guidance. What would you like to know?"
+                    'content': "👋 Hi! I'm your PulseTrade AI Assistant. I can help you with trading strategies, market analysis, and emotional trading guidance. What would you like to know?",
+                    'timestamp': datetime.now().strftime("%H:%M")
                 }
             ]
+            st.session_state.ai_thinking = False
             st.rerun()
+        
+        # Enhanced suggested questions section
+        st.markdown("""
+        <div class="suggestions-container">
+            <h4>💡 Quick Questions</h4>
+            <p class="suggestions-subtitle">Click any question to get instant AI advice</p>
+        """, unsafe_allow_html=True)
+        
+        # Suggested questions with enhanced styling
+        suggestions = [
+            {"text": "Should I trade when I'm feeling anxious?", "icon": "😰", "category": "Emotions"},
+            {"text": "How to set stop losses effectively?", "icon": "🎯", "category": "Risk"},
+            {"text": "What's my optimal trading time?", "icon": "⏰", "category": "Timing"},
+            {"text": "How to prevent panic selling?", "icon": "🛡️", "category": "Psychology"},
+            {"text": "Portfolio diversification tips?", "icon": "📊", "category": "Portfolio"},
+            {"text": "RSI indicator explanation?", "icon": "📈", "category": "Technical"}
+        ]
+        
+        # Display suggestions in a grid
+        for i in range(0, len(suggestions), 3):
+            cols = st.columns(3)
+            for j in range(3):
+                if i + j < len(suggestions):
+                    suggestion = suggestions[i + j]
+                    with cols[j]:
+                        if st.button(
+                            f"{suggestion['icon']} {suggestion['text']}", 
+                            key=f"sug_{i+j}", 
+                            use_container_width=True,
+                            help=f"Category: {suggestion['category']}"
+                        ):
+                            # Add user message
+                            st.session_state.chat_history.append({
+                                'role': 'user',
+                                'content': suggestion['text'],
+                                'timestamp': datetime.now().strftime("%H:%M")
+                            })
+                            
+                            # Set AI thinking state
+                            st.session_state.ai_thinking = True
+                            st.rerun()
+                            
+                            # Create context-aware prompt
+                            context = f"""You are a professional trading advisor for PulseTrade, a platform that monitors traders' emotions in real-time.
+                            
+Current user context:
+- Emotional state: Calm (72%)
+- Current portfolio: $68,450 (+5.2% today)
+- Recent alert: Prevented panic sell on TSLA, saved $450
+- Win rate when calm: 72%
+
+User question: {suggestion['text']}
+
+Provide helpful, concise advice (2-3 sentences) considering their emotional state and trading psychology. Be supportive and data-driven."""
+                            
+                            # Get AI response
+                            try:
+                                ai_response = query_ai_model(context)
+                                if not ai_response or len(ai_response.strip()) < 10:
+                                    ai_response = "I apologize, but I'm having trouble processing your request right now. Please try rephrasing your question or ask about risk management, trading strategies, or market analysis."
+                            except Exception as e:
+                                ai_response = "I'm experiencing some technical difficulties. Please try again in a moment, or ask about trading strategies, risk management, or market analysis."
+                            
+                            # Add AI response
+                            st.session_state.chat_history.append({
+                                'role': 'assistant',
+                                'content': ai_response,
+                                'timestamp': datetime.now().strftime("%H:%M")
+                            })
+                            
+                            # Clear AI thinking state
+                            st.session_state.ai_thinking = False
+                            st.rerun()
+        
+        st.markdown("</div>", unsafe_allow_html=True)
     
     with tab4:
         st.markdown("### 💼 Portfolio & Market Analysis")
