@@ -285,7 +285,7 @@
 
 ### Standard Mode
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py
 ```

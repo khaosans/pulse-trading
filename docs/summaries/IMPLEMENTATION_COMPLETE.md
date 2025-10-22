@@ -139,7 +139,7 @@ All refinements have been successfully implemented and tested.
 
 ### Standard Mode
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py
 ```

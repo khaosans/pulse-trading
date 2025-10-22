@@ -4,7 +4,7 @@
 
 ### Step 1: Navigate to Project
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 ```
 
 ### Step 2: Activate Environment

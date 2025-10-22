@@ -9,7 +9,7 @@ Everything is **built, tested, documented, and deployed**. Here's your quick sta
 ## ⚡ Quick Start (30 Seconds)
 
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py
 ```
@@ -158,7 +158,7 @@ A **complete financial platform** with:
 ## 📁 Repository Structure
 
 ```
-/Users/Sour/pulse trading/
+pulse-trading/
 ├── demo_app.py ⭐              Main application (run this!)
 ├── README.md 📖                Start here for overview
 ├── QA_TEST_REPORT.md ✅        Quality assurance (A+ grade)

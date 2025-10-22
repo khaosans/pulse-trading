@@ -239,7 +239,7 @@ TOTAL: 84/84 = 100% ✅
 
 ### Run the App (30 seconds)
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py
 ```

@@ -10,7 +10,7 @@
 
 ```bash
 # 1. Navigate to your project
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 
 # 2. Activate environment
 source venv/bin/activate

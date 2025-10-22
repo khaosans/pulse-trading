@@ -3,10 +3,12 @@
 > **Revolutionary trading platform combining real-time biometric emotion tracking with AI-powered analytics and community-driven insights**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Demo](https://img.shields.io/badge/Demo-Live-brightgreen.svg)](http://localhost:8501)
+[![Demo](https://img.shields.io/badge/Demo-Live-brightgreen.svg)](https://pulsetrade-demo.streamlit.app)
 [![Grade](https://img.shields.io/badge/Grade-A++-success.svg)](#)
 [![Version](https://img.shields.io/badge/Version-2.1.0-blue.svg)](#)
 [![Quality](https://img.shields.io/badge/Quality-Production%20Ready-brightgreen.svg)](#)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)](https://streamlit.io)
 
 ---
 
@@ -34,7 +36,10 @@ Real-time biometric monitoring via wearable device that:
 
 ## 🚀 Quick Start - Interactive Demo
 
-### Run the Demo (3 Steps!)
+### 🌐 Try Live Demo (No Installation Required!)
+**Live Demo**: [https://pulsetrade-demo.streamlit.app](https://pulsetrade-demo.streamlit.app)
+
+### 🛠️ Run Locally (3 Steps!)
 
 ```bash
 # 1. Clone the repository
@@ -268,7 +273,7 @@ pulse-trading/
 
 ---
 
-## 🎓 Academic Context
+## 🎓 Academic Project
 
 **Course**: BADM 520 - Marketing Strategy  
 **Institution**: iMBA UIUC (University of Illinois Urbana-Champaign)  
@@ -282,6 +287,8 @@ pulse-trading/
 - **Maryam** - Promotion & Service Design
 - **Scott** - Financial Projections
 - **Sour** - KPI Development & Technical Demo
+
+> **Note**: This is an academic project for educational purposes. All data is synthetic and no real trading or financial transactions are conducted.
 
 ---
 
@@ -355,7 +362,10 @@ pulse-trading/
 - ✅ Generated community posts
 - ✅ Mock biometric readings
 
-### Production Privacy Standards:
+### Academic Project Notice:
+This repository contains an academic project for BADM 520 - Marketing Strategy at iMBA UIUC. All data is synthetic and no real financial transactions or personal data are involved.
+
+### Production Privacy Standards (Conceptual):
 - End-to-end encryption
 - Local storage by default
 - User controls all data sharing

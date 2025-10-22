@@ -33,7 +33,7 @@ http://73.96.74.57:8501
 ```
 ✅ Process Running: YES (PID: 32096)
 ✅ Port: 8501
-✅ Location: /Users/Sour/pulse trading/demo_app.py
+✅ Location: demo_app.py
 ✅ Python Version: 3.13
 ✅ Virtual Environment: ACTIVE
 ✅ Health Check: PASSED (ok)
@@ -249,7 +249,7 @@ This has:
 ps aux | grep streamlit
 
 # If not running, restart:
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py
 ```

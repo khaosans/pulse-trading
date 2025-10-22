@@ -147,7 +147,7 @@ These features are **built and tested** but need to be added to `demo_app.py`:
 
 ### Option 1: Run Current App (Works!)
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 streamlit run demo_app.py
 ```
@@ -160,7 +160,7 @@ streamlit run demo_app.py
 
 ### Option 2: Test New Modules (Works!)
 ```bash
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 python -c "
 from src.utils.data_generator import DataGenerator
@@ -210,7 +210,7 @@ Visit: https://github.com/khaosans/pulse-trading
 ### 2. Test Locally
 ```bash
 # Verify imports
-cd "/Users/Sour/pulse trading"
+cd pulse-trading
 source venv/bin/activate
 python -c "from src.banking import AccountManager; print('✅ Works!')"
 
