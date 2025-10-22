@@ -4,6 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Demo](https://img.shields.io/badge/Demo-Live-brightgreen.svg)](https://pulsetrade-demo.streamlit.app)
+[![Auto-Deploy](https://img.shields.io/badge/Auto--Deploy-Enabled-success.svg)](#)
 [![Grade](https://img.shields.io/badge/Grade-A++-success.svg)](#)
 [![Version](https://img.shields.io/badge/Version-2.1.0-blue.svg)](#)
 [![Quality](https://img.shields.io/badge/Quality-Production%20Ready-brightgreen.svg)](#)
