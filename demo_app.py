@@ -2348,9 +2348,9 @@ def main():
                 }
             ]
         
-        # Initialize AI thinking state
-        if 'ai_thinking' not in st.session_state:
-            st.session_state.ai_thinking = False
+        # Initialize AI thinking state (removed to fix loading issue)
+        # if 'ai_thinking' not in st.session_state:
+        #     st.session_state.ai_thinking = False
         
         # Enhanced chat container with professional styling
         st.markdown("""
@@ -2398,24 +2398,24 @@ def main():
                 </div>
                 """, unsafe_allow_html=True)
         
-        # Show AI thinking indicator
-        if st.session_state.ai_thinking:
-            st.markdown("""
-            <div class="chat-message assistant enhanced thinking">
-                <div class="message-header">
-                    <strong>🤖 AI Assistant</strong>
-                    <span class="timestamp">Thinking...</span>
-                </div>
-                <div class="thinking-indicator">
-                    <div class="typing-animation">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <span class="thinking-text">Analyzing your question and emotional state...</span>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+        # Show AI thinking indicator (removed to fix loading issue)
+        # if st.session_state.ai_thinking:
+        #     st.markdown("""
+        #     <div class="chat-message assistant enhanced thinking">
+        #         <div class="message-header">
+        #             <strong>🤖 AI Assistant</strong>
+        #             <span class="timestamp">Thinking...</span>
+        #         </div>
+        #         <div class="thinking-indicator">
+        #             <div class="typing-animation">
+        #                 <span></span>
+        #                 <span></span>
+        #                 <span></span>
+        #             </div>
+        #             <span class="thinking-text">Analyzing your question and emotional state...</span>
+        #         </div>
+        #     </div>
+        #     """, unsafe_allow_html=True)
         
         st.markdown("</div></div>", unsafe_allow_html=True)
         
@@ -2457,10 +2457,6 @@ def main():
                 'timestamp': datetime.now().strftime("%H:%M")
             })
             
-            # Set AI thinking state
-            st.session_state.ai_thinking = True
-            st.rerun()
-            
             # Create context-aware prompt
             context = f"""You are a professional trading advisor for PulseTrade, a platform that monitors traders' emotions in real-time.
             
@@ -2489,8 +2485,6 @@ Provide helpful, concise advice (2-3 sentences) considering their emotional stat
                 'timestamp': datetime.now().strftime("%H:%M")
             })
             
-            # Clear AI thinking state
-            st.session_state.ai_thinking = False
             st.rerun()
         
         # Handle clear chat
@@ -2502,7 +2496,6 @@ Provide helpful, concise advice (2-3 sentences) considering their emotional stat
                     'timestamp': datetime.now().strftime("%H:%M")
                 }
             ]
-            st.session_state.ai_thinking = False
             st.rerun()
         
         # Enhanced suggested questions section
@@ -2542,10 +2535,6 @@ Provide helpful, concise advice (2-3 sentences) considering their emotional stat
                                 'timestamp': datetime.now().strftime("%H:%M")
                             })
                             
-                            # Set AI thinking state
-                            st.session_state.ai_thinking = True
-                            st.rerun()
-                            
                             # Create context-aware prompt
                             context = f"""You are a professional trading advisor for PulseTrade, a platform that monitors traders' emotions in real-time.
                             
@@ -2574,8 +2563,6 @@ Provide helpful, concise advice (2-3 sentences) considering their emotional stat
                                 'timestamp': datetime.now().strftime("%H:%M")
                             })
                             
-                            # Clear AI thinking state
-                            st.session_state.ai_thinking = False
                             st.rerun()
         
         st.markdown("</div>", unsafe_allow_html=True)
